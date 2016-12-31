@@ -28,7 +28,7 @@ Task("AppVeyorUpdate")
 		Information("Building on AppVeyor");
 		buildVersion = AppVeyor.Environment.Build.Version;
 		Information("Build Version is {0}", buildVersion);
-		AppVeyor.AddErrorMessage("Configuration {0}", AppVeyor.Environment.Configuration);
+		Information("Configuration {0}", AppVeyor.Environment.Configuration);
 	}
 	else
 	{
