@@ -5,11 +5,14 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var solution = "Sannel.House.Web.sln";
+
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
 //////////////////////////////////////////////////////////////////////
+
+var solution = "Sannel.House.Web.sln";
+var buildVersion = "0.1.0-alpha-0001";
 
 // Define directories.
 var buildDir = Directory("./src") + Directory("Sannel.House.Web") + Directory("bin");
@@ -17,45 +20,61 @@ var buildDir = Directory("./src") + Directory("Sannel.House.Web") + Directory("b
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
+Task("AppVeyorUpdate")
+	.Does(() =>
+{
+	if(AppVeyor.IsRunningOnAppVeyor)
+	{
+		Information("Building on AppVeyor");
+		buildVersion = AppVeyor.Environment.Build.Version;
+		Information("Build Version is {0}", buildVersion);
+		AppVeyor.AddErrorMessage("Configuration {0}", AppVeyor.Environment.Configuration);
+	}
+	else
+	{
+		Information("Not building on AppVeyor");
+	}
+});
 
 Task("Clean")
-    .Does(() =>
+	.IsDependentOn("AppVeyorUpdate")
+	.Does(() =>
 {
-    CleanDirectory(buildDir);
+	CleanDirectory(buildDir);
 });
 
 Task("Restore-NuGet-Packages")
-    .IsDependentOn("Clean")
-    .Does(() =>
+	.IsDependentOn("Clean")
+	.Does(() =>
 {
-    NuGetRestore(solution);
+	NuGetRestore(solution);
 });
 
 Task("Build")
-    .IsDependentOn("Restore-NuGet-Packages")
-    .Does(() =>
+	.IsDependentOn("Restore-NuGet-Packages")
+	.Does(() =>
 {
-    if(IsRunningOnWindows())
-    {
-      // Use MSBuild
-      MSBuild(solution, settings =>
-        settings.SetConfiguration(configuration));
-    }
-    else
-    {
-      // Use XBuild
-      XBuild("./src/Example.sln", settings =>
-        settings.SetConfiguration(configuration));
-    }
+	if(IsRunningOnWindows())
+	{
+	  // Use MSBuild
+	  MSBuild(solution, settings =>
+		settings.SetConfiguration(configuration));
+	}
+	else
+	{
+	  // Use XBuild
+	  XBuild("./src/Example.sln", settings =>
+		settings.SetConfiguration(configuration));
+	}
 });
 
 Task("Run-Unit-Tests")
-    .IsDependentOn("Build")
-    .Does(() =>
+	.IsDependentOn("Build")
+	.Does(() =>
 {
-    NUnit3("./src/**/bin/" + configuration + "/*.Tests.dll", new NUnit3Settings {
-        NoResults = true
-        });
+	NUnit3("./src/**/bin/" + configuration + "/*.Tests.dll", new NUnit3Settings {
+		NoResults = true
+		});
 });
 
 //////////////////////////////////////////////////////////////////////
@@ -63,7 +82,7 @@ Task("Run-Unit-Tests")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build");
+	.IsDependentOn("Build");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
