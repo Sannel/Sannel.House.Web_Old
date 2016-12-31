@@ -28,16 +28,16 @@ Task("AppVeyorUpdate")
 		Information("Building on AppVeyor");
 		buildVersion = AppVeyor.Environment.Build.Version;
 		Information("Build Version is {0}", buildVersion);
-		Information(
-		@"Build:
-		Folder: {0}
-		Id: {1}
-		Number: {2}
-		Version: {3}",
-		BuildSystem.AppVeyor.Environment.Build.Folder,
-		BuildSystem.AppVeyor.Environment.Build.Id,
-		BuildSystem.AppVeyor.Environment.Build.Number,
-		BuildSystem.AppVeyor.Environment.Build.Version
+  Information(
+		@"Repository:
+		Branch: {0}
+		Name: {1}
+		Provider: {2}
+		Scm: {3}",
+		BuildSystem.AppVeyor.Environment.Repository.Branch,
+		BuildSystem.AppVeyor.Environment.Repository.Name,
+		BuildSystem.AppVeyor.Environment.Repository.Provider,
+		BuildSystem.AppVeyor.Environment.Repository.Scm
 		);
 	}
 	else
