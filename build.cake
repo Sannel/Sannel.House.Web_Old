@@ -28,21 +28,17 @@ Task("AppVeyorUpdate")
 		Information("Building on AppVeyor");
 		buildVersion = AppVeyor.Environment.Build.Version;
 		Information("Build Version is {0}", buildVersion);
-   Information(
-        @"Environment:
-        ApiUrl: {0}
-        Configuration: {1}
-        JobId: {2}
-        JobName: {3}
-        Platform: {4}
-        ScheduledBuild: {5}",
-        AppVeyor.Environment.ApiUrl,
-        AppVeyor.Environment.Configuration,
-        AppVeyor.Environment.JobId,
-        AppVeyor.Environment.JobName,
-        AppVeyor.Environment.Platform,
-        AppVeyor.Environment.ScheduledBuild
-        );
+		Information(
+		@"Build:
+		Folder: {0}
+		Id: {1}
+		Number: {2}
+		Version: {3}",
+		BuildSystem.AppVeyor.Environment.Build.Folder,
+		BuildSystem.AppVeyor.Environment.Build.Id,
+		BuildSystem.AppVeyor.Environment.Build.Number,
+		BuildSystem.AppVeyor.Environment.Build.Version
+		);
 	}
 	else
 	{
