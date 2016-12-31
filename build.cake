@@ -30,8 +30,8 @@ Task("AppVeyorUpdate")
 		if(String.Compare(AppVeyor.Environment.Repository.Branch, "master") != 0)
 		{
 			var lastIndex = buildVersion.LastIndexOf('.');
-			buildVersion = buildVersion.Substring(lastIndex);
-			buildVersion += String.Format(".{0}-alpha-{0}", AppVeyor.Environment.Build.Number); 
+			buildVersion = buildVersion.Substring(0, lastIndex);
+			buildVersion += String.Format(".{0:000}-alpha-{0}", AppVeyor.Environment.Build.Number); 
 		}
 		Information("Build Version is {0}", buildVersion);
 	}
