@@ -3,11 +3,14 @@
   "buildOptions": {
     "debugType": "portable"
   },
-  "dependencies": {
-    "System.Runtime.Serialization.Primitives": "4.3.0",
-    "xunit": "2.1.0",
-    "dotnet-test-xunit": "1.0.0-rc2-192208-24"
-  },
+    "dependencies": {
+        "System.Runtime.Serialization.Primitives": "4.3.0",
+        "xunit": "2.1.0",
+        "Sannel.House.Web": "1.0.0-*",
+        "Sannel.House.Web.Base": "0.1.0-*",
+        "Sannel.House.Web.Data": "0.1.0-*",
+        "Sannel.House.Web.Mocks": "0.1.0-*"
+    },
   "testRunner": "xunit",
   "frameworks": {
     "netcoreapp1.1": {
