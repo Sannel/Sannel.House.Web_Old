@@ -24,12 +24,12 @@ using Xunit;
 
 namespace Sannel.House.Web.Tests
 {
-	public class TemperatureSettingControllerTests
+	public partial class TemperatureSettingControllerTests : IContextWrapperTest
 	{
 		[Fact]
 		public void GetTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new TemperatureSettingController(context))
@@ -38,36 +38,36 @@ namespace Sannel.House.Web.Tests
 					var var2 = new TemperatureSetting();
 					var var3 = new TemperatureSetting();
 					//var1
-					var1.Id = 22;
-					var1.DayOfWeek = 75;
-					var1.Month = 41;
+					var1.Id = 45;
+					var1.DayOfWeek = 16;
+					var1.Month = 68;
 					var1.IsTimeOnly = true;
 					var1.StartTime = DateTimeOffset.MinValue;
 					var1.EndTime = DateTimeOffset.MinValue;
-					var1.HeatTemperatureC = 0.64859668055949582;
-					var1.CoolTemperatureC = 0.13646625081843988;
+					var1.HeatTemperatureC = 0.907878695012945;
+					var1.CoolTemperatureC = 0.2244404168913329;
 					var1.DateCreated = DateTimeOffset.MinValue;
 					var1.DateModified = DateTimeOffset.MinValue;
 					//var2
-					var2.Id = 27;
-					var2.DayOfWeek = 53;
-					var2.Month = 2;
+					var2.Id = 62;
+					var2.DayOfWeek = 1;
+					var2.Month = 23;
 					var2.IsTimeOnly = true;
 					var2.StartTime = DateTimeOffset.MinValue;
 					var2.EndTime = DateTimeOffset.MinValue;
-					var2.HeatTemperatureC = 0.32507602885601855;
-					var2.CoolTemperatureC = 0.97603103796766655;
+					var2.HeatTemperatureC = 0.52107075998609453;
+					var2.CoolTemperatureC = 0.56210706874826322;
 					var2.DateCreated = DateTimeOffset.MinValue;
 					var2.DateModified = DateTimeOffset.MinValue;
 					//var3
-					var3.Id = 69;
-					var3.DayOfWeek = 71;
-					var3.Month = 60;
-					var3.IsTimeOnly = false;
+					var3.Id = 2;
+					var3.DayOfWeek = 56;
+					var3.Month = 26;
+					var3.IsTimeOnly = true;
 					var3.StartTime = DateTimeOffset.MinValue;
 					var3.EndTime = DateTimeOffset.MinValue;
-					var3.HeatTemperatureC = 0.31917741211092909;
-					var3.CoolTemperatureC = 0.694953488975276;
+					var3.HeatTemperatureC = 0.29716010824644945;
+					var3.CoolTemperatureC = 0.52906857595269963;
 					var3.DateCreated = DateTimeOffset.MinValue;
 					var3.DateModified = DateTimeOffset.MinValue;
 					//Fix Order
@@ -79,7 +79,7 @@ namespace Sannel.House.Web.Tests
 					context.TemperatureSettings.Add(var1);
 					context.TemperatureSettings.Add(var2);
 					context.TemperatureSettings.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					//call get method
 					var results = controller.Get();
 					Assert.NotNull(results);
@@ -128,7 +128,7 @@ namespace Sannel.House.Web.Tests
 		[Fact]
 		public void GetWithIdTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new TemperatureSettingController(context))
@@ -137,36 +137,36 @@ namespace Sannel.House.Web.Tests
 					var var2 = new TemperatureSetting();
 					var var3 = new TemperatureSetting();
 					//var1
-					var1.Id = 22;
-					var1.DayOfWeek = 75;
-					var1.Month = 41;
+					var1.Id = 45;
+					var1.DayOfWeek = 16;
+					var1.Month = 68;
 					var1.IsTimeOnly = true;
 					var1.StartTime = DateTimeOffset.MinValue;
 					var1.EndTime = DateTimeOffset.MinValue;
-					var1.HeatTemperatureC = 0.64859668055949582;
-					var1.CoolTemperatureC = 0.13646625081843988;
+					var1.HeatTemperatureC = 0.907878695012945;
+					var1.CoolTemperatureC = 0.2244404168913329;
 					var1.DateCreated = DateTimeOffset.MinValue;
 					var1.DateModified = DateTimeOffset.MinValue;
 					//var2
-					var2.Id = 27;
-					var2.DayOfWeek = 53;
-					var2.Month = 2;
+					var2.Id = 62;
+					var2.DayOfWeek = 1;
+					var2.Month = 23;
 					var2.IsTimeOnly = true;
 					var2.StartTime = DateTimeOffset.MinValue;
 					var2.EndTime = DateTimeOffset.MinValue;
-					var2.HeatTemperatureC = 0.32507602885601855;
-					var2.CoolTemperatureC = 0.97603103796766655;
+					var2.HeatTemperatureC = 0.52107075998609453;
+					var2.CoolTemperatureC = 0.56210706874826322;
 					var2.DateCreated = DateTimeOffset.MinValue;
 					var2.DateModified = DateTimeOffset.MinValue;
 					//var3
-					var3.Id = 69;
-					var3.DayOfWeek = 71;
-					var3.Month = 60;
-					var3.IsTimeOnly = false;
+					var3.Id = 2;
+					var3.DayOfWeek = 56;
+					var3.Month = 26;
+					var3.IsTimeOnly = true;
 					var3.StartTime = DateTimeOffset.MinValue;
 					var3.EndTime = DateTimeOffset.MinValue;
-					var3.HeatTemperatureC = 0.31917741211092909;
-					var3.CoolTemperatureC = 0.694953488975276;
+					var3.HeatTemperatureC = 0.29716010824644945;
+					var3.CoolTemperatureC = 0.52906857595269963;
 					var3.DateCreated = DateTimeOffset.MinValue;
 					var3.DateModified = DateTimeOffset.MinValue;
 					//Fix Order
@@ -178,7 +178,7 @@ namespace Sannel.House.Web.Tests
 					context.TemperatureSettings.Add(var1);
 					context.TemperatureSettings.Add(var2);
 					context.TemperatureSettings.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					// verify
 					var actual = controller.Get(var1.Id);
 					Assert.NotNull(actual.Id);

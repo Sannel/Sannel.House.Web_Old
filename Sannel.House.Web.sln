@@ -20,7 +20,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sannel.House.Web.Mocks", "s
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sannel.House.Web.Base", "src\Sannel.House.Web.Base\Sannel.House.Web.Base.xproj", "{A18B2AEC-B2C1-4AB6-9BB1-0BC2897545F5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sannel.House.Web.Test", "src\Sannel.House.Web.Test\Sannel.House.Web.Test.xproj", "{78761CC0-278A-4D95-9057-2F12F8E2428B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sannel.House.Web.Tests", "src\Sannel.House.Web.Tests\Sannel.House.Web.Tests.xproj", "{78761CC0-278A-4D95-9057-2F12F8E2428B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

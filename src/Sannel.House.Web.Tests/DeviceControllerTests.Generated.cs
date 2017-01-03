@@ -24,12 +24,12 @@ using Xunit;
 
 namespace Sannel.House.Web.Tests
 {
-	public class DeviceControllerTests
+	public partial class DeviceControllerTests : IContextWrapperTest
 	{
 		[Fact]
 		public void GetTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new DeviceController(context))
@@ -38,24 +38,24 @@ namespace Sannel.House.Web.Tests
 					var var2 = new Device();
 					var var3 = new Device();
 					//var1
-					var1.Id = 67;
-					var1.Name = "e.yaS$&]t:\\S^z}}B@p+\"_S&!E7O!v8K=G?FqE";
-					var1.Description = "P*J3N5nE#F6[b>wKv";
-					var1.DisplayOrder = 92;
+					var1.Id = 89;
+					var1.Name = "Sgm/s0B#b6[:Fp";
+					var1.Description = "M5KGC$_{*CnkD";
+					var1.DisplayOrder = 60;
 					var1.DateCreated = DateTimeOffset.MinValue;
 					var1.IsReadOnly = false;
 					//var2
-					var2.Id = 48;
-					var2.Name = ")w4\\QrO,B+llj8zH3K-+89j)}Ax/[xBf)r->JJ-Za5~";
-					var2.Description = "@3@*=uHA9vD\\D??|&CzI%{#>IN?HAy}]v>[N1h9g%#N2\"}`7]";
-					var2.DisplayOrder = 12;
+					var2.Id = 83;
+					var2.Name = "DE*6<`sEI=VtKhOxNdKcOk1w)";
+					var2.Description = ".iKGQA\"x=y*ONB@mawz]F2J5v(!^v";
+					var2.DisplayOrder = 76;
 					var2.DateCreated = DateTimeOffset.MinValue;
 					var2.IsReadOnly = false;
 					//var3
-					var3.Id = 84;
-					var3.Name = ".5b|c?MN![{!FDW\"|6*ot4_@Mc?";
-					var3.Description = "|pq:AaL#l#u``}JoJGv4}PG6j1D!8MBC\\Bvu-I^<8H<";
-					var3.DisplayOrder = 21;
+					var3.Id = 16;
+					var3.Name = "6Pe9$JoD,X/|$9yDXkkA7T:js\\NGQqQBF(BOinN";
+					var3.Description = "W!~rnxLzN@^[Vkc$*rcnhwNoWn;S&]mW<pQ7c,t";
+					var3.DisplayOrder = 88;
 					var3.DateCreated = DateTimeOffset.MinValue;
 					var3.IsReadOnly = false;
 					//Fix Order
@@ -66,7 +66,7 @@ namespace Sannel.House.Web.Tests
 					context.Devices.Add(var1);
 					context.Devices.Add(var2);
 					context.Devices.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					//call get method
 					var results = controller.Get();
 					Assert.NotNull(results);
@@ -103,7 +103,7 @@ namespace Sannel.House.Web.Tests
 		[Fact]
 		public void GetWithIdTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new DeviceController(context))
@@ -112,23 +112,23 @@ namespace Sannel.House.Web.Tests
 					var var2 = new Device();
 					var var3 = new Device();
 					//var1
-					var1.Id = 50;
-					var1.Name = "7}6M.O_-/WC~lK!zVJVluCEkwAmW$Mtjz4xrFK\\M^);ZDI";
-					var1.Description = "'}g[)($zLnrJzo0Z[yGs*>hfA+J5f@9e(Q:J?";
-					var1.DisplayOrder = 60;
+					var1.Id = 25;
+					var1.Name = "`fSW\\1PWbpbL;eF?G!AxcPsmxG(6C-!";
+					var1.Description = "'I~%Lg91Pf@5*<M&x?K[Z1L'*";
+					var1.DisplayOrder = 96;
 					var1.DateCreated = DateTimeOffset.MinValue;
-					var1.IsReadOnly = true;
+					var1.IsReadOnly = false;
 					//var2
-					var2.Id = 88;
-					var2.Name = "T#cl/MFx!5zQ:8bVEy\\vgqH}";
-					var2.Description = "xkZ:9TA'&ygjl~D?sz)1,>]-7Ek`vZj+ZkAwzu\"DE&4hv";
-					var2.DisplayOrder = 92;
+					var2.Id = 52;
+					var2.Name = "I}eFDfd6!!@xQeTv\\Z08}SM_2!0b|/}g*N!";
+					var2.Description = "%5*t(EK')rmaho";
+					var2.DisplayOrder = 76;
 					var2.DateCreated = DateTimeOffset.MinValue;
 					var2.IsReadOnly = true;
 					//var3
-					var3.Id = 33;
-					var3.Name = "\\<e8pSOb[Vhma";
-					var3.Description = "/Mk)^rc>)v9|D\\$|MtK%n`iha8Wfr]VC'03'jtW#TC)$%Szd";
+					var3.Id = 34;
+					var3.Name = "?`%yIT[]x:M(-/.216ZVD3A,yKwj[TrO~Cv]T|o4";
+					var3.Description = "hW*!QCB,#-|l/g;Jn";
 					var3.DisplayOrder = 27;
 					var3.DateCreated = DateTimeOffset.MinValue;
 					var3.IsReadOnly = false;
@@ -140,7 +140,7 @@ namespace Sannel.House.Web.Tests
 					context.Devices.Add(var1);
 					context.Devices.Add(var2);
 					context.Devices.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					// verify
 					var actual = controller.Get(var1.Id);
 					Assert.NotNull(actual.Id);

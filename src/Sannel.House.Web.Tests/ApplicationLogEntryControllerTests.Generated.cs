@@ -24,12 +24,12 @@ using Xunit;
 
 namespace Sannel.House.Web.Tests
 {
-	public class ApplicationLogEntryControllerTests
+	public partial class ApplicationLogEntryControllerTests : IContextWrapperTest
 	{
 		[Fact]
 		public void GetTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new ApplicationLogEntryController(context))
@@ -39,24 +39,24 @@ namespace Sannel.House.Web.Tests
 					var var3 = new ApplicationLogEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 6;
-					var1.ApplicationId = "wG-'d4ZGM-Gj+?\\}@oLBM~8,+m<48=};h6n1\"Xe+?/l,pCH\"";
-					var1.Message = "P)7d+p/g%~CT";
-					var1.Exception = "]B1~}a^1=7Bz~kcSD42Gg+v68a\"ot07L2SI>-tL~#S)J_ve/";
+					var1.DeviceId = 80;
+					var1.ApplicationId = "&;K)*yuiXJj^qs7$5TO>#MK{'WbsGwxE";
+					var1.Message = "uAd7\\[8DAFS.3`z2sB/E>~>|_@}f~nE4C3$HGP!8?D;P";
+					var1.Exception = "HM`HlrrqwsEv;j&6;\\3bkzBKFE6F\"0t5(/";
 					var1.CreatedDate = DateTimeOffset.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 67;
-					var2.ApplicationId = "~BWF*>~Ph)H7KPGo+1%o]:_";
-					var2.Message = "9X,jC+Qn^qWl_(Z3>-Sn";
-					var2.Exception = "`:h\\Ih=yB4r";
+					var2.DeviceId = 32;
+					var2.ApplicationId = "Suh:lypBz!w)l!Acfl0b^o_E9Ix{Xzn+Fcj";
+					var2.Message = "E`,(l37L=\"%DTG(/,/@0PO`FP%OSzT$m";
+					var2.Exception = ",@qTw(r:td]j,EHXB9A8+1~1";
 					var2.CreatedDate = DateTimeOffset.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 18;
-					var3.ApplicationId = "vNe,d(iS8OB%";
-					var3.Message = "'}0V=gmvpFpV%~d!bDQ;dl";
-					var3.Exception = "HW1`6;uDvQd$:.T2}Dk0&ut(varwc,#+";
+					var3.DeviceId = 20;
+					var3.ApplicationId = "ve;yr3,D'h2lH";
+					var3.Message = "$v@0^mcn#A~?3-CXsu=i";
+					var3.Exception = "(l]$0,t\"-bX(OPy$Wnp[$a04^[Ngz7n1+L5PCE^H6mj";
 					var3.CreatedDate = DateTimeOffset.Now;
 					//Fix Order
 					var order = DateTimeOffset.Now;
@@ -67,7 +67,7 @@ namespace Sannel.House.Web.Tests
 					context.ApplicationLogEntries.Add(var1);
 					context.ApplicationLogEntries.Add(var2);
 					context.ApplicationLogEntries.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					//call get method
 					var results = controller.Get();
 					Assert.NotNull(results);
@@ -104,7 +104,7 @@ namespace Sannel.House.Web.Tests
 		[Fact]
 		public void GetWithIdTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new ApplicationLogEntryController(context))
@@ -114,24 +114,24 @@ namespace Sannel.House.Web.Tests
 					var var3 = new ApplicationLogEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 6;
-					var1.ApplicationId = "wG-'d4ZGM-Gj+?\\}@oLBM~8,+m<48=};h6n1\"Xe+?/l,pCH\"";
-					var1.Message = "P)7d+p/g%~CT";
-					var1.Exception = "]B1~}a^1=7Bz~kcSD42Gg+v68a\"ot07L2SI>-tL~#S)J_ve/";
+					var1.DeviceId = 80;
+					var1.ApplicationId = "&;K)*yuiXJj^qs7$5TO>#MK{'WbsGwxE";
+					var1.Message = "uAd7\\[8DAFS.3`z2sB/E>~>|_@}f~nE4C3$HGP!8?D;P";
+					var1.Exception = "HM`HlrrqwsEv;j&6;\\3bkzBKFE6F\"0t5(/";
 					var1.CreatedDate = DateTimeOffset.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 67;
-					var2.ApplicationId = "~BWF*>~Ph)H7KPGo+1%o]:_";
-					var2.Message = "9X,jC+Qn^qWl_(Z3>-Sn";
-					var2.Exception = "`:h\\Ih=yB4r";
+					var2.DeviceId = 32;
+					var2.ApplicationId = "Suh:lypBz!w)l!Acfl0b^o_E9Ix{Xzn+Fcj";
+					var2.Message = "E`,(l37L=\"%DTG(/,/@0PO`FP%OSzT$m";
+					var2.Exception = ",@qTw(r:td]j,EHXB9A8+1~1";
 					var2.CreatedDate = DateTimeOffset.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 18;
-					var3.ApplicationId = "vNe,d(iS8OB%";
-					var3.Message = "'}0V=gmvpFpV%~d!bDQ;dl";
-					var3.Exception = "HW1`6;uDvQd$:.T2}Dk0&ut(varwc,#+";
+					var3.DeviceId = 20;
+					var3.ApplicationId = "ve;yr3,D'h2lH";
+					var3.Message = "$v@0^mcn#A~?3-CXsu=i";
+					var3.Exception = "(l]$0,t\"-bX(OPy$Wnp[$a04^[Ngz7n1+L5PCE^H6mj";
 					var3.CreatedDate = DateTimeOffset.Now;
 					//Fix Order
 					var order = DateTimeOffset.Now;
@@ -142,7 +142,7 @@ namespace Sannel.House.Web.Tests
 					context.ApplicationLogEntries.Add(var1);
 					context.ApplicationLogEntries.Add(var2);
 					context.ApplicationLogEntries.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					// verify
 					var actual = controller.Get(var1.Id);
 					Assert.NotNull(actual.Id);

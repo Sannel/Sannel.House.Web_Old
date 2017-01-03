@@ -24,12 +24,12 @@ using Xunit;
 
 namespace Sannel.House.Web.Tests
 {
-	public class TemperatureEntryControllerTests
+	public partial class TemperatureEntryControllerTests : IContextWrapperTest
 	{
 		[Fact]
 		public void GetTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new TemperatureEntryController(context))
@@ -39,24 +39,24 @@ namespace Sannel.House.Web.Tests
 					var var3 = new TemperatureEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 25;
-					var1.TemperatureCelsius = 0.56825943224516673;
-					var1.Humidity = 0.020200115637946929;
-					var1.Pressure = 0.4835248549857758;
+					var1.DeviceId = 1;
+					var1.TemperatureCelsius = 0.18359576453622234;
+					var1.Humidity = 0.73647805291064;
+					var1.Pressure = 0.776059281442342;
 					var1.CreatedDateTime = DateTimeOffset.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 77;
-					var2.TemperatureCelsius = 0.29628449366254939;
-					var2.Humidity = 0.092949271711031567;
-					var2.Pressure = 0.73748483589733249;
+					var2.DeviceId = 41;
+					var2.TemperatureCelsius = 0.22429871988682948;
+					var2.Humidity = 0.80821105828891093;
+					var2.Pressure = 0.19471998288981615;
 					var2.CreatedDateTime = DateTimeOffset.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 85;
-					var3.TemperatureCelsius = 0.91465140316386306;
-					var3.Humidity = 0.28943045776776527;
-					var3.Pressure = 0.018729472075928687;
+					var3.DeviceId = 86;
+					var3.TemperatureCelsius = 0.62913314375520368;
+					var3.Humidity = 0.069958891752156846;
+					var3.Pressure = 0.57319398297611346;
 					var3.CreatedDateTime = DateTimeOffset.Now;
 					//Fix Order
 					var order = DateTimeOffset.Now;
@@ -67,7 +67,7 @@ namespace Sannel.House.Web.Tests
 					context.TemperatureEntries.Add(var1);
 					context.TemperatureEntries.Add(var2);
 					context.TemperatureEntries.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					//call get method
 					var results = controller.Get();
 					Assert.NotNull(results);
@@ -104,7 +104,7 @@ namespace Sannel.House.Web.Tests
 		[Fact]
 		public void GetWithIdTest()
 		{
-			using (var wrapper = new ContextWrapper())
+			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
 				using (var controller = new TemperatureEntryController(context))
@@ -114,24 +114,24 @@ namespace Sannel.House.Web.Tests
 					var var3 = new TemperatureEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 25;
-					var1.TemperatureCelsius = 0.56825943224516673;
-					var1.Humidity = 0.020200115637946929;
-					var1.Pressure = 0.4835248549857758;
+					var1.DeviceId = 1;
+					var1.TemperatureCelsius = 0.18359576453622234;
+					var1.Humidity = 0.73647805291064;
+					var1.Pressure = 0.776059281442342;
 					var1.CreatedDateTime = DateTimeOffset.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 77;
-					var2.TemperatureCelsius = 0.29628449366254939;
-					var2.Humidity = 0.092949271711031567;
-					var2.Pressure = 0.73748483589733249;
+					var2.DeviceId = 41;
+					var2.TemperatureCelsius = 0.22429871988682948;
+					var2.Humidity = 0.80821105828891093;
+					var2.Pressure = 0.19471998288981615;
 					var2.CreatedDateTime = DateTimeOffset.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 85;
-					var3.TemperatureCelsius = 0.91465140316386306;
-					var3.Humidity = 0.28943045776776527;
-					var3.Pressure = 0.018729472075928687;
+					var3.DeviceId = 86;
+					var3.TemperatureCelsius = 0.62913314375520368;
+					var3.Humidity = 0.069958891752156846;
+					var3.Pressure = 0.57319398297611346;
 					var3.CreatedDateTime = DateTimeOffset.Now;
 					//Fix Order
 					var order = DateTimeOffset.Now;
@@ -142,7 +142,7 @@ namespace Sannel.House.Web.Tests
 					context.TemperatureEntries.Add(var1);
 					context.TemperatureEntries.Add(var2);
 					context.TemperatureEntries.Add(var3);
-					context.SaveChanges();
+					wrapper.SaveChanges();
 					// verify
 					var actual = controller.Get(var1.Id);
 					Assert.NotNull(actual.Id);

@@ -12,6 +12,8 @@ namespace Sannel.House.Web.Mocks
 	{
 		private DataContext context;
 		private SqliteConnection connection;
+		private DbContextOptions<DataContext> options;
+		private IContextWrapperTest wrapperTest;
 
 		public DataContext Context
 		{
@@ -21,15 +23,27 @@ namespace Sannel.House.Web.Mocks
 			}
 		}
 
-		public ContextWrapper()
+		public ContextWrapper(IContextWrapperTest testClass)
 		{
+			wrapperTest = testClass;
 			connection = new SqliteConnection("DataSource=:memory:");
 			connection.Open();
-			var options = new DbContextOptionsBuilder<DataContext>()
+			options = new DbContextOptionsBuilder<DataContext>()
 					.UseSqlite(connection)
 					.Options;
 			context = new DataContext(options);
 			context.Database.EnsureCreated();
+		}
+
+		public DataContext CreateSubContext()
+		{
+			return new DataContext(options);
+		}
+
+		public void SaveChanges()
+		{
+			wrapperTest.PreSaveChanges(this);
+			context.SaveChanges();
 		}
 
 		public void Dispose()
