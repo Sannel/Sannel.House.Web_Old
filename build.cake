@@ -135,12 +135,9 @@ Task("Zip")
 });
 
 Task("Run-Unit-Tests")
-	.IsDependentOn("Build")
 	.Does(() =>
 {
-	NUnit3("./src/**/bin/" + configuration + "/*.Tests.dll", new NUnit3Settings {
-		NoResults = true
-		});
+	DotNetCoreTest("./src/Sannel.House.Web.Tests");
 });
 
 //////////////////////////////////////////////////////////////////////
