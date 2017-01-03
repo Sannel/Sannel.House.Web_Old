@@ -137,6 +137,7 @@ Task("Zip")
 Task("Run-Unit-Tests")
 	.Does(() =>
 {
+	DotNetCoreRestore("./src/Sannel.House.Web.Tests");
 	DotNetCoreTest("./src/Sannel.House.Web.Tests");
 });
 
