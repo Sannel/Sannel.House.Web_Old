@@ -22,24 +22,7 @@ using Sannel.House.Web.Base.Interfaces;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
-	public class ApplicationLogEntryController : Controller
+	public partial class ApplicationLogEntryController : Controller
 	{
-		private IDataContext context;
-		public ApplicationLogEntryController(IDataContext context)
-		{
-			this.context = context;
-		}
-
-		public IEnumerable<ApplicationLogEntry> Get()
-		{
-			return context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
-		}
-
-		[HttpGet("{id}")]
-		public ApplicationLogEntry Get(Guid id)
-		{
-			return context.ApplicationLogEntries.FirstOrDefault(i => i.Id == id);
-		}
 	}
 }

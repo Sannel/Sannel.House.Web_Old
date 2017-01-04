@@ -22,7 +22,24 @@ using Sannel.House.Web.Base.Interfaces;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	public partial class TemperatureEntryController : Controller
+	[Route("api/[controller]")]
+	public partial class DeviceController : Controller
 	{
+		private IDataContext context;
+		public DeviceController(IDataContext context)
+		{
+			this.context = context;
+		}
+
+		public IEnumerable<Device> Get()
+		{
+			return context.Devices.OrderBy(i => i.DisplayOrder);
+		}
+
+		[HttpGet("{id}")]
+		public Device Get(Int32 id)
+		{
+			return context.Devices.FirstOrDefault(i => i.Id == id);
+		}
 	}
 }
