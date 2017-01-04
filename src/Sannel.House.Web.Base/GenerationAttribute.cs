@@ -12,5 +12,11 @@ namespace Sannel.House.Web.Base
 		}
 
 		public bool Ignore { get; set; }
+
+		public bool IsRequired { get; set; }
+
+		public bool IsNow { get; set; }
+
+		public bool ShouldBeCount { get; set; }
 	}
 }

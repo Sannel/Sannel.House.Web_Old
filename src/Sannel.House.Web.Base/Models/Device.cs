@@ -39,6 +39,7 @@ namespace Sannel.House.Web.Base.Models
 		[MaxLength(256)]
 		[Required]
 		[JsonProperty("Name")]
+		[Generation(IsRequired = true)]
 		public String Name { get; set; }
 
 		/// <summary>
@@ -60,6 +61,7 @@ namespace Sannel.House.Web.Base.Models
 		/// The display order.
 		/// </value>
 		[JsonProperty("DisplayOrder")]
+		[Generation(ShouldBeCount = true)]
 		public int DisplayOrder { get; set; }
 
 		/// <summary>
@@ -69,6 +71,7 @@ namespace Sannel.House.Web.Base.Models
 		/// The date created.
 		/// </value>
 		[JsonProperty("DateCreated")]
+		[Generation(IsNow = true)]
 		public DateTimeOffset DateCreated { get; set; }
 
 		/// <summary>
