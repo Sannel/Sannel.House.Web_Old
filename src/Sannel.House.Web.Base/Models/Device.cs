@@ -51,6 +51,7 @@ namespace Sannel.House.Web.Base.Models
 		[MaxLength(2000)]
 		[Required]
 		[JsonProperty("Description")]
+		[Generation(IsRequired = true)]
 		public String Description { get; set; }
 
 

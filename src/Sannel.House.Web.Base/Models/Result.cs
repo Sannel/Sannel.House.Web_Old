@@ -19,11 +19,33 @@ using System.Threading.Tasks;
 
 namespace Sannel.House.Web.Base.Models
 {
-    public class Result<T>
+	/// <summary>
+	/// The results of an action to any of the api calls
+	/// </summary>
+	/// <typeparam name="T">Any type thats returned from an api call</typeparam>
+	public class Result<T>
     {
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Result{T}"/> is success.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if success; otherwise, <c>false</c>.
+		/// </value>
 		public bool Success { get; set; }
-		public List<String> Errors { get; set; } = new List<String>();
+		/// <summary>
+		/// Gets the errors.
+		/// </summary>
+		/// <value>
+		/// The errors.
+		/// </value>
+		public List<String> Errors { get; } = new List<String>();
 
+		/// <summary>
+		/// Gets or sets the data for the result
+		/// </summary>
+		/// <value>
+		/// The data.
+		/// </value>
 		public T Data { get; set; }
 	}
 }

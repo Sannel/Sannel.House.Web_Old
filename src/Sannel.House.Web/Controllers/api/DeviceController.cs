@@ -25,7 +25,7 @@ namespace Sannel.House.Web.Controllers.api
 	public partial class DeviceController : Controller
 	{
 		[HttpPost]
-		public Result<Device> Post(Device device)
+		public Result<Device> Post([FromBody]Device device)
 		{
 			var result = new Result<Device>();
 			result.Data = device;
@@ -58,6 +58,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			catch(Exception ex)
 			{
+				
 				result.Errors.Add(ex.Message);
 				return result;
 			}
