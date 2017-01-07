@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Tests
 {
@@ -29,10 +30,13 @@ namespace Sannel.House.Web.Tests
 		[Fact]
 		public void GetTest()
 		{
+			ILoggerFactory loggerFactory = new LoggerFactory();
+			loggerFactory.AddConsole();
+
 			using (var wrapper = new ContextWrapper(this))
 			{
 				var context = wrapper.Context;
-				using (var controller = new ApplicationLogEntryController(context))
+				using (var controller = new ApplicationLogEntryController(context, loggerFactory.CreateLogger<ApplicationLogEntryController>()))
 				{
 					var var1 = new ApplicationLogEntry();
 					var var2 = new ApplicationLogEntry();
