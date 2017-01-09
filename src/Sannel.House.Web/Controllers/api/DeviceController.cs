@@ -19,39 +19,51 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
 	public partial class DeviceController : Controller
 	{
+		private IDataContext context;
+		private ILogger logger;
+		public DeviceController(IDataContext context, ILogger<DeviceController> logger)
+		{
+			this.context = context;
+			this.logger = logger;
+		}
+
+		partial void postExtraVerification(Device data, Result<Device> result);
+
 		[HttpPost]
-		public Result<Device> Post([FromBody]Device device)
+		public Result<Device> Post([FromBody]Device data)
 		{
 			var result = new Result<Device>();
-			result.Data = device;
+			result.Data = data;
 			result.Success = false;
-			if (device == null)
+			if (data == null)
 			{
-				result.Errors.Add($"{nameof(device)} cannot be null");
+				result.Errors.Add($"{nameof(data)} cannot be null");
 				return result;
 			}
 
-			device.Id = default(int);
-			if (String.IsNullOrWhiteSpace(device.Name))
+			data.Id = default(int);
+			if (String.IsNullOrWhiteSpace(data.Name))
 			{
-				result.Errors.Add($"{nameof(device.Name)} must have a non empty value");
+				result.Errors.Add($"{nameof(data.Name)} must have a non empty value");
 				return result;
 			}
 
-			if (postExtraVerification(device, result))
+			postExtraVerification(data, result);
+			if(result.Errors.Count > 0)
 			{
 				return result;
 			}
 
-			device.DateCreated = DateTimeOffset.Now;
-			device.DisplayOrder = context.Devices.Count();
+			data.DateCreated = DateTimeOffset.Now;
+			data.DisplayOrder = context.Devices.Count();
 
-			context.Devices.Add(device);
+			context.Devices.Add(data);
 			try
 			{
 				context.SaveChanges();
@@ -65,11 +77,6 @@ namespace Sannel.House.Web.Controllers.api
 
 			result.Success = true;
 			return result;
-		}
-
-		private bool postExtraVerification(Device device, Result<Device> result)
-		{
-			return false;
 		}
 	}
 }

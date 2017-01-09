@@ -19,10 +19,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
 	public partial class TemperatureSettingController : Controller
 	{
+		private IDataContext context;
+		private ILogger logger;
+		public TemperatureSettingController(IDataContext context, ILogger<TemperatureSettingController> logger)
+		{
+			this.context = context;
+			this.logger = logger;
+		}
 	}
 }

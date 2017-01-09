@@ -25,12 +25,6 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class DeviceController : Controller
 	{
-		private IDataContext context;
-		public DeviceController(IDataContext context)
-		{
-			this.context = context;
-		}
-
 		public IEnumerable<Device> Get()
 		{
 			return context.Devices.OrderBy(i => i.DisplayOrder);

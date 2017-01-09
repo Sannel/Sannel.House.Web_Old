@@ -25,12 +25,6 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class TemperatureEntryController : Controller
 	{
-		private IDataContext context;
-		public TemperatureEntryController(IDataContext context)
-		{
-			this.context = context;
-		}
-
 		public IEnumerable<TemperatureEntry> Get()
 		{
 			return context.TemperatureEntries.OrderByDescending(i => i.CreatedDateTime);

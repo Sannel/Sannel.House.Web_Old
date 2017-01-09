@@ -19,18 +19,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
-using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	public partial class TemperatureEntryController : Controller
+	[Route("api/[controller]")]
+	public partial class ApplicationLogEntryController : Controller
 	{
-		private IDataContext context;
-		private ILogger logger;
-		public TemperatureEntryController(IDataContext context, ILogger<TemperatureEntryController> logger)
+		public IEnumerable<ApplicationLogEntry> Get()
 		{
-			this.context = context;
-			this.logger = logger;
+			return context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
+		}
+
+		[HttpGet("{id}")]
+		public ApplicationLogEntry Get(Guid id)
+		{
+			return context.ApplicationLogEntries.FirstOrDefault(i => i.Id == id);
 		}
 	}
 }

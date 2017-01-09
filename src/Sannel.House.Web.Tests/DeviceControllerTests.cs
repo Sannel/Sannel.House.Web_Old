@@ -1,4 +1,5 @@
-﻿using Sannel.House.Web.Base.Models;
+﻿using Microsoft.Extensions.Logging;
+using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Controllers.api;
 using Sannel.House.Web.Mocks;
 using System;
@@ -21,14 +22,16 @@ namespace Sannel.House.Web.Tests
 
 			using (var wrapper = new ContextWrapper(this))
 			{
+				var logFactory = new LoggerFactory();
+				var logger = logFactory.CreateLogger<DeviceController>();
 				var context = wrapper.Context;
-				using (var controller = new DeviceController(context))
+				using (var controller = new DeviceController(context, logger))
 				{
 					var result = controller.Post(null);
 					Assert.NotNull(result);
 					Assert.False(result.Success);
 					Assert.Equal(1, result.Errors.Count);
-					Assert.Equal("device cannot be null", result.Errors[0]);
+					Assert.Equal("data cannot be null", result.Errors[0]);
 					Assert.Null(result.Data);
 
 					var data = new Device();
