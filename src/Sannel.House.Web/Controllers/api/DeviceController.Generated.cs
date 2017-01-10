@@ -35,5 +35,55 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			return context.Devices.FirstOrDefault(i => i.Id == id);
 		}
+
+		[HttpPost]
+		public Result<Device> Post([FromBody] Device data)
+		{
+			var result = new Result<Device>();
+			result.Data = data;
+			result.Success = false;
+			if (data == null)
+			{
+				result.Errors.Add($"{nameof(data)} cannot be null");
+				return result;
+			}
+
+			data.Id = 0;
+			if (String.IsNullOrWhiteSpace(data.Name))
+			{
+				result.Errors.Add($"{nameof(data.Name)} must have a non empty value");
+				return result;
+			}
+
+			if (String.IsNullOrWhiteSpace(data.Description))
+			{
+				result.Errors.Add($"{nameof(data.Description)} must have a non empty value");
+				return result;
+			}
+
+			postExtraVerification(data, result);
+			if (result.Errors.Count > 0)
+			{
+				return result;
+			}
+
+			postExtraReset(data);
+			context.Devices.Add(data);
+			try
+			{
+				context.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				result.Errors.Add(ex.Message);
+				return result;
+			}
+
+			result.Success = true;
+			return result;
+		}
+
+		partial void postExtraVerification(Device data, Result<Device> result);
+		partial void postExtraReset(Device data);
 	}
 }

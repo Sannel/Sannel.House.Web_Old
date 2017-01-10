@@ -32,51 +32,5 @@ namespace Sannel.House.Web.Controllers.api
 			this.context = context;
 			this.logger = logger;
 		}
-
-		partial void postExtraVerification(Device data, Result<Device> result);
-
-		[HttpPost]
-		public Result<Device> Post([FromBody]Device data)
-		{
-			var result = new Result<Device>();
-			result.Data = data;
-			result.Success = false;
-			if (data == null)
-			{
-				result.Errors.Add($"{nameof(data)} cannot be null");
-				return result;
-			}
-
-			data.Id = default(int);
-			if (String.IsNullOrWhiteSpace(data.Name))
-			{
-				result.Errors.Add($"{nameof(data.Name)} must have a non empty value");
-				return result;
-			}
-
-			postExtraVerification(data, result);
-			if(result.Errors.Count > 0)
-			{
-				return result;
-			}
-
-			data.DateCreated = DateTimeOffset.Now;
-			data.DisplayOrder = context.Devices.Count();
-
-			context.Devices.Add(data);
-			try
-			{
-				context.SaveChanges();
-			}
-			catch(Exception ex)
-			{
-				
-				result.Errors.Add(ex.Message);
-				return result;
-			}
-
-			result.Success = true;
-			return result;
-		}
 	}
 }

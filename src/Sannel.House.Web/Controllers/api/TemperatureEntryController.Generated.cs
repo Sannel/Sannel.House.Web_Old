@@ -35,5 +35,43 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			return context.TemperatureEntries.FirstOrDefault(i => i.Id == id);
 		}
+
+		[HttpPost]
+		public Result<TemperatureEntry> Post([FromBody] TemperatureEntry data)
+		{
+			var result = new Result<TemperatureEntry>();
+			result.Data = data;
+			result.Success = false;
+			if (data == null)
+			{
+				result.Errors.Add($"{nameof(data)} cannot be null");
+				return result;
+			}
+
+			data.Id = Guid.NewGuid();
+			postExtraVerification(data, result);
+			if (result.Errors.Count > 0)
+			{
+				return result;
+			}
+
+			postExtraReset(data);
+			context.TemperatureEntries.Add(data);
+			try
+			{
+				context.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				result.Errors.Add(ex.Message);
+				return result;
+			}
+
+			result.Success = true;
+			return result;
+		}
+
+		partial void postExtraVerification(TemperatureEntry data, Result<TemperatureEntry> result);
+		partial void postExtraReset(TemperatureEntry data);
 	}
 }
