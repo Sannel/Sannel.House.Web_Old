@@ -19,22 +19,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-#if LOGGING_SERVICE || LOGGING_SDK
-namespace Sannel.House.Logging.Models
-#else
 namespace Sannel.House.Web.Base.Models
-#endif
 {
+	[Generation(DontGenerateMethods = new GenerationAttribute.ApiCalls[]
+	{
+		GenerationAttribute.ApiCalls.Delete,
+		GenerationAttribute.ApiCalls.Push
+	})]
 	public class ApplicationLogEntry
 	{
-#if !LOGGING_SDK
 		[Key]
 		public Guid Id
 		{
 			get;
 			set;
 		}
-#endif
 
 		public int? DeviceId
 		{
@@ -44,6 +43,7 @@ namespace Sannel.House.Web.Base.Models
 
 		[Required]
 		[MaxLength(256)]
+		[Generation(IsRequired = true)]
 		public String ApplicationId
 		{
 			get;
@@ -51,6 +51,7 @@ namespace Sannel.House.Web.Base.Models
 		}
 
 		[Required]
+		[Generation(CheckForEmptyString = true)]
 		public String Message
 		{
 			get;
@@ -62,21 +63,12 @@ namespace Sannel.House.Web.Base.Models
 			get;
 			set;
 		}
-#if !LOGGING_SDK
 		[Required]
+		[Generation(IsNow = true)]
 		public DateTimeOffset CreatedDate
 		{
 			get;
 			set;
 		}
-#endif
-
-#if LOGGING_SERVICE
-		public bool Synced
-		{
-			get;
-			set;
-		} = false;
-#endif
 	}
 }

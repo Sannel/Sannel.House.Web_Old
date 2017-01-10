@@ -17,8 +17,26 @@ namespace Sannel.House.Web.Base
 
 		public bool CheckForEmptyString { get; set; }
 
+		public bool GreaterThenZero { get; set; }
+
 		public bool IsNow { get; set; }
 
 		public bool ShouldBeCount { get; set; }
+
+		public ApiCalls[] DontGenerateMethods
+		{
+			get;
+			set;
+		}
+
+
+		public enum ApiCalls
+		{
+			Get,
+			GetWithId,
+			Post,
+			Push,
+			Delete
+		}
 	}
 }

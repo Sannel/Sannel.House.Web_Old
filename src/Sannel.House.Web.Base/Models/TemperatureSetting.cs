@@ -6,23 +6,15 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Sannel.House.Web.Base.Converters;
-#if CLIENT
-
-namespace Sannel.House.Client.Models
-#else
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sannel.House.Web.Base.Models
-#endif
 {
 	/// <summary>
 	/// Represents the configuration f
 	/// </summary>
 	public class TemperatureSetting
-#if CLIENT
-		: System.ComponentModel.INotifyPropertyChanged
-#endif
 	{
 		private long id;
 		/// <summary>
@@ -31,10 +23,8 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The identifier.
 		/// </value>
-#if !CLIENT
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Key]
-#endif
 		[JsonProperty(nameof(Id))]
 		public long Id
 		{
@@ -255,23 +245,6 @@ namespace Sannel.House.Web.Base.Models
 			}
 		}
 
-#if CLIENT
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void Set<T>(ref T dest, T source, [CallerMemberName]String propName = null)
-		{
-
-			if (!Object.Equals(dest, source))
-			{
-				dest = source;
-				NotifyPropertyChanged(propName);
-			}
-		}
-		public void NotifyPropertyChanged([CallerMemberName]String memberName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(memberName));
-		}
-#else
 		protected void Set<T>(ref T dest, T source, [CallerMemberName]String propName = null)
 		{
 			if (!Object.Equals(dest, source))
@@ -282,6 +255,5 @@ namespace Sannel.House.Web.Base.Models
 		protected void NotifyPropertyChanged([CallerMemberName]String memberName = null)
 		{
 		}
-#endif
 	}
 }
