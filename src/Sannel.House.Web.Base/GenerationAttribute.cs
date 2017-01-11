@@ -34,7 +34,7 @@ namespace Sannel.House.Web.Base
 			Get,
 			GetWithId,
 			Post,
-			Push,
+			Put,
 			Delete
 		}
 
