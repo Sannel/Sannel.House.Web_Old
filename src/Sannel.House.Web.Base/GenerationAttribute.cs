@@ -29,7 +29,6 @@ namespace Sannel.House.Web.Base
 			set;
 		}
 
-
 		public enum ApiCalls
 		{
 			Get,
@@ -37,6 +36,15 @@ namespace Sannel.House.Web.Base
 			Post,
 			Push,
 			Delete
+		}
+
+		public bool ShouldGenerateMethod(ApiCalls method)
+		{
+			if(DontGenerateMethods != null && DontGenerateMethods.Contains(method))
+			{
+				return false;
+			}
+			return true;
 		}
 	}
 }
