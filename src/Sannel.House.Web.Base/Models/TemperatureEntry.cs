@@ -25,7 +25,7 @@ namespace Sannel.House.Web.Base.Models
 	[Generation(DontGenerateMethods = new GenerationAttribute.ApiCalls[]
 	{
 		GenerationAttribute.ApiCalls.Delete,
-		GenerationAttribute.ApiCalls.Push
+		GenerationAttribute.ApiCalls.Put
 	})]
 	public class TemperatureEntry
 	{
