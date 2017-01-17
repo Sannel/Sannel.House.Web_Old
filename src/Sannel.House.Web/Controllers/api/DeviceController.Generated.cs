@@ -17,8 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -55,9 +57,9 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
-			if (String.IsNullOrWhiteSpace(data.Description))
+			if (data.Description == null)
 			{
-				result.Errors.Add($"{nameof(data.Description)} must have a non empty value");
+				result.Errors.Add($"{nameof(data.Description)} must not be null");
 				return result;
 			}
 
@@ -67,6 +69,8 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
+			data.DisplayOrder = context.Devices.Count();
+			data.DateCreated = DateTimeOffset.Now;
 			postExtraReset(data);
 			context.Devices.Add(data);
 			try
@@ -75,6 +79,8 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			catch (Exception ex)
 			{
+				if (logger.IsEnabled(LogLevel.Error))
+					logger.LogError(LoggingIds.PostException, ex, "Error during Device Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}

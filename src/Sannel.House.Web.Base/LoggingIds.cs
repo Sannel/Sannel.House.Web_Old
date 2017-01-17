@@ -1,4 +1,4 @@
-/* Copyright 2017 Sannel Software, L.L.C.
+﻿/* Copyright 2017 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -11,27 +11,16 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
-
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Sannel.House.Web.Base.Models;
-using Sannel.House.Web.Base.Interfaces;
-using Microsoft.Extensions.Logging;
-using Sannel.House.Web.Base;
 
-namespace Sannel.House.Web.Controllers.api
+namespace Sannel.House.Web.Base
 {
-	public partial class DeviceController : Controller
+	public static class LoggingIds
 	{
-		private IDataContext context;
-		private ILogger logger;
-		public DeviceController(IDataContext context, ILogger<DeviceController> logger)
-		{
-			this.context = context;
-			this.logger = logger;
-		}
+		public static readonly EventId PostException = new EventId(1, "Post Exception");
 	}
 }
