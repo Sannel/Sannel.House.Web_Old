@@ -23,6 +23,8 @@ namespace Sannel.House.Web.Base
 
 		public bool ShouldBeCount { get; set; }
 
+		public bool CantUpdate { get; set; }
+
 		public ApiCalls[] DontGenerateMethods
 		{
 			get;
