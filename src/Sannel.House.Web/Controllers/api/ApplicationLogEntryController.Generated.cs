@@ -17,8 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -49,12 +51,25 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			data.Id = Guid.NewGuid();
+			if (data.ApplicationId == null)
+			{
+				result.Errors.Add($"{nameof(data.ApplicationId)} must not be null");
+				return result;
+			}
+
+			if (String.IsNullOrWhiteSpace(data.Message))
+			{
+				result.Errors.Add($"{nameof(data.Message)} must have a non empty value");
+				return result;
+			}
+
 			postExtraVerification(data, result);
 			if (result.Errors.Count > 0)
 			{
 				return result;
 			}
 
+			data.CreatedDate = DateTimeOffset.Now;
 			postExtraReset(data);
 			context.ApplicationLogEntries.Add(data);
 			try
@@ -63,6 +78,8 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			catch (Exception ex)
 			{
+				if (logger.IsEnabled(LogLevel.Error))
+					logger.LogError(LoggingIds.PostException, ex, "Error during ApplicationLogEntry Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}

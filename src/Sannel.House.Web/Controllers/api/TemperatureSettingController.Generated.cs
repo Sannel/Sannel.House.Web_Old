@@ -17,8 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -63,6 +65,8 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			catch (Exception ex)
 			{
+				if (logger.IsEnabled(LogLevel.Error))
+					logger.LogError(LoggingIds.PostException, ex, "Error during TemperatureSetting Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}

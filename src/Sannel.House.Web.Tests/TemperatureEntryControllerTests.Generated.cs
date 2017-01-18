@@ -16,6 +16,7 @@ using System;
 using Sannel.House.Web.Base.Interfaces;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Controllers.api;
+using Sannel.House.Web.Data;
 using Sannel.House.Web.Mocks;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,24 +44,24 @@ namespace Sannel.House.Web.Tests
 						var var3 = new TemperatureEntry();
 						//var1
 						var1.Id = Guid.NewGuid();
-						var1.DeviceId = 50;
-						var1.TemperatureCelsius = 0.17491436292180529;
-						var1.Humidity = 0.68454665163743622;
-						var1.Pressure = 0.10284319571351781;
+						var1.DeviceId = 48;
+						var1.TemperatureCelsius = 0.093544082759667233;
+						var1.Humidity = 0.81781536658192766;
+						var1.Pressure = 0.86056559200424965;
 						var1.CreatedDateTime = DateTimeOffset.Now;
 						//var2
 						var2.Id = Guid.NewGuid();
-						var2.DeviceId = 15;
-						var2.TemperatureCelsius = 0.71690824614693793;
-						var2.Humidity = 0.035434121282507725;
-						var2.Pressure = 0.24452482594387831;
+						var2.DeviceId = 85;
+						var2.TemperatureCelsius = 0.22400316001102474;
+						var2.Humidity = 0.88102902606177569;
+						var2.Pressure = 0.63801939256397044;
 						var2.CreatedDateTime = DateTimeOffset.Now;
 						//var3
 						var3.Id = Guid.NewGuid();
-						var3.DeviceId = 18;
-						var3.TemperatureCelsius = 0.17296682771899125;
-						var3.Humidity = 0.30090909930919718;
-						var3.Pressure = 0.69809584957458815;
+						var3.DeviceId = 55;
+						var3.TemperatureCelsius = 0.16821098987395455;
+						var3.Humidity = 0.86343549651253759;
+						var3.Pressure = 0.51693051798126222;
 						var3.CreatedDateTime = DateTimeOffset.Now;
 						//Fix Order
 						var order = DateTimeOffset.Now;
@@ -122,24 +123,24 @@ namespace Sannel.House.Web.Tests
 						var var3 = new TemperatureEntry();
 						//var1
 						var1.Id = Guid.NewGuid();
-						var1.DeviceId = 50;
-						var1.TemperatureCelsius = 0.17491436292180529;
-						var1.Humidity = 0.68454665163743622;
-						var1.Pressure = 0.10284319571351781;
+						var1.DeviceId = 48;
+						var1.TemperatureCelsius = 0.093544082759667233;
+						var1.Humidity = 0.81781536658192766;
+						var1.Pressure = 0.86056559200424965;
 						var1.CreatedDateTime = DateTimeOffset.Now;
 						//var2
 						var2.Id = Guid.NewGuid();
-						var2.DeviceId = 15;
-						var2.TemperatureCelsius = 0.71690824614693793;
-						var2.Humidity = 0.035434121282507725;
-						var2.Pressure = 0.24452482594387831;
+						var2.DeviceId = 85;
+						var2.TemperatureCelsius = 0.22400316001102474;
+						var2.Humidity = 0.88102902606177569;
+						var2.Pressure = 0.63801939256397044;
 						var2.CreatedDateTime = DateTimeOffset.Now;
 						//var3
 						var3.Id = Guid.NewGuid();
-						var3.DeviceId = 18;
-						var3.TemperatureCelsius = 0.17296682771899125;
-						var3.Humidity = 0.30090909930919718;
-						var3.Pressure = 0.69809584957458815;
+						var3.DeviceId = 55;
+						var3.TemperatureCelsius = 0.16821098987395455;
+						var3.Humidity = 0.86343549651253759;
+						var3.Pressure = 0.51693051798126222;
 						var3.CreatedDateTime = DateTimeOffset.Now;
 						//Fix Order
 						var order = DateTimeOffset.Now;
@@ -185,5 +186,55 @@ namespace Sannel.House.Web.Tests
 				}
 			}
 		}
+
+		[Fact]
+		public void PostTest()
+		{
+			{
+				var logFactory = new LoggerFactory();
+				var logger = logFactory.CreateLogger<TemperatureEntryController>();
+				using (var wrapper = new ContextWrapper(this))
+				{
+					var context = wrapper.Context;
+					using (var controller = new TemperatureEntryController(context, logger))
+					{
+						var result = controller.Post(null);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("data cannot be null", result.Errors[0]);
+						Assert.Null(result.Data);
+						var expected = new TemperatureEntry();
+						// Success Test test
+						expected = new TemperatureEntry();
+						expected.Id = Guid.NewGuid();
+						expected.DeviceId = 48;
+						expected.TemperatureCelsius = 0.85465780452576368;
+						expected.Humidity = 0.54606472400299488;
+						expected.Pressure = 0.093544082759667233;
+						expected.CreatedDateTime = DateTimeOffset.Now;
+						postPreCall(expected, wrapper);
+						result = controller.Post(expected);
+						Assert.NotNull(result);
+						Assert.True(result.Success, "Success was not true");
+						Assert.Equal(0, result.Errors.Count);
+						Assert.NotNull(result.Data);
+						Assert.True(result.Data.Id != Guid.NewGuid());
+						var first = context.TemperatureEntries.FirstOrDefault((i) => i.Id == result.Data.Id);
+						Assert.NotNull(first);
+						var resultData = result.Data;
+						Assert.Equal(first.Id, resultData.Id);
+						Assert.Equal(first.DeviceId, resultData.DeviceId);
+						Assert.Equal(first.TemperatureCelsius, resultData.TemperatureCelsius);
+						Assert.Equal(first.Humidity, resultData.Humidity);
+						Assert.Equal(first.Pressure, resultData.Pressure);
+						Assert.Equal(first.CreatedDateTime, resultData.CreatedDateTime);
+					}
+				}
+			}
+		}
+
+		// used to make sure reference tables have data needed for a test to succeed
+		partial void postPreCall(TemperatureEntry data, ContextWrapper wrapper);
 	}
 }

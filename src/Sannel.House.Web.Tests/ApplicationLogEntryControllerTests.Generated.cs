@@ -16,6 +16,7 @@ using System;
 using Sannel.House.Web.Base.Interfaces;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Controllers.api;
+using Sannel.House.Web.Data;
 using Sannel.House.Web.Mocks;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,24 +44,24 @@ namespace Sannel.House.Web.Tests
 						var var3 = new ApplicationLogEntry();
 						//var1
 						var1.Id = Guid.NewGuid();
-						var1.DeviceId = 30;
-						var1.ApplicationId = "O7DgfW[j$VMbvbr(n7Db.NwQlrZWWk(u";
-						var1.Message = "f?ValZCcj;N29@&Xv_{E^[Gt#'9M[^q/MssCJyn6&%";
-						var1.Exception = "}{oKTh[Li{*";
+						var1.DeviceId = 13;
+						var1.ApplicationId = "`#/K\"MK2K/tr5^6$vX$x=s-#D=];('MO=x\"Gp";
+						var1.Message = "$Q$&SVy|3C'^^{}y2t}V%M<";
+						var1.Exception = "zmFC(t+c)zy`=!*uLSbf&yT>i_\"Mv:&]9}s:6^";
 						var1.CreatedDate = DateTimeOffset.Now;
 						//var2
 						var2.Id = Guid.NewGuid();
-						var2.DeviceId = 5;
-						var2.ApplicationId = "~WipIH?-.1:~,";
-						var2.Message = "q{Qju&1iv@xv6#b)<SN";
-						var2.Exception = ",q_2N3sbJmCN0";
+						var2.DeviceId = 16;
+						var2.ApplicationId = "IliCQ$J38h?3r^MD'z5f";
+						var2.Message = "=yj^Kb!{*?2q";
+						var2.Exception = "uKk#:SCwvxnuVL_h%CGz<de>otBZoOuq/F*nI@H%dMw[>lqzJ";
 						var2.CreatedDate = DateTimeOffset.Now;
 						//var3
 						var3.Id = Guid.NewGuid();
-						var3.DeviceId = 51;
-						var3.ApplicationId = "r@=z^(XCAA-M=APGEEnlsVNKX)";
-						var3.Message = "+(q5/Pw6(QQf`@;vk";
-						var3.Exception = "j8vZ.1{V2%Da'F/DuzJ~2o%>&h=C%-HaPA>e_g8^uI)5&k";
+						var3.DeviceId = 36;
+						var3.ApplicationId = "}zeAeEm#jt)D";
+						var3.Message = "eA=0qI,Ax8B:Jf?j:-*T=8aa=Ca}F<^OdP";
+						var3.Exception = "*N(Q`X;;D;K1VL%rT-m/";
 						var3.CreatedDate = DateTimeOffset.Now;
 						//Fix Order
 						var order = DateTimeOffset.Now;
@@ -122,24 +123,24 @@ namespace Sannel.House.Web.Tests
 						var var3 = new ApplicationLogEntry();
 						//var1
 						var1.Id = Guid.NewGuid();
-						var1.DeviceId = 30;
-						var1.ApplicationId = "O7DgfW[j$VMbvbr(n7Db.NwQlrZWWk(u";
-						var1.Message = "f?ValZCcj;N29@&Xv_{E^[Gt#'9M[^q/MssCJyn6&%";
-						var1.Exception = "}{oKTh[Li{*";
+						var1.DeviceId = 13;
+						var1.ApplicationId = "`#/K\"MK2K/tr5^6$vX$x=s-#D=];('MO=x\"Gp";
+						var1.Message = "$Q$&SVy|3C'^^{}y2t}V%M<";
+						var1.Exception = "zmFC(t+c)zy`=!*uLSbf&yT>i_\"Mv:&]9}s:6^";
 						var1.CreatedDate = DateTimeOffset.Now;
 						//var2
 						var2.Id = Guid.NewGuid();
-						var2.DeviceId = 5;
-						var2.ApplicationId = "~WipIH?-.1:~,";
-						var2.Message = "q{Qju&1iv@xv6#b)<SN";
-						var2.Exception = ",q_2N3sbJmCN0";
+						var2.DeviceId = 16;
+						var2.ApplicationId = "IliCQ$J38h?3r^MD'z5f";
+						var2.Message = "=yj^Kb!{*?2q";
+						var2.Exception = "uKk#:SCwvxnuVL_h%CGz<de>otBZoOuq/F*nI@H%dMw[>lqzJ";
 						var2.CreatedDate = DateTimeOffset.Now;
 						//var3
 						var3.Id = Guid.NewGuid();
-						var3.DeviceId = 51;
-						var3.ApplicationId = "r@=z^(XCAA-M=APGEEnlsVNKX)";
-						var3.Message = "+(q5/Pw6(QQf`@;vk";
-						var3.Exception = "j8vZ.1{V2%Da'F/DuzJ~2o%>&h=C%-HaPA>e_g8^uI)5&k";
+						var3.DeviceId = 36;
+						var3.ApplicationId = "}zeAeEm#jt)D";
+						var3.Message = "eA=0qI,Ax8B:Jf?j:-*T=8aa=Ca}F<^OdP";
+						var3.Exception = "*N(Q`X;;D;K1VL%rT-m/";
 						var3.CreatedDate = DateTimeOffset.Now;
 						//Fix Order
 						var order = DateTimeOffset.Now;
@@ -185,5 +186,85 @@ namespace Sannel.House.Web.Tests
 				}
 			}
 		}
+
+		[Fact]
+		public void PostTest()
+		{
+			{
+				var logFactory = new LoggerFactory();
+				var logger = logFactory.CreateLogger<ApplicationLogEntryController>();
+				using (var wrapper = new ContextWrapper(this))
+				{
+					var context = wrapper.Context;
+					using (var controller = new ApplicationLogEntryController(context, logger))
+					{
+						var result = controller.Post(null);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("data cannot be null", result.Errors[0]);
+						Assert.Null(result.Data);
+						var expected = new ApplicationLogEntry();
+						// ApplicationId test
+						expected = new ApplicationLogEntry();
+						expected.Id = Guid.NewGuid();
+						expected.DeviceId = 13;
+						expected.Message = "uW`#/K\"MK2K/tr5^";
+						expected.Exception = "$vX$x=s-#D=]";
+						expected.CreatedDate = DateTimeOffset.Now;
+						expected.ApplicationId = null;
+						postPreCall(expected, wrapper);
+						result = controller.Post(expected);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("ApplicationId must not be null", result.Errors[0]);
+						Assert.NotNull(result.Data);
+						// Message test
+						expected = new ApplicationLogEntry();
+						expected.Id = Guid.NewGuid();
+						expected.DeviceId = 13;
+						expected.ApplicationId = "uW`#/K\"MK2K/tr5^";
+						expected.Exception = "$vX$x=s-#D=]";
+						expected.CreatedDate = DateTimeOffset.Now;
+						expected.Message = "";
+						postPreCall(expected, wrapper);
+						result = controller.Post(expected);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("Message must have a non empty value", result.Errors[0]);
+						Assert.NotNull(result.Data);
+						// Success Test test
+						expected = new ApplicationLogEntry();
+						expected.Id = Guid.NewGuid();
+						expected.DeviceId = 13;
+						expected.ApplicationId = "uW`#/K\"MK2K/tr5^";
+						expected.Message = "$vX$x=s-#D=]";
+						expected.Exception = "('MO=x\"Gp)IliCQ$J38h?3r^MD'z5f4";
+						expected.CreatedDate = DateTimeOffset.Now;
+						postPreCall(expected, wrapper);
+						result = controller.Post(expected);
+						Assert.NotNull(result);
+						Assert.True(result.Success, "Success was not true");
+						Assert.Equal(0, result.Errors.Count);
+						Assert.NotNull(result.Data);
+						Assert.True(result.Data.Id != Guid.NewGuid());
+						var first = context.ApplicationLogEntries.FirstOrDefault((i) => i.Id == result.Data.Id);
+						Assert.NotNull(first);
+						var resultData = result.Data;
+						Assert.Equal(first.Id, resultData.Id);
+						Assert.Equal(first.DeviceId, resultData.DeviceId);
+						Assert.Equal(first.ApplicationId, resultData.ApplicationId);
+						Assert.Equal(first.Message, resultData.Message);
+						Assert.Equal(first.Exception, resultData.Exception);
+						Assert.Equal(first.CreatedDate, resultData.CreatedDate);
+					}
+				}
+			}
+		}
+
+		// used to make sure reference tables have data needed for a test to succeed
+		partial void postPreCall(ApplicationLogEntry data, ContextWrapper wrapper);
 	}
 }

@@ -17,8 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -49,6 +51,12 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			data.Id = Guid.NewGuid();
+			if (data.DeviceId <= 0)
+			{
+				result.Errors.Add($"{nameof(data.DeviceId)} must be greater then 0");
+				return result;
+			}
+
 			postExtraVerification(data, result);
 			if (result.Errors.Count > 0)
 			{
@@ -63,6 +71,8 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			catch (Exception ex)
 			{
+				if (logger.IsEnabled(LogLevel.Error))
+					logger.LogError(LoggingIds.PostException, ex, "Error during TemperatureEntry Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}
