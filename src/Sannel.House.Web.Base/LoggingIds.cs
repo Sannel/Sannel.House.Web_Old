@@ -22,5 +22,7 @@ namespace Sannel.House.Web.Base
 	public static class LoggingIds
 	{
 		public static readonly EventId PostException = new EventId(1, "Post Exception");
+
+		public static readonly EventId PutException = new EventId(2, "Put Exception");
 	}
 }

@@ -91,5 +91,68 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void postExtraVerification(Device data, Result<Device> result);
 		partial void postExtraReset(Device data);
+		[HttpPut]
+		public Result<Device> Put([FromBody] Device data)
+		{
+			var result = new Result<Device>();
+			result.Data = data;
+			result.Success = false;
+			if (data == null)
+			{
+				result.Errors.Add($"{nameof(data)} cannot be null");
+				return result;
+			}
+
+			data.Id = 0;
+			if (String.IsNullOrWhiteSpace(data.Name))
+			{
+				result.Errors.Add($"{nameof(data.Name)} must have a non empty value");
+				return result;
+			}
+
+			if (data.Description == null)
+			{
+				result.Errors.Add($"{nameof(data.Description)} must not be null");
+				return result;
+			}
+
+			putExtraVerification(data, result);
+			if (result.Errors.Count > 0)
+			{
+				return result;
+			}
+
+			putExtraReset(data);
+			var current = context.Devices.FirstOrDefault((i) => i.Id == data.Id);
+			if (current == null)
+			{
+				result.Errors.Add($"Device with Id {data.Id} was not found");
+				return result;
+			}
+
+			current.Name = data.Name;
+			current.Description = data.Description;
+			current.DisplayOrder = data.DisplayOrder;
+			try
+			{
+				context.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				if (logger.IsEnabled(LogLevel.Error))
+				{
+					logger.LogError(LoggingIds.PutException, ex, "Error during Device Put");
+				}
+
+				result.Errors.Add(ex.Message);
+				return result;
+			}
+
+			result.Success = true;
+			return result;
+		}
+
+		partial void putExtraVerification(Device data, Result<Device> result);
+		partial void putExtraReset(Device data);
 	}
 }

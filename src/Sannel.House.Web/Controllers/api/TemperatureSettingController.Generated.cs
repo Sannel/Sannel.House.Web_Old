@@ -77,5 +77,62 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void postExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 		partial void postExtraReset(TemperatureSetting data);
+		[HttpPut]
+		public Result<TemperatureSetting> Put([FromBody] TemperatureSetting data)
+		{
+			var result = new Result<TemperatureSetting>();
+			result.Data = data;
+			result.Success = false;
+			if (data == null)
+			{
+				result.Errors.Add($"{nameof(data)} cannot be null");
+				return result;
+			}
+
+			data.Id = 0;
+			putExtraVerification(data, result);
+			if (result.Errors.Count > 0)
+			{
+				return result;
+			}
+
+			putExtraReset(data);
+			var current = context.TemperatureSettings.FirstOrDefault((i) => i.Id == data.Id);
+			if (current == null)
+			{
+				result.Errors.Add($"TemperatureSetting with Id {data.Id} was not found");
+				return result;
+			}
+
+			current.DayOfWeek = data.DayOfWeek;
+			current.Month = data.Month;
+			current.IsTimeOnly = data.IsTimeOnly;
+			current.StartTime = data.StartTime;
+			current.EndTime = data.EndTime;
+			current.HeatTemperatureC = data.HeatTemperatureC;
+			current.CoolTemperatureC = data.CoolTemperatureC;
+			current.DateCreated = data.DateCreated;
+			current.DateModified = data.DateModified;
+			try
+			{
+				context.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				if (logger.IsEnabled(LogLevel.Error))
+				{
+					logger.LogError(LoggingIds.PutException, ex, "Error during TemperatureSetting Put");
+				}
+
+				result.Errors.Add(ex.Message);
+				return result;
+			}
+
+			result.Success = true;
+			return result;
+		}
+
+		partial void putExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
+		partial void putExtraReset(TemperatureSetting data);
 	}
 }

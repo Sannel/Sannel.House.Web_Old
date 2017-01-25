@@ -92,7 +92,7 @@ namespace Sannel.House.Web.Base.Models
 		/// Gets or sets if this device is readonly
 		/// </summary>
 		[JsonProperty("IsReadOnly")]
-		[Generation(CantUpdate = true)]
+		[Generation(CantUpdate = true, AlwaysValue = false)]
 		public bool IsReadOnly { get; set; }
 	}
 }
