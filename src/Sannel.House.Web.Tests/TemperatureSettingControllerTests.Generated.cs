@@ -43,36 +43,36 @@ namespace Sannel.House.Web.Tests
 						var var2 = new TemperatureSetting();
 						var var3 = new TemperatureSetting();
 						//var1
-						var1.Id = 92;
-						var1.DayOfWeek = 7;
-						var1.Month = 76;
-						var1.IsTimeOnly = true;
+						var1.Id = 57;
+						var1.DayOfWeek = 85;
+						var1.Month = 11;
+						var1.IsTimeOnly = false;
 						var1.StartTime = DateTimeOffset.MinValue;
 						var1.EndTime = DateTimeOffset.MinValue;
-						var1.HeatTemperatureC = 0.54319769867844769;
-						var1.CoolTemperatureC = 0.9665230875678934;
+						var1.HeatTemperatureC = 0.43362218301446281;
+						var1.CoolTemperatureC = 0.1384886974182393;
 						var1.DateCreated = DateTimeOffset.MinValue;
 						var1.DateModified = DateTimeOffset.MinValue;
 						//var2
-						var2.Id = 7;
-						var2.DayOfWeek = 1;
-						var2.Month = 30;
-						var2.IsTimeOnly = false;
+						var2.Id = 2;
+						var2.DayOfWeek = 33;
+						var2.Month = 59;
+						var2.IsTimeOnly = true;
 						var2.StartTime = DateTimeOffset.MinValue;
 						var2.EndTime = DateTimeOffset.MinValue;
-						var2.HeatTemperatureC = 0.52661180800134866;
-						var2.CoolTemperatureC = 0.032094962909861913;
+						var2.HeatTemperatureC = 0.22264813036781184;
+						var2.CoolTemperatureC = 0.056368343558333978;
 						var2.DateCreated = DateTimeOffset.MinValue;
 						var2.DateModified = DateTimeOffset.MinValue;
 						//var3
-						var3.Id = 69;
-						var3.DayOfWeek = 10;
-						var3.Month = 5;
-						var3.IsTimeOnly = true;
+						var3.Id = 84;
+						var3.DayOfWeek = 81;
+						var3.Month = 23;
+						var3.IsTimeOnly = false;
 						var3.StartTime = DateTimeOffset.MinValue;
 						var3.EndTime = DateTimeOffset.MinValue;
-						var3.HeatTemperatureC = 0.63643362402749881;
-						var3.CoolTemperatureC = 0.99906104057983547;
+						var3.HeatTemperatureC = 0.36613437969523221;
+						var3.CoolTemperatureC = 0.32502767877887362;
 						var3.DateCreated = DateTimeOffset.MinValue;
 						var3.DateModified = DateTimeOffset.MinValue;
 						//Fix Order
@@ -146,36 +146,36 @@ namespace Sannel.House.Web.Tests
 						var var2 = new TemperatureSetting();
 						var var3 = new TemperatureSetting();
 						//var1
-						var1.Id = 92;
-						var1.DayOfWeek = 7;
-						var1.Month = 76;
-						var1.IsTimeOnly = true;
+						var1.Id = 57;
+						var1.DayOfWeek = 85;
+						var1.Month = 11;
+						var1.IsTimeOnly = false;
 						var1.StartTime = DateTimeOffset.MinValue;
 						var1.EndTime = DateTimeOffset.MinValue;
-						var1.HeatTemperatureC = 0.54319769867844769;
-						var1.CoolTemperatureC = 0.9665230875678934;
+						var1.HeatTemperatureC = 0.43362218301446281;
+						var1.CoolTemperatureC = 0.1384886974182393;
 						var1.DateCreated = DateTimeOffset.MinValue;
 						var1.DateModified = DateTimeOffset.MinValue;
 						//var2
-						var2.Id = 7;
-						var2.DayOfWeek = 1;
-						var2.Month = 30;
-						var2.IsTimeOnly = false;
+						var2.Id = 2;
+						var2.DayOfWeek = 33;
+						var2.Month = 59;
+						var2.IsTimeOnly = true;
 						var2.StartTime = DateTimeOffset.MinValue;
 						var2.EndTime = DateTimeOffset.MinValue;
-						var2.HeatTemperatureC = 0.52661180800134866;
-						var2.CoolTemperatureC = 0.032094962909861913;
+						var2.HeatTemperatureC = 0.22264813036781184;
+						var2.CoolTemperatureC = 0.056368343558333978;
 						var2.DateCreated = DateTimeOffset.MinValue;
 						var2.DateModified = DateTimeOffset.MinValue;
 						//var3
-						var3.Id = 69;
-						var3.DayOfWeek = 10;
-						var3.Month = 5;
-						var3.IsTimeOnly = true;
+						var3.Id = 84;
+						var3.DayOfWeek = 81;
+						var3.Month = 23;
+						var3.IsTimeOnly = false;
 						var3.StartTime = DateTimeOffset.MinValue;
 						var3.EndTime = DateTimeOffset.MinValue;
-						var3.HeatTemperatureC = 0.63643362402749881;
-						var3.CoolTemperatureC = 0.99906104057983547;
+						var3.HeatTemperatureC = 0.36613437969523221;
+						var3.CoolTemperatureC = 0.32502767877887362;
 						var3.DateCreated = DateTimeOffset.MinValue;
 						var3.DateModified = DateTimeOffset.MinValue;
 						//Fix Order
@@ -253,16 +253,16 @@ namespace Sannel.House.Web.Tests
 						Assert.Equal("data cannot be null", result.Errors[0]);
 						Assert.Null(result.Data);
 						var expected = new TemperatureSetting();
-						// Success Test test
+						// Success Test
 						expected = new TemperatureSetting();
-						expected.Id = 92;
-						expected.DayOfWeek = 7;
-						expected.Month = 69;
-						expected.IsTimeOnly = false;
+						expected.Id = 77;
+						expected.DayOfWeek = 12;
+						expected.Month = 51;
+						expected.IsTimeOnly = true;
 						expected.StartTime = DateTimeOffset.MinValue;
 						expected.EndTime = DateTimeOffset.MinValue;
-						expected.HeatTemperatureC = 0.0041733910349073776;
-						expected.CoolTemperatureC = 0.09501407579286679;
+						expected.HeatTemperatureC = 0.32445674404709446;
+						expected.CoolTemperatureC = 0.90481607751213766;
 						expected.DateCreated = DateTimeOffset.MinValue;
 						expected.DateModified = DateTimeOffset.MinValue;
 						postPreCall(expected, wrapper);
@@ -292,5 +292,75 @@ namespace Sannel.House.Web.Tests
 
 		// used to make sure reference tables have data needed for a test to succeed
 		partial void postPreCall(TemperatureSetting data, ContextWrapper wrapper);
+		[Fact]
+		public void PutTest()
+		{
+			{
+				var logFactory = new LoggerFactory();
+				var logger = logFactory.CreateLogger<TemperatureSettingController>();
+				using (var wrapper = new ContextWrapper(this))
+				{
+					var context = wrapper.Context;
+					using (var controller = new TemperatureSettingController(context, logger))
+					{
+						var result = controller.Put(null);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("data cannot be null", result.Errors[0]);
+						Assert.Null(result.Data);
+						var expected = new TemperatureSetting();
+						// Success Test
+						expected = new TemperatureSetting();
+						expected.Id = 49;
+						expected.DayOfWeek = 50;
+						expected.Month = 87;
+						expected.IsTimeOnly = false;
+						expected.StartTime = DateTimeOffset.MinValue;
+						expected.EndTime = DateTimeOffset.MinValue;
+						expected.HeatTemperatureC = 0.77200041654147222;
+						expected.CoolTemperatureC = 0.86954589135458038;
+						expected.DateCreated = DateTimeOffset.MinValue;
+						expected.DateModified = DateTimeOffset.MinValue;
+						putPreCall(expected, wrapper);
+						context.TemperatureSettings.Add(expected);
+						context.SaveChanges();
+						// Reset props and call put
+						expected.DayOfWeek = 68;
+						expected.Month = 60;
+						expected.IsTimeOnly = true;
+						expected.StartTime = DateTimeOffset.MinValue;
+						expected.EndTime = DateTimeOffset.MinValue;
+						expected.HeatTemperatureC = 0.9129330385070914;
+						expected.CoolTemperatureC = 0.76805834927040073;
+						expected.DateCreated = DateTimeOffset.MinValue;
+						expected.DateModified = DateTimeOffset.MinValue;
+						putPreCall(expected, wrapper);
+						result = controller.Put(expected);
+						Assert.NotNull(result);
+						Assert.True(result.Success, "Success was not true");
+						Assert.Equal(0, result.Errors.Count);
+						Assert.NotNull(result.Data);
+						Assert.True(result.Data.Id > 0, "Id not updated");
+						var first = context.TemperatureSettings.FirstOrDefault((i) => i.Id == result.Data.Id);
+						Assert.NotNull(first);
+						var resultData = result.Data;
+						Assert.Equal(first.Id, resultData.Id);
+						Assert.Equal(first.DayOfWeek, resultData.DayOfWeek);
+						Assert.Equal(first.Month, resultData.Month);
+						Assert.Equal(first.IsTimeOnly, resultData.IsTimeOnly);
+						Assert.Equal(first.StartTime, resultData.StartTime);
+						Assert.Equal(first.EndTime, resultData.EndTime);
+						Assert.Equal(first.HeatTemperatureC, resultData.HeatTemperatureC);
+						Assert.Equal(first.CoolTemperatureC, resultData.CoolTemperatureC);
+						Assert.Equal(first.DateCreated, resultData.DateCreated);
+						Assert.Equal(first.DateModified, resultData.DateModified);
+					}
+				}
+			}
+		}
+
+		// used to make sure reference tables have data needed for a test to succeed
+		partial void putPreCall(TemperatureSetting data, ContextWrapper wrapper);
 	}
 }

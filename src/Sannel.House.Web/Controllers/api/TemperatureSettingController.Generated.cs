@@ -89,7 +89,6 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
-			data.Id = 0;
 			putExtraVerification(data, result);
 			if (result.Errors.Count > 0)
 			{

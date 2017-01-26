@@ -43,26 +43,26 @@ namespace Sannel.House.Web.Tests
 						var var2 = new Device();
 						var var3 = new Device();
 						//var1
-						var1.Id = 54;
-						var1.Name = "1C>$oQt\\C_*(<zz#*7g62m!z0*63K^hE9$M1?\\j`t11";
-						var1.Description = "ng&5TxqgnAakAKn#o+vDB";
-						var1.DisplayOrder = 39;
+						var1.Id = 41;
+						var1.Name = "*_2vh|/])Ig/^#A}xXT>b<*4wwjn";
+						var1.Description = "|]sXx9)!zhV.e@m-9C11T[}Q?aaSjNedH/D<@`y_o";
+						var1.DisplayOrder = 63;
 						var1.DateCreated = DateTimeOffset.MinValue;
 						var1.IsReadOnly = false;
 						//var2
 						var2.Id = 87;
-						var2.Name = "}{qc[8Isp+Fp}\\7=vqxIAz=Sb'#FvgP`naFiNj,";
-						var2.Description = "m!eo.9^B+0Mvq],KK&hJ?B|c\"Nvz\"3F&t/K6}eV$)Whrz$z$";
-						var2.DisplayOrder = 40;
+						var2.Name = "1N{.f@BuC%+=#nS@)_A5d]j#)K_2>q#_3s(}P`{1Hp.I]K]i";
+						var2.Description = "dbGPO_m[Qe4|8i/AX=Qf/n#gF/i/M9x{.JN!K_I@!8q?";
+						var2.DisplayOrder = 43;
 						var2.DateCreated = DateTimeOffset.MinValue;
 						var2.IsReadOnly = true;
 						//var3
-						var3.Id = 36;
-						var3.Name = "j3qGoc_ctu]3seN$bk>LXZLC'DSrnI$8QF%P)e[1";
-						var3.Description = "l\\ue9MW[PhEkQ4*w{(.xx9;wwvrda2T";
-						var3.DisplayOrder = 1;
+						var3.Id = 24;
+						var3.Name = ":32O'kbsxpnXCo,1`8{i2a(;|*5A";
+						var3.Description = "5zaep8%bX%J]yC6Z<sx{w-)]jV";
+						var3.DisplayOrder = 50;
 						var3.DateCreated = DateTimeOffset.MinValue;
-						var3.IsReadOnly = true;
+						var3.IsReadOnly = false;
 						//Fix Order
 						var3.DisplayOrder = 1;
 						var2.DisplayOrder = 2;
@@ -121,24 +121,24 @@ namespace Sannel.House.Web.Tests
 						var var2 = new Device();
 						var var3 = new Device();
 						//var1
-						var1.Id = 37;
-						var1.Name = "S1TO*%p-*6{";
-						var1.Description = "Cv[(.y[7Lrag.Ee6_~8.;+_EP:-6";
-						var1.DisplayOrder = 82;
+						var1.Id = 77;
+						var1.Name = "d(%mfQsX)2W.B9%BEJ[x@)?MO#[H[\\;aZiC2.iu8x+43";
+						var1.Description = "[g40?\\POhnm+j~[$KPhpXK<f<@/lCWr9ks4pFT?L+JP*";
+						var1.DisplayOrder = 72;
 						var1.DateCreated = DateTimeOffset.MinValue;
-						var1.IsReadOnly = false;
+						var1.IsReadOnly = true;
 						//var2
-						var2.Id = 28;
-						var2.Name = "+LM?&|1eh_5K)en?\"vPt;];;kv7T(&-<^O";
-						var2.Description = ":1xQ0!0K<g";
-						var2.DisplayOrder = 89;
+						var2.Id = 57;
+						var2.Name = "o-?TOmB@KI%(*Z+_mjJh*}x$#wrgw`Z^M&y5]=E";
+						var2.Description = ";'{xk3}CkNzkc~HA%DGqk|581p!{m060Pna,XM].c#`j";
+						var2.DisplayOrder = 33;
 						var2.DateCreated = DateTimeOffset.MinValue;
 						var2.IsReadOnly = true;
 						//var3
-						var3.Id = 84;
-						var3.Name = "tw~In)l;kMK";
-						var3.Description = "F.@1:Q6CBd_u:^B,eIk|&r7?wLGll%^qWf";
-						var3.DisplayOrder = 12;
+						var3.Id = 42;
+						var3.Name = "b_4QOA[f6HNA^'jmxDk]wdLKF>q`z&KgF3Z<IZg[Z";
+						var3.Description = ":&z!864CNy|g.z-:1wp:aAMI$:(o@";
+						var3.DisplayOrder = 76;
 						var3.DateCreated = DateTimeOffset.MinValue;
 						var3.IsReadOnly = false;
 						//Fix Order
@@ -203,13 +203,13 @@ namespace Sannel.House.Web.Tests
 						Assert.Equal("data cannot be null", result.Errors[0]);
 						Assert.Null(result.Data);
 						var expected = new Device();
-						// Name test
+						// Name
 						expected = new Device();
-						expected.Id = 73;
-						expected.Description = "2s``:}^8@m*[Bn`A[#yEOX5xG|W%l%e>e2Se_mD2*kEex^AJ";
-						expected.DisplayOrder = 89;
+						expected.Id = 33;
+						expected.Description = "+XWr)$+`6bxgc`T(g~Viy?Ah";
+						expected.DisplayOrder = 41;
 						expected.DateCreated = DateTimeOffset.MinValue;
-						expected.IsReadOnly = true;
+						expected.IsReadOnly = false;
 						expected.Name = "";
 						postPreCall(expected, wrapper);
 						result = controller.Post(expected);
@@ -218,13 +218,13 @@ namespace Sannel.House.Web.Tests
 						Assert.Equal(1, result.Errors.Count);
 						Assert.Equal("Name must have a non empty value", result.Errors[0]);
 						Assert.NotNull(result.Data);
-						// Description test
+						// Description
 						expected = new Device();
-						expected.Id = 73;
-						expected.Name = "2s``:}^8@m*[Bn`A[#yEOX5xG|W%l%e>e2Se_mD2*kEex^AJ";
-						expected.DisplayOrder = 89;
+						expected.Id = 52;
+						expected.Name = "BlW]~}0aXD\"n_uOfe~4<cGFa5q)`";
+						expected.DisplayOrder = 20;
 						expected.DateCreated = DateTimeOffset.MinValue;
-						expected.IsReadOnly = true;
+						expected.IsReadOnly = false;
 						expected.Description = null;
 						postPreCall(expected, wrapper);
 						result = controller.Post(expected);
@@ -233,12 +233,12 @@ namespace Sannel.House.Web.Tests
 						Assert.Equal(1, result.Errors.Count);
 						Assert.Equal("Description must not be null", result.Errors[0]);
 						Assert.NotNull(result.Data);
-						// Success Test test
+						// Success Test
 						expected = new Device();
-						expected.Id = 73;
-						expected.Name = "2s``:}^8@m*[Bn`A[#yEOX5xG|W%l%e>e2Se_mD2*kEex^AJ";
-						expected.Description = "zV]C3(-os$96`c<w(7XGEkAprd%&}?b>Je<_X6+AQVH\\E";
-						expected.DisplayOrder = 95;
+						expected.Id = 71;
+						expected.Name = "n=Wj3wNL}`${<O}E!~@cG/KiIjG<.'*~";
+						expected.Description = "!$/cCr.Oa3_={oSD0XCs=PMqwD;g>&%|3";
+						expected.DisplayOrder = 15;
 						expected.DateCreated = DateTimeOffset.MinValue;
 						expected.IsReadOnly = false;
 						postPreCall(expected, wrapper);
@@ -264,5 +264,91 @@ namespace Sannel.House.Web.Tests
 
 		// used to make sure reference tables have data needed for a test to succeed
 		partial void postPreCall(Device data, ContextWrapper wrapper);
+		[Fact]
+		public void PutTest()
+		{
+			{
+				var logFactory = new LoggerFactory();
+				var logger = logFactory.CreateLogger<DeviceController>();
+				using (var wrapper = new ContextWrapper(this))
+				{
+					var context = wrapper.Context;
+					using (var controller = new DeviceController(context, logger))
+					{
+						var result = controller.Put(null);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("data cannot be null", result.Errors[0]);
+						Assert.Null(result.Data);
+						var expected = new Device();
+						// Name
+						expected = new Device();
+						expected.Id = 27;
+						expected.Description = "f@Zc8:|$oTj$:6kH\\y]9|6d";
+						expected.DisplayOrder = 60;
+						expected.DateCreated = DateTimeOffset.MinValue;
+						expected.IsReadOnly = false;
+						expected.Name = "";
+						putPreCall(expected, wrapper);
+						result = controller.Put(expected);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("Name must have a non empty value", result.Errors[0]);
+						Assert.NotNull(result.Data);
+						// Description
+						expected = new Device();
+						expected.Id = 47;
+						expected.Name = "=S\"Q>abm^ZGexa'4_u;O`Zj;AHi";
+						expected.DisplayOrder = 79;
+						expected.DateCreated = DateTimeOffset.MinValue;
+						expected.IsReadOnly = false;
+						expected.Description = null;
+						putPreCall(expected, wrapper);
+						result = controller.Put(expected);
+						Assert.NotNull(result);
+						Assert.False(result.Success);
+						Assert.Equal(1, result.Errors.Count);
+						Assert.Equal("Description must not be null", result.Errors[0]);
+						Assert.NotNull(result.Data);
+						// Success Test
+						expected = new Device();
+						expected.Id = 19;
+						expected.Name = "jmt,rhz\\S\"FM<\\?\"={Sx]7,0+/%z(kfX`Vwm\\o|%/:3";
+						expected.Description = "zf-rcTKtfm]\\>^y";
+						expected.DisplayOrder = 67;
+						expected.DateCreated = DateTimeOffset.MinValue;
+						expected.IsReadOnly = false;
+						putPreCall(expected, wrapper);
+						context.Devices.Add(expected);
+						context.SaveChanges();
+						// Reset props and call put
+						expected.Name = "C@*tO^3pK,7-8QA29<{X@/XQ5";
+						expected.Description = "LAlTWBEH_>}P<xGppoa9N!]@Qo.W%__x+Sy_:!N~a)[D+o?";
+						expected.DisplayOrder = 18;
+						putPreCall(expected, wrapper);
+						result = controller.Put(expected);
+						Assert.NotNull(result);
+						Assert.True(result.Success, "Success was not true");
+						Assert.Equal(0, result.Errors.Count);
+						Assert.NotNull(result.Data);
+						Assert.True(result.Data.Id > 0, "Id not updated");
+						var first = context.Devices.FirstOrDefault((i) => i.Id == result.Data.Id);
+						Assert.NotNull(first);
+						var resultData = result.Data;
+						Assert.Equal(first.Id, resultData.Id);
+						Assert.Equal(first.Name, resultData.Name);
+						Assert.Equal(first.Description, resultData.Description);
+						Assert.Equal(first.DisplayOrder, resultData.DisplayOrder);
+						Assert.Equal(first.DateCreated, resultData.DateCreated);
+						Assert.Equal(first.IsReadOnly, resultData.IsReadOnly);
+					}
+				}
+			}
+		}
+
+		// used to make sure reference tables have data needed for a test to succeed
+		partial void putPreCall(Device data, ContextWrapper wrapper);
 	}
 }

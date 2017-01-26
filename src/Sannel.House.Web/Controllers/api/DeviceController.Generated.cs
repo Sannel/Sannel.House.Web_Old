@@ -103,7 +103,6 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
-			data.Id = 0;
 			if (String.IsNullOrWhiteSpace(data.Name))
 			{
 				result.Errors.Add($"{nameof(data.Name)} must have a non empty value");

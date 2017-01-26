@@ -33,5 +33,14 @@ namespace Sannel.House.Web.Controllers.api
 			this.context = context;
 			this.logger = logger;
 		}
+
+		partial void putExtraVerification(Device data, Result<Device> result)
+		{
+			var item = context.Devices.FirstOrDefault(i => i.Id == data.Id);
+			if(item != null && item.IsReadOnly)
+			{
+				result.Errors.Add($"Device {item.Id} is read only");
+			}
+		}
 	}
 }
