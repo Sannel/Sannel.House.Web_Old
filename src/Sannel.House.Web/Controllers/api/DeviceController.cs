@@ -42,5 +42,38 @@ namespace Sannel.House.Web.Controllers.api
 				result.Errors.Add($"Device {item.Id} is read only");
 			}
 		}
+
+		[HttpDelete]
+		public Result<Device> Delete(int key)
+		{
+			var result = new Result<Device>();
+			result.Success = false;
+
+			var data = context.Devices.FirstOrDefault(i => i.Id == key);
+
+			if (data != null)
+			{
+				result.Data = data;
+				try
+				{
+					context.Devices.Remove(data);
+					context.SaveChanges();
+					result.Success = true;
+					return result;
+				}
+				catch(Exception ex)
+				{
+					if (logger.IsEnabled(LogLevel.Error))
+					{
+						logger.LogError(LoggingIds.DeleteException, ex, $"Exception deleting Device with Id {key}");
+					}
+					result.Errors.Add(ex.Message);
+					return result;
+				}
+			}
+
+			result.Errors.Add($"Device with Id {key} was not found");
+			return result;
+		}
 	}
 }
