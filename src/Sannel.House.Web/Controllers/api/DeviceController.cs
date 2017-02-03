@@ -54,6 +54,13 @@ namespace Sannel.House.Web.Controllers.api
 			if (data != null)
 			{
 				result.Data = data;
+
+				deleteExtraVerification(data, result);
+				if(result.Errors.Count > 0)
+				{
+					return result;
+				}
+
 				try
 				{
 					context.Devices.Remove(data);
@@ -75,5 +82,7 @@ namespace Sannel.House.Web.Controllers.api
 			result.Errors.Add($"Device with Id {key} was not found");
 			return result;
 		}
+
+		partial void deleteExtraVerification(Device data, Result<Device> result);
 	}
 }

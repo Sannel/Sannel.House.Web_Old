@@ -5,11 +5,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sannel.House.Web.Data;
+using Xunit;
+using Microsoft.Extensions.Logging;
+using Sannel.House.Web.Controllers.api;
+using Sannel.House.Web.Base;
 
 namespace Sannel.House.Web.Tests
 {
 	public partial class TemperatureEntryControllerTests : IContextWrapperTest
 	{
+		[Fact]
+		public void DeviceIdResetTest()
+		{
+
+			var logFactory = new LoggerFactory();
+			var logger = logFactory.CreateLogger<TemperatureEntryController>();
+			using (var wrapper = new ContextWrapper(this))
+			{
+				var context = wrapper.Context;
+				context.Devices.Add(new Device()
+				{
+					Id = 1,
+					Name = "Controller",
+					Description = "",
+					DateCreated = DateTimeOffset.Now,
+					DisplayOrder = 0,
+					IsReadOnly = true
+				});
+				context.Devices.Add(new Device()
+				{
+					Id = 2,
+					Name = "Default",
+					Description = "",
+					DateCreated = DateTimeOffset.Now,
+					DisplayOrder = 0,
+					IsReadOnly = true
+				});
+
+				context.SaveChanges();
+
+				using (var controller = new TemperatureEntryController(context, logger))
+				{
+					var temp = new TemperatureEntry();
+					temp.TemperatureCelsius = 20;
+					temp.DeviceId = 500;
+					temp.CreatedDateTime = DateTimeOffset.Now;
+					var result = controller.Post(temp);
+					Assert.True(result.Success);
+					var d = result.Data;
+					Assert.NotNull(d);
+					Assert.Equal(SystemDeviceIds.DefaultId, d.DeviceId);
+				}
+			}
+		}
+
 		public void PreSaveChanges(ContextWrapper wrapper)
 		{
 			// Add any missing devices our database may have.

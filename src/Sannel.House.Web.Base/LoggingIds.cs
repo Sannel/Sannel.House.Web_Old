@@ -26,5 +26,7 @@ namespace Sannel.House.Web.Base
 		public static readonly EventId PutException = new EventId(2, "Put Exception");
 
 		public static readonly EventId DeleteException = new EventId(3, "Delete Exception");
+
+		public static readonly EventId DeviceNotFoundError = new EventId(4, "Device Not Found");
 	}
 }

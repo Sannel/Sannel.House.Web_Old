@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Sannel.House.Web.Base;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -31,6 +32,19 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			this.context = context;
 			this.logger = logger;
+		}
+
+		partial void postExtraReset(TemperatureEntry data)
+		{
+			var device = context.Devices.FirstOrDefault(i => i.Id == data.DeviceId);
+			if(device == null)
+			{
+				if (logger.IsEnabled(LogLevel.Error))
+				{
+					logger.LogError(LoggingIds.DeviceNotFoundError, $"A device with id {data.DeviceId} was not found setting device to default");
+				}
+				data.DeviceId = SystemDeviceIds.DefaultId;
+			}
 		}
 	}
 }
