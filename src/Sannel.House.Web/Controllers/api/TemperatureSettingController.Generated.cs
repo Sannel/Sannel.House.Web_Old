@@ -133,5 +133,43 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 		partial void putExtraReset(TemperatureSetting data);
+		[HttpDelete("{key}")]
+		public Result<TemperatureSetting> Delete(Int64 key)
+		{
+			var result = new Result<TemperatureSetting>();
+			var data = context.TemperatureSettings.FirstOrDefault((i) => i.Id == key);
+			if (data != null)
+			{
+				result.Data = data;
+				deleteExtraVerification(data, result);
+				if (result.Errors.Count > 0)
+				{
+					return result;
+				}
+
+				try
+				{
+					context.TemperatureSettings.Remove(data);
+					context.SaveChanges();
+					result.Success = true;
+					return result;
+				}
+				catch (Exception ex)
+				{
+					if (logger.IsEnabled(LogLevel.Error))
+					{
+						logger.LogError(LoggingIds.DeleteException, ex, $"Exception deleting TemperatureSetting with Id{key}");
+					}
+
+					result.Errors.Add(ex.Message);
+					return result;
+				}
+			}
+
+			result.Errors.Add($"Device with ID {key} was not found");
+			return result;
+		}
+
+		partial void deleteExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 	}
 }

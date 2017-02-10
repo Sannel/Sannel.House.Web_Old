@@ -153,5 +153,43 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(Device data, Result<Device> result);
 		partial void putExtraReset(Device data);
+		[HttpDelete("{key}")]
+		public Result<Device> Delete(Int32 key)
+		{
+			var result = new Result<Device>();
+			var data = context.Devices.FirstOrDefault((i) => i.Id == key);
+			if (data != null)
+			{
+				result.Data = data;
+				deleteExtraVerification(data, result);
+				if (result.Errors.Count > 0)
+				{
+					return result;
+				}
+
+				try
+				{
+					context.Devices.Remove(data);
+					context.SaveChanges();
+					result.Success = true;
+					return result;
+				}
+				catch (Exception ex)
+				{
+					if (logger.IsEnabled(LogLevel.Error))
+					{
+						logger.LogError(LoggingIds.DeleteException, ex, $"Exception deleting Device with Id{key}");
+					}
+
+					result.Errors.Add(ex.Message);
+					return result;
+				}
+			}
+
+			result.Errors.Add($"Device with ID {key} was not found");
+			return result;
+		}
+
+		partial void deleteExtraVerification(Device data, Result<Device> result);
 	}
 }
