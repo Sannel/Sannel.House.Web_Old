@@ -21,9 +21,11 @@ using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
 using Sannel.House.Web.Base;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
+	[Authorize(Roles = "DeviceList,DeviceManager")]
 	public partial class DeviceController : Controller
 	{
 		private IDataContext context;
@@ -32,6 +34,36 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			this.context = context;
 			this.logger = logger;
+		}
+
+		[HttpGet]
+		public IEnumerable<Device> Get()
+		{
+			return internalGet();
+		}
+
+		[HttpGet("{id}")]
+		public Device Get(int id)
+		{
+			return internalGet(id);
+		}
+
+		[HttpPost]
+		public Result<Device> Post([FromBody]Device data)
+		{
+			return internalPost(data);
+		}
+
+		[HttpPut]
+		public Result<Device> Put([FromBody]Device data)
+		{
+			return internalPut(data);
+		}
+
+		[HttpDelete("{id}")]
+		public Result<Device> Delete(int id)
+		{
+			return internalDelete(id);
 		}
 
 		partial void putExtraVerification(Device data, Result<Device> result)

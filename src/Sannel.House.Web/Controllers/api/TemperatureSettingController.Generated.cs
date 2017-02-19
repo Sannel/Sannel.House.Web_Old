@@ -27,19 +27,17 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class TemperatureSettingController : Controller
 	{
-		public IEnumerable<TemperatureSetting> Get()
+		private IEnumerable<TemperatureSetting> internalGet()
 		{
 			return context.TemperatureSettings.OrderByDescending(i => i.DateCreated);
 		}
 
-		[HttpGet("{id}")]
-		public TemperatureSetting Get(Int64 id)
+		private TemperatureSetting internalGet(Int64 id)
 		{
 			return context.TemperatureSettings.FirstOrDefault(i => i.Id == id);
 		}
 
-		[HttpPost]
-		public Result<TemperatureSetting> Post([FromBody] TemperatureSetting data)
+		private Result<TemperatureSetting> internalPost(TemperatureSetting data)
 		{
 			var result = new Result<TemperatureSetting>();
 			result.Data = data;
@@ -77,8 +75,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void postExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 		partial void postExtraReset(TemperatureSetting data);
-		[HttpPut]
-		public Result<TemperatureSetting> Put([FromBody] TemperatureSetting data)
+		private Result<TemperatureSetting> internalPut(TemperatureSetting data)
 		{
 			var result = new Result<TemperatureSetting>();
 			result.Data = data;
@@ -133,8 +130,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 		partial void putExtraReset(TemperatureSetting data);
-		[HttpDelete("{key}")]
-		public Result<TemperatureSetting> Delete(Int64 key)
+		private Result<TemperatureSetting> internalDelete(key)
 		{
 			var result = new Result<TemperatureSetting>();
 			var data = context.TemperatureSettings.FirstOrDefault((i) => i.Id == key);

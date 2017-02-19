@@ -27,19 +27,17 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class ApplicationLogEntryController : Controller
 	{
-		public IEnumerable<ApplicationLogEntry> Get()
+		private IEnumerable<ApplicationLogEntry> internalGet()
 		{
 			return context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
 		}
 
-		[HttpGet("{id}")]
-		public ApplicationLogEntry Get(Guid id)
+		private ApplicationLogEntry internalGet(Guid id)
 		{
 			return context.ApplicationLogEntries.FirstOrDefault(i => i.Id == id);
 		}
 
-		[HttpPost]
-		public Result<ApplicationLogEntry> Post([FromBody] ApplicationLogEntry data)
+		private Result<ApplicationLogEntry> internalPost(ApplicationLogEntry data)
 		{
 			var result = new Result<ApplicationLogEntry>();
 			result.Data = data;

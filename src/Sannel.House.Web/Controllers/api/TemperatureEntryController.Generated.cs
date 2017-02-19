@@ -27,19 +27,17 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class TemperatureEntryController : Controller
 	{
-		public IEnumerable<TemperatureEntry> Get()
+		private IEnumerable<TemperatureEntry> internalGet()
 		{
 			return context.TemperatureEntries.OrderByDescending(i => i.CreatedDateTime);
 		}
 
-		[HttpGet("{id}")]
-		public TemperatureEntry Get(Guid id)
+		private TemperatureEntry internalGet(Guid id)
 		{
 			return context.TemperatureEntries.FirstOrDefault(i => i.Id == id);
 		}
 
-		[HttpPost]
-		public Result<TemperatureEntry> Post([FromBody] TemperatureEntry data)
+		private Result<TemperatureEntry> internalPost(TemperatureEntry data)
 		{
 			var result = new Result<TemperatureEntry>();
 			result.Data = data;

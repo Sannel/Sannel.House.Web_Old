@@ -27,19 +27,17 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class DeviceController : Controller
 	{
-		public IEnumerable<Device> Get()
+		private IEnumerable<Device> internalGet()
 		{
 			return context.Devices.OrderBy(i => i.DisplayOrder);
 		}
 
-		[HttpGet("{id}")]
-		public Device Get(Int32 id)
+		private Device internalGet(Int32 id)
 		{
 			return context.Devices.FirstOrDefault(i => i.Id == id);
 		}
 
-		[HttpPost]
-		public Result<Device> Post([FromBody] Device data)
+		private Result<Device> internalPost(Device data)
 		{
 			var result = new Result<Device>();
 			result.Data = data;
@@ -91,8 +89,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void postExtraVerification(Device data, Result<Device> result);
 		partial void postExtraReset(Device data);
-		[HttpPut]
-		public Result<Device> Put([FromBody] Device data)
+		private Result<Device> internalPut(Device data)
 		{
 			var result = new Result<Device>();
 			result.Data = data;
@@ -153,8 +150,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(Device data, Result<Device> result);
 		partial void putExtraReset(Device data);
-		[HttpDelete("{key}")]
-		public Result<Device> Delete(Int32 key)
+		private Result<Device> internalDelete(key)
 		{
 			var result = new Result<Device>();
 			var data = context.Devices.FirstOrDefault((i) => i.Id == key);
