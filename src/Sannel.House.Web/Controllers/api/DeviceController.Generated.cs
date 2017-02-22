@@ -150,7 +150,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(Device data, Result<Device> result);
 		partial void putExtraReset(Device data);
-		private Result<Device> internalDelete(key)
+		private Result<Device> internalDelete(Int32 key)
 		{
 			var result = new Result<Device>();
 			var data = context.Devices.FirstOrDefault((i) => i.Id == key);

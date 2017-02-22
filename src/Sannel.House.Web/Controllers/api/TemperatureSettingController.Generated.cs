@@ -130,7 +130,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		partial void putExtraVerification(TemperatureSetting data, Result<TemperatureSetting> result);
 		partial void putExtraReset(TemperatureSetting data);
-		private Result<TemperatureSetting> internalDelete(key)
+		private Result<TemperatureSetting> internalDelete(Int64 key)
 		{
 			var result = new Result<TemperatureSetting>();
 			var data = context.TemperatureSettings.FirstOrDefault((i) => i.Id == key);

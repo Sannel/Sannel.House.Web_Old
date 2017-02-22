@@ -21,6 +21,7 @@ using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
 using Sannel.House.Web.Base;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -32,6 +33,27 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			this.context = context;
 			this.logger = logger;
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureEntryList")]
+		public IEnumerable<TemperatureEntry> Get()
+		{
+			return internalGet();
+		}
+
+		[HttpGet("{id}")]
+		[Authorize(Roles = "TemperatureEntryList")]
+		public TemperatureEntry Get(Guid id)
+		{
+			return internalGet(id);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "TemperatureEntryAdd")]
+		public Result<TemperatureEntry> Post([FromBody]TemperatureEntry data)
+		{
+			return internalPost(data);
 		}
 
 		partial void postExtraReset(TemperatureEntry data)

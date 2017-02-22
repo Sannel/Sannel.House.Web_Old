@@ -20,9 +20,11 @@ using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
+	[Authorize(Roles = "TemperatureSettingEdit")]
 	public partial class TemperatureSettingController : Controller
 	{
 		private IDataContext context;
@@ -31,6 +33,38 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			this.context = context;
 			this.logger = logger;
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureSettingList")]
+		public IEnumerable<TemperatureSetting> Get()
+		{
+			return internalGet();
+		}
+
+		[HttpGet("{id}")]
+		[Authorize(Roles = "TemperatureSettingList")]
+		public TemperatureSetting Get(long id)
+		{
+			return internalGet(id);
+		}
+
+		[HttpPost]
+		public Result<TemperatureSetting> Post([FromBody]TemperatureSetting data)
+		{
+			return internalPost(data);
+		}
+
+		[HttpPut]
+		public Result<TemperatureSetting> Put([FromBody]TemperatureSetting data)
+		{
+			return internalPut(data);
+		}
+
+		[HttpDelete("{key}")]
+		public Result<TemperatureSetting> Delete(long key)
+		{
+			return internalDelete(key);
 		}
 	}
 }

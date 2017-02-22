@@ -25,7 +25,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Authorize(Roles = "DeviceList,DeviceManager")]
+	[Authorize(Roles = "DeviceManager")]
 	public partial class DeviceController : Controller
 	{
 		private IDataContext context;
@@ -37,12 +37,14 @@ namespace Sannel.House.Web.Controllers.api
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "DeviceList")]
 		public IEnumerable<Device> Get()
 		{
 			return internalGet();
 		}
 
 		[HttpGet("{id}")]
+		[Authorize(Roles = "DeviceList")]
 		public Device Get(int id)
 		{
 			return internalGet(id);
@@ -72,6 +74,14 @@ namespace Sannel.House.Web.Controllers.api
 			if(item != null && item.IsReadOnly)
 			{
 				result.Errors.Add($"Device {item.Id} is read only");
+			}
+		}
+
+		partial void deleteExtraVerification(Device data, Result<Device> result)
+		{
+			if (data.IsReadOnly)
+			{
+				result.Errors.Add($"Device {data.Id} is read only");
 			}
 		}
 	}

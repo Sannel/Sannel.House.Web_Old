@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -31,6 +32,27 @@ namespace Sannel.House.Web.Controllers.api
 		{
 			this.context = context;
 			this.logger = logger;
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "ApplicationLogList")]
+		public IEnumerable<ApplicationLogEntry> Get()
+		{
+			return internalGet();
+		}
+
+		[HttpGet("{id}")]
+		[Authorize(Roles = "ApplicationLogList")]
+		public ApplicationLogEntry Get(Guid id)
+		{
+			return internalGet(id);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "ApplicationLogAdd")]
+		public Result<ApplicationLogEntry> Post([FromBody]ApplicationLogEntry data)
+		{
+			return internalPost(data);
 		}
 	}
 }
