@@ -26,6 +26,7 @@ namespace Sannel.House.Web.Controllers.api
 {
 	public partial class ApplicationLogEntryController : Controller
 	{
+		protected int PageSize => 20;
 		private IDataContext context;
 		private ILogger logger;
 		public ApplicationLogEntryController(IDataContext context, ILogger<ApplicationLogEntryController> logger)
@@ -36,9 +37,23 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet]
 		[Authorize(Roles = "ApplicationLogList")]
-		public IEnumerable<ApplicationLogEntry> Get()
+		public PagedResults<ApplicationLogEntry> GetPaged()
 		{
-			return internalGet();
+			return GetPaged(0, PageSize);
+		}
+
+		[HttpGet("{page}")]
+		[Authorize(Roles = "ApplicationLogList")]
+		public PagedResults<ApplicationLogEntry> GetPaged(int page)
+		{
+			return GetPaged(page, PageSize);
+		}
+
+		[HttpGet("{page}/{pageSize}")]
+		[Authorize(Roles = "ApplicationLogList")]
+		public PagedResults<ApplicationLogEntry> GetPaged(int page, int pageSize)
+		{
+			return internalGetPaged(page, pageSize);
 		}
 
 		[HttpGet("{id}")]

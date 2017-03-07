@@ -27,9 +27,17 @@ namespace Sannel.House.Web.Controllers.api
 	[Route("api/[controller]")]
 	public partial class ApplicationLogEntryController : Controller
 	{
-		private IEnumerable<ApplicationLogEntry> internalGet()
+		private PagedResults<ApplicationLogEntry> internalGetPaged(int page, int pageSize)
 		{
-			return context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
+			IQueryable<ApplicationLogEntry> query;
+			query = context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
+			var results = new PagedResults<ApplicationLogEntry>();
+			results.TotalResults = query.LongCount();
+			results.PageSize = pageSize;
+			query = query.Skip(page * results.PageSize).Take(results.PageSize);
+			results.Data = query;
+			results.Success = true;
+			return results;
 		}
 
 		private ApplicationLogEntry internalGet(Guid id)

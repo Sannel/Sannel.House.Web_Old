@@ -31,14 +31,15 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		///   <c>true</c> if success; otherwise, <c>false</c>.
 		/// </value>
-		public bool Success { get; set; }
+		public virtual bool Success { get; set; }
+
 		/// <summary>
 		/// Gets the errors.
 		/// </summary>
 		/// <value>
 		/// The errors.
 		/// </value>
-		public List<String> Errors { get; } = new List<String>();
+		public virtual List<String> Errors { get; } = new List<String>();
 
 		/// <summary>
 		/// Gets or sets the data for the result
@@ -46,6 +47,6 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The data.
 		/// </value>
-		public T Data { get; set; }
+		public virtual T Data { get; set; }
 	}
 }
