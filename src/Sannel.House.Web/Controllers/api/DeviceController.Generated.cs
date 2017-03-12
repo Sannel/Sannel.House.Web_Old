@@ -24,12 +24,34 @@ using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
 	public partial class DeviceController : Controller
 	{
-		private IEnumerable<Device> internalGet()
+		private PagedResults<Device> internalGetPaged(int page, int pageSize)
 		{
-			return context.Devices.OrderBy(i => i.DisplayOrder);
+			var results = new PagedResults<Device>();
+			if (page <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("Page must be 1 or greater");
+				return results;
+			}
+
+			if (pageSize <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("PageSize must be 1 or greater");
+				return results;
+			}
+
+			IQueryable<Device> query;
+			query = context.Devices.OrderBy(i => i.DisplayOrder);
+			results.TotalResults = query.LongCount();
+			results.PageSize = pageSize;
+			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
+			results.CurrentPage = page;
+			results.Data = query;
+			results.Success = true;
+			return results;
 		}
 
 		private Device internalGet(Int32 id)

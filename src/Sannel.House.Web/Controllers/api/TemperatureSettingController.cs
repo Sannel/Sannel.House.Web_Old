@@ -37,9 +37,23 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet]
 		[Authorize(Roles = "TemperatureSettingList")]
-		public IEnumerable<TemperatureSetting> Get()
+		public PagedResults<TemperatureSetting> GetPaged()
 		{
-			return internalGet();
+			return GetPaged(1);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureSettingList")]
+		public PagedResults<TemperatureSetting> GetPaged(int page)
+		{
+			return GetPaged(page, 25);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureSettingList")]
+		public PagedResults<TemperatureSetting> GetPaged(int page, int pageSize)
+		{
+			return internalGetPaged(page, pageSize);
 		}
 
 		[HttpGet("{id}")]

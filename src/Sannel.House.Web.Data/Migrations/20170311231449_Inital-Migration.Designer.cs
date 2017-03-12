@@ -8,31 +8,33 @@ using Sannel.House.Web.Data;
 namespace Sannel.House.Web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20160826011531_AddedApplicationLogEntries")]
-    partial class AddedApplicationLogEntries
+    [Migration("20170311231449_Inital-Migration")]
+    partial class InitalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
+                        .IsUnique()
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
@@ -104,8 +106,6 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AspNetUserRoles");
                 });
 
@@ -131,11 +131,11 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<string>("ApplicationId")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
 
                     b.Property<int?>("DeviceId");
-
-                    b.Property<DateTime>("EntryDateTime");
 
                     b.Property<string>("Exception");
 
@@ -149,7 +149,8 @@ namespace Sannel.House.Web.Data.Migrations
 
             modelBuilder.Entity("Sannel.House.Web.Base.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -157,7 +158,7 @@ namespace Sannel.House.Web.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -168,10 +169,10 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
 
@@ -184,7 +185,7 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -203,11 +204,11 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 2000);
+                        .HasMaxLength(2000);
 
                     b.Property<int>("DisplayOrder");
 
@@ -215,11 +216,33 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
+                });
+
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTimeOffset>("CreatedDateTime");
+
+                    b.Property<int>("DeviceId");
+
+                    b.Property<double>("Humidity");
+
+                    b.Property<double>("Pressure");
+
+                    b.Property<double>("TemperatureCelsius");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("TemperatureEntries");
                 });
 
             modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureSetting", b =>
@@ -229,13 +252,13 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<double>("CoolTemperatureC");
 
-                    b.Property<DateTime>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated");
 
-                    b.Property<DateTime>("DateModified");
+                    b.Property<DateTimeOffset>("DateModified");
 
                     b.Property<int?>("DayOfWeek");
 
-                    b.Property<DateTime?>("EndTime");
+                    b.Property<DateTimeOffset?>("EndTime");
 
                     b.Property<double>("HeatTemperatureC");
 
@@ -243,7 +266,7 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<int?>("Month");
 
-                    b.Property<DateTime?>("StartTime");
+                    b.Property<DateTimeOffset?>("StartTime");
 
                     b.HasKey("Id");
 
@@ -284,6 +307,14 @@ namespace Sannel.House.Web.Data.Migrations
                     b.HasOne("Sannel.House.Web.Base.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureEntry", b =>
+                {
+                    b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
+                        .WithMany()
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

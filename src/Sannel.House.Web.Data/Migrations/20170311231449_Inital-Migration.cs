@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Sannel.House.Web.Data.Migrations
 {
-    public partial class AddedIndentity : Migration
+    public partial class InitalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,6 +38,22 @@ namespace Sannel.House.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ApplicationLogEntries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ApplicationId = table.Column<string>(maxLength: 256, nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    DeviceId = table.Column<int>(nullable: true),
+                    Exception = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationLogEntries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -48,6 +64,7 @@ namespace Sannel.House.Web.Data.Migrations
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -60,6 +77,44 @@ namespace Sannel.House.Web.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Devices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
+                    Description = table.Column<string>(maxLength: 2000, nullable: false),
+                    DisplayOrder = table.Column<int>(nullable: false),
+                    IsReadOnly = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Devices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TemperatureSettings",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CoolTemperatureC = table.Column<double>(nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
+                    DateModified = table.Column<DateTimeOffset>(nullable: false),
+                    DayOfWeek = table.Column<int>(nullable: true),
+                    EndTime = table.Column<DateTimeOffset>(nullable: true),
+                    HeatTemperatureC = table.Column<double>(nullable: false),
+                    IsTimeOnly = table.Column<bool>(nullable: false),
+                    Month = table.Column<int>(nullable: true),
+                    StartTime = table.Column<DateTimeOffset>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemperatureSettings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,10 +203,33 @@ namespace Sannel.House.Web.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TemperatureEntries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(nullable: false),
+                    DeviceId = table.Column<int>(nullable: false),
+                    Humidity = table.Column<double>(nullable: false),
+                    Pressure = table.Column<double>(nullable: false),
+                    TemperatureCelsius = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemperatureEntries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TemperatureEntries_Devices_DeviceId",
+                        column: x => x.DeviceId,
+                        principalTable: "Devices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
-                column: "NormalizedName");
+                column: "NormalizedName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -174,11 +252,6 @@ namespace Sannel.House.Web.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -188,6 +261,11 @@ namespace Sannel.House.Web.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TemperatureEntries_DeviceId",
+                table: "TemperatureEntries",
+                column: "DeviceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,10 +286,22 @@ namespace Sannel.House.Web.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ApplicationLogEntries");
+
+            migrationBuilder.DropTable(
+                name: "TemperatureEntries");
+
+            migrationBuilder.DropTable(
+                name: "TemperatureSettings");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Devices");
         }
     }
 }

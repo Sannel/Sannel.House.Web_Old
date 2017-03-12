@@ -24,17 +24,31 @@ using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
 	public partial class ApplicationLogEntryController : Controller
 	{
 		private PagedResults<ApplicationLogEntry> internalGetPaged(int page, int pageSize)
 		{
+			var results = new PagedResults<ApplicationLogEntry>();
+			if (page <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("Page must be 1 or greater");
+				return results;
+			}
+
+			if (pageSize <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("PageSize must be 1 or greater");
+				return results;
+			}
+
 			IQueryable<ApplicationLogEntry> query;
 			query = context.ApplicationLogEntries.OrderByDescending(i => i.CreatedDate);
-			var results = new PagedResults<ApplicationLogEntry>();
 			results.TotalResults = query.LongCount();
 			results.PageSize = pageSize;
-			query = query.Skip(page * results.PageSize).Take(results.PageSize);
+			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
+			results.CurrentPage = page;
 			results.Data = query;
 			results.Success = true;
 			return results;

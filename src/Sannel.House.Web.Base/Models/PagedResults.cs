@@ -31,5 +31,16 @@ namespace Sannel.House.Web.Base.Models
 			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the current page
+		/// </summary>
+		/// <value>
+		/// The current page
+		/// </value>
+		public virtual int CurrentPage
+		{
+			get;
+			set;
+		}
     }
 }

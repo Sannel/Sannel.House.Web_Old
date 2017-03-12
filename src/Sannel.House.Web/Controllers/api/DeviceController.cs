@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Sannel.House.Web.Controllers.api
 {
 	[Authorize(Roles = "DeviceManager")]
+	[Route("api/[controller]")]
 	public partial class DeviceController : Controller
 	{
 		private IDataContext context;
@@ -38,9 +39,23 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet]
 		[Authorize(Roles = "DeviceList")]
-		public IEnumerable<Device> Get()
+		public PagedResults<Device> GetPaged()
 		{
-			return internalGet();
+			return GetPaged(1, 25);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "DeviceList")]
+		public PagedResults<Device> GetPaged(int page)
+		{
+			return GetPaged(page, 25);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "DeviceList")]
+		public PagedResults<Device> GetPaged(int page, int pageSize)
+		{
+			return internalGetPaged(page, pageSize);
 		}
 
 		[HttpGet("{id}")]

@@ -24,12 +24,34 @@ using Microsoft.Extensions.Logging;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
 	public partial class TemperatureSettingController : Controller
 	{
-		private IEnumerable<TemperatureSetting> internalGet()
+		private PagedResults<TemperatureSetting> internalGetPaged(int page, int pageSize)
 		{
-			return context.TemperatureSettings.OrderByDescending(i => i.DateCreated);
+			var results = new PagedResults<TemperatureSetting>();
+			if (page <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("Page must be 1 or greater");
+				return results;
+			}
+
+			if (pageSize <= 0)
+			{
+				results.Success = false;
+				results.Errors.Add("PageSize must be 1 or greater");
+				return results;
+			}
+
+			IQueryable<TemperatureSetting> query;
+			query = context.TemperatureSettings.OrderByDescending(i => i.DateCreated);
+			results.TotalResults = query.LongCount();
+			results.PageSize = pageSize;
+			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
+			results.CurrentPage = page;
+			results.Data = query;
+			results.Success = true;
+			return results;
 		}
 
 		private TemperatureSetting internalGet(Int64 id)

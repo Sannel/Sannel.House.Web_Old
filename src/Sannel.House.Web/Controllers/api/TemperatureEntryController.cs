@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
+	[Route("api/[controller]")]
 	public partial class TemperatureEntryController : Controller
 	{
 		private IDataContext context;
@@ -37,9 +38,23 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet]
 		[Authorize(Roles = "TemperatureEntryList")]
-		public IEnumerable<TemperatureEntry> Get()
+		public PagedResults<TemperatureEntry> GetPaged()
 		{
-			return internalGet();
+			return GetPaged(1);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureEntryList")]
+		public PagedResults<TemperatureEntry> GetPaged(int page)
+		{
+			return GetPaged(page, 25);
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "TemperatureEntryList")]
+		public PagedResults<TemperatureEntry> GetPaged(int page, int pageSize)
+		{
+			return internalGetPaged(page, pageSize);
 		}
 
 		[HttpGet("{id}")]

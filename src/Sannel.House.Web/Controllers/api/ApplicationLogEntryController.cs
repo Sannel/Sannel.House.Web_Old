@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
+	[Route("api/[controller]")]
 	public partial class ApplicationLogEntryController : Controller
 	{
 		protected int PageSize => 20;
@@ -39,7 +40,7 @@ namespace Sannel.House.Web.Controllers.api
 		[Authorize(Roles = "ApplicationLogList")]
 		public PagedResults<ApplicationLogEntry> GetPaged()
 		{
-			return GetPaged(0, PageSize);
+			return GetPaged(1, PageSize);
 		}
 
 		[HttpGet("{page}")]

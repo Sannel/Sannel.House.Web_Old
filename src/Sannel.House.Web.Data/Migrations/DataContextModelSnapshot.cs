@@ -13,25 +13,27 @@ namespace Sannel.House.Web.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
+                .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
+                        .IsUnique()
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
@@ -103,8 +105,6 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AspNetUserRoles");
                 });
 
@@ -130,7 +130,7 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<string>("ApplicationId")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
@@ -148,7 +148,8 @@ namespace Sannel.House.Web.Data.Migrations
 
             modelBuilder.Entity("Sannel.House.Web.Base.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -156,7 +157,7 @@ namespace Sannel.House.Web.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -167,10 +168,10 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
 
@@ -183,7 +184,7 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -206,7 +207,7 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 2000);
+                        .HasMaxLength(2000);
 
                     b.Property<int>("DisplayOrder");
 
@@ -214,7 +215,7 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -250,9 +251,9 @@ namespace Sannel.House.Web.Data.Migrations
 
                     b.Property<double>("CoolTemperatureC");
 
-                    b.Property<DateTime>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated");
 
-                    b.Property<DateTime>("DateModified");
+                    b.Property<DateTimeOffset>("DateModified");
 
                     b.Property<int?>("DayOfWeek");
 
