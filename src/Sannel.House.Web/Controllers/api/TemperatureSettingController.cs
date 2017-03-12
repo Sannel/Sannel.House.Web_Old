@@ -35,21 +35,21 @@ namespace Sannel.House.Web.Controllers.api
 			this.logger = logger;
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged")]
 		[Authorize(Roles = "TemperatureSettingList")]
 		public PagedResults<TemperatureSetting> GetPaged()
 		{
 			return GetPaged(1);
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged/{page}")]
 		[Authorize(Roles = "TemperatureSettingList")]
 		public PagedResults<TemperatureSetting> GetPaged(int page)
 		{
 			return GetPaged(page, 25);
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged/{page}/{pageSize}")]
 		[Authorize(Roles = "TemperatureSettingList")]
 		public PagedResults<TemperatureSetting> GetPaged(int page, int pageSize)
 		{

@@ -37,21 +37,21 @@ namespace Sannel.House.Web.Controllers.api
 			this.logger = logger;
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged")]
 		[Authorize(Roles = "DeviceList")]
 		public PagedResults<Device> GetPaged()
 		{
 			return GetPaged(1, 25);
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged/{page}")]
 		[Authorize(Roles = "DeviceList")]
 		public PagedResults<Device> GetPaged(int page)
 		{
 			return GetPaged(page, 25);
 		}
 
-		[HttpGet]
+		[HttpGet("GetPaged/{page}/{pageSize}")]
 		[Authorize(Roles = "DeviceList")]
 		public PagedResults<Device> GetPaged(int page, int pageSize)
 		{

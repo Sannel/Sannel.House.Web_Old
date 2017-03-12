@@ -167,6 +167,7 @@ namespace Sannel.House.Web.Controllers.api
 			try
 			{
 				context.SaveChanges();
+				result.Data = current;
 			}
 			catch (Exception ex)
 			{
