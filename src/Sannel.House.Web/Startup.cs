@@ -57,10 +57,14 @@ namespace Sannel.House.Web
 			services.AddAntiforgery();
 			services.AddSingleton(Configuration);
 			services.AddScoped<IDataContext, DataContext>();
+			services.AddScoped<DataSeeder>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public async void Configure(IApplicationBuilder app, 
+			IHostingEnvironment env, 
+			ILoggerFactory loggerFactory, 
+			DataSeeder seeder)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
@@ -91,12 +95,19 @@ namespace Sannel.House.Web
 			app.UseIdentity();
 			// To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
+			
+
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
+
+			if (env.IsDevelopment())
+			{
+				await seeder.SeedDataAsync();
+			}
 		}
 	}
 }
