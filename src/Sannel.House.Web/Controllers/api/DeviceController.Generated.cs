@@ -54,9 +54,22 @@ namespace Sannel.House.Web.Controllers.api
 			return results;
 		}
 
-		private Device internalGet(Int32 id)
+		private Result<Device> internalGet(Int32 id)
 		{
-			return context.Devices.FirstOrDefault(i => i.Id == id);
+			var results = new Result<Device>();
+			var data = context.Devices.FirstOrDefault(i => i.Id == id);
+			if (data != null)
+			{
+				results.Success = true;
+				results.Data = data;
+				return results;
+			}
+			else
+			{
+				results.Success = false;
+				results.Errors.Add($"Could not find Device with Id {id}");
+				return results;
+			}
 		}
 
 		private Result<Device> internalPost(Device data)

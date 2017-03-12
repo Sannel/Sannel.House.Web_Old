@@ -60,7 +60,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet("{id}")]
 		[Authorize(Roles = "DeviceList")]
-		public Device Get(int id)
+		public Result<Device> Get(int id)
 		{
 			return internalGet(id);
 		}

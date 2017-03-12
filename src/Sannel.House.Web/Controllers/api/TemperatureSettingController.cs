@@ -58,7 +58,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet("{id}")]
 		[Authorize(Roles = "TemperatureSettingList")]
-		public TemperatureSetting Get(long id)
+		public Result<TemperatureSetting> Get(long id)
 		{
 			return internalGet(id);
 		}

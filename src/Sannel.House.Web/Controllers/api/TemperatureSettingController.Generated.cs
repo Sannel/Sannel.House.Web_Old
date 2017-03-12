@@ -54,9 +54,22 @@ namespace Sannel.House.Web.Controllers.api
 			return results;
 		}
 
-		private TemperatureSetting internalGet(Int64 id)
+		private Result<TemperatureSetting> internalGet(Int64 id)
 		{
-			return context.TemperatureSettings.FirstOrDefault(i => i.Id == id);
+			var results = new Result<TemperatureSetting>();
+			var data = context.TemperatureSettings.FirstOrDefault(i => i.Id == id);
+			if (data != null)
+			{
+				results.Success = true;
+				results.Data = data;
+				return results;
+			}
+			else
+			{
+				results.Success = false;
+				results.Errors.Add($"Could not find TemperatureSetting with Id {id}");
+				return results;
+			}
 		}
 
 		private Result<TemperatureSetting> internalPost(TemperatureSetting data)

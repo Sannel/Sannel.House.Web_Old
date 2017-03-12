@@ -59,7 +59,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet("{id}")]
 		[Authorize(Roles = "TemperatureEntryList")]
-		public TemperatureEntry Get(Guid id)
+		public Result<TemperatureEntry> Get(Guid id)
 		{
 			return internalGet(id);
 		}

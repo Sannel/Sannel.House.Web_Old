@@ -54,9 +54,22 @@ namespace Sannel.House.Web.Controllers.api
 			return results;
 		}
 
-		private ApplicationLogEntry internalGet(Guid id)
+		private Result<ApplicationLogEntry> internalGet(Guid id)
 		{
-			return context.ApplicationLogEntries.FirstOrDefault(i => i.Id == id);
+			var results = new Result<ApplicationLogEntry>();
+			var data = context.ApplicationLogEntries.FirstOrDefault(i => i.Id == id);
+			if (data != null)
+			{
+				results.Success = true;
+				results.Data = data;
+				return results;
+			}
+			else
+			{
+				results.Success = false;
+				results.Errors.Add($"Could not find ApplicationLogEntry with Id {id}");
+				return results;
+			}
 		}
 
 		private Result<ApplicationLogEntry> internalPost(ApplicationLogEntry data)

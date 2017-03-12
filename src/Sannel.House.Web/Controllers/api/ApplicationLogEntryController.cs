@@ -59,7 +59,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		[HttpGet("{id}")]
 		[Authorize(Roles = "ApplicationLogList")]
-		public ApplicationLogEntry Get(Guid id)
+		public Result<ApplicationLogEntry> Get(Guid id)
 		{
 			return internalGet(id);
 		}
