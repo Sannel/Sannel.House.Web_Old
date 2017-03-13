@@ -12,6 +12,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.*/
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		///   <c>true</c> if success; otherwise, <c>false</c>.
 		/// </value>
+		[JsonProperty(nameof(Success))]
 		public virtual bool Success { get; set; }
 
 		/// <summary>
@@ -39,6 +41,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The errors.
 		/// </value>
+		[JsonProperty(nameof(Errors))]
 		public virtual List<String> Errors { get; } = new List<String>();
 
 		/// <summary>
@@ -47,6 +50,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The data.
 		/// </value>
+		[JsonProperty(nameof(Data))]
 		public virtual T Data { get; set; }
 	}
 }

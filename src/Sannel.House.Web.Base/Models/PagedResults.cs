@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The total results.
 		/// </value>
+		[JsonProperty(nameof(TotalResults))]
 		public virtual long TotalResults
 		{
 			get;
@@ -25,6 +27,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The size of the page.
 		/// </value>
+		[JsonProperty(nameof(PageSize))]
 		public virtual int PageSize
 		{
 			get;
@@ -37,6 +40,7 @@ namespace Sannel.House.Web.Base.Models
 		/// <value>
 		/// The current page
 		/// </value>
+		[JsonProperty(nameof(CurrentPage))]
 		public virtual int CurrentPage
 		{
 			get;

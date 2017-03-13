@@ -1,22 +1,15 @@
 ﻿/// <reference path="jquery.d.ts" />
 /// <reference path="knockout.d.ts" />
-
-class ServerDevice {
-	Id: Number;
-	Name: string;
-	Description: string;
-    DisplayOrder: Number;
-    IsReadOnly: boolean;
-}
+/// <reference path="local.ts" />
 
 class Device {
-	Id: KnockoutObservable<Number> = ko.observable(0);
+	Id: KnockoutObservable<number> = ko.observable(0);
 	Name: KnockoutObservable<string> = ko.observable("");
 	Description: KnockoutObservable<string> = ko.observable("");
-    DisplayOrder: KnockoutObservable<Number> = ko.observable(0);
+    DisplayOrder: KnockoutObservable<number> = ko.observable(0);
     IsReadOnly: KnockoutObservable<boolean> = ko.observable(false);
 
-	constructor(sdevice: ServerDevice = undefined) {
+	constructor(sdevice: _Device = undefined) {
 		if (sdevice != undefined) {
 			this.Id(sdevice.Id);
 			this.Name(sdevice.Name);
@@ -26,8 +19,8 @@ class Device {
 		}
 	}
 
-	public AsServerDevice(): ServerDevice {
-		var sd = new ServerDevice();
+	public AsServerDevice(): _Device {
+		var sd = new _Device();
 		sd.Id = this.Id();
 		sd.Name = this.Name();
 		sd.Description = this.Description();
@@ -46,7 +39,7 @@ class DevicesViewModel {
 		this._apiUrl = "/api/Device";
 	}
 
-	private _devicesReceived(data: ServerDevice[]) {
+	private _devicesReceived(data: _Device[]) {
 		for (var i = 0; i < data.length; i++) {
 			this.Devices.push(new Device(data[i]));
 		}
@@ -58,8 +51,13 @@ class DevicesViewModel {
 			url: me._apiUrl + "/getpaged",
 			type: 'get',
 			contentType: "application/json; charset=utf-8",
-			success: function (data) {
-				console.log(data);
+			success: function (data: PagedResults<_Device>) {
+				if (data.Success) {
+					for (var i = 0; i < data.Data.length; i++) {
+						var device = data.Data[i];
+						me.Devices.push(new Device(device));
+					}
+				}
 			}
 		});
 	}
@@ -70,7 +68,7 @@ class DevicesViewModel {
 			url: me._apiUrl + "/" + id,
 			type: 'get',
 			contentType: "application/json; charset=utf-8",
-			success: function (device: ServerDevice) {
+			success: function (device: _Device) {
 				var found = false;
 				for (var i = 0; i < me.Devices().length; i++) {
 					var d = me.Devices()[i];

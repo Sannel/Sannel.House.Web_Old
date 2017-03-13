@@ -95,8 +95,6 @@ namespace Sannel.House.Web
 			app.UseIdentity();
 			// To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
-			
-
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
