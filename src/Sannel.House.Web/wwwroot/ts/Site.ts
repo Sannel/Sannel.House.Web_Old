@@ -43,7 +43,7 @@ class DevicesViewModel {
 	public CurrentDevice: KnockoutObservable<Device> = ko.observable(undefined);
 
 	constructor() {
-		this._apiUrl = "/api/Devices";
+		this._apiUrl = "/api/Device";
 	}
 
 	private _devicesReceived(data: ServerDevice[]) {
@@ -55,11 +55,11 @@ class DevicesViewModel {
 	public loadDevices() {
 		var me = this;
 		$.ajax({
-			url: me._apiUrl,
+			url: me._apiUrl + "/getpaged",
 			type: 'get',
 			contentType: "application/json; charset=utf-8",
 			success: function (data) {
-				me._devicesReceived(data);
+				console.log(data);
 			}
 		});
 	}

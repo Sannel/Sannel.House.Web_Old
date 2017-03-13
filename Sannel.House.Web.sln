@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 		build.cake = build.cake
+		Gulpfile.js = Gulpfile.js
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data", "src\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj", "{B8B4B27D-99BF-45ED-9F3B-3D773E3C7D79}"

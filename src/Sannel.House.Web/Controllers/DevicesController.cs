@@ -10,10 +10,10 @@ using Sannel.House.Web.Base.Interfaces;
 
 namespace Sannel.House.Web.Controllers
 {
-	[Authorize(Roles = "Admin,Controller")]
     public class DevicesController : Controller
     {
         // GET: /<controller>/
+		[Authorize(Roles = "Admin,DeviceList")]
         public IActionResult Index()
         {
 			ViewBag.Section = "Devices";
