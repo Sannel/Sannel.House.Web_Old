@@ -4,10 +4,12 @@
   "description": "The website portion of Sannel House",
   "main": "index.js",
   "dependencies": {
+    "gulp-debug": "^3.1.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemap": "^1.0.1",
     "gulp-typescript": "^3.1.5",
+    "run-sequence": "^1.2.2",
     "typescript": "^2.2.1"
   },
   "devDependencies": {},

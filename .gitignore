@@ -252,3 +252,4 @@ paket-files/
 *.sln.iml
 /tools
 /Build
+/src/Sannel.House.Web/wwwroot/js/site.js
