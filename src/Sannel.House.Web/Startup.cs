@@ -16,6 +16,7 @@ using Sannel.House.Web.Base.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.DataProtection;
+using MySQL.Data.Entity.Extensions;
 
 namespace Sannel.House.Web
 {
@@ -39,7 +40,14 @@ namespace Sannel.House.Web
 		{
 			// Add framework services.
 			services.AddEntityFramework();
-			services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+			if(String.Compare(Configuration["UseMySql"], "true", true) == 0)
+			{
+				services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));	
+			}
+			else
+			{
+				services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+			}
 			services.AddMvc();
 			services.AddMvcCore();
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>

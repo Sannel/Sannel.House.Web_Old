@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
@@ -8,26 +7,21 @@
     <PackageId>Sannel.House.Web</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\Test.pubxml" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="wwwroot\ts\file.ts" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
@@ -49,12 +43,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="SapientGuardian.EntityFrameworkCore.MySql" Version="7.1.21" />
   </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Start.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -63,9 +56,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
-
 </Project>
