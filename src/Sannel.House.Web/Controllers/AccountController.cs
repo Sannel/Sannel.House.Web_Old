@@ -80,19 +80,18 @@ namespace Sannel.House.Web.Controllers
 				if (results.Succeeded)
 				{
 					var user = await userManager.FindByNameAsync(model.Email);
-					return Json(new
+					return Json(new LoginResult
 					{
 						Success = true,
-						Name = user.Name
-					});
+						Data = user.Name,
+					}.AddRoles(await userManager.GetRolesAsync(user)));
 				}
 			}
 
-			return Json(new
+			return Json(new Result<String>
 			{
-				Success = false,
-				Name = (String)null
-			});
+				Success = false
+			}.AddError("Invalid username and/or password"));
 		}
 
 		[HttpGet]

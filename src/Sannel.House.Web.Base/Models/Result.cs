@@ -45,6 +45,17 @@ namespace Sannel.House.Web.Base.Models
 		public virtual List<String> Errors { get; } = new List<String>();
 
 		/// <summary>
+		/// Adds an Error to the errors list and returns this object
+		/// </summary>
+		/// <param name="error">The error.</param>
+		/// <returns></returns>
+		public virtual Result<T> AddError(String error)
+		{
+			Errors.Add(error);
+			return this;
+		}
+
+		/// <summary>
 		/// Gets or sets the data for the result
 		/// </summary>
 		/// <value>

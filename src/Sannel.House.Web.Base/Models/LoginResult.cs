@@ -11,53 +11,55 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Sannel.House.Web.Base.Models
 {
-    public class PagedResults<T> : Result<IEnumerable<T>>
+    public class LoginResult : Result<String>
     {
 		/// <summary>
-		/// Gets or sets the total results.
+		/// Gets the roles for the logged in user
 		/// </summary>
 		/// <value>
-		/// The total results.
+		/// The roles.
 		/// </value>
-		[JsonProperty(nameof(TotalResults))]
-		public virtual long TotalResults
+		public virtual List<String> Roles
 		{
 			get;
-			set;
+		} = new List<string>();
+
+		/// <summary>
+		/// Adds the role to Roles
+		/// </summary>
+		/// <param name="role">The role.</param>
+		/// <returns></returns>
+		public virtual LoginResult AddRole(String role)
+		{
+			Roles.Add(role);
+			return this;
 		}
 
 		/// <summary>
-		/// Gets or sets the size of the page.
+		/// Adds the roles to the Roles property
 		/// </summary>
-		/// <value>
-		/// The size of the page.
-		/// </value>
-		[JsonProperty(nameof(PageSize))]
-		public virtual int PageSize
+		/// <param name="roles">The roles.</param>
+		/// <returns></returns>
+		public virtual LoginResult AddRoles(IEnumerable<String> roles)
 		{
-			get;
-			set;
+			Roles.AddRange(roles);
+			return this;
 		}
 
 		/// <summary>
-		/// Gets or sets the current page
+		/// Adds the roles to the Roles property
 		/// </summary>
-		/// <value>
-		/// The current page
-		/// </value>
-		[JsonProperty(nameof(CurrentPage))]
-		public virtual int CurrentPage
+		/// <param name="roles">The roles.</param>
+		/// <returns></returns>
+		public virtual LoginResult AddRoles(params String[] roles)
 		{
-			get;
-			set;
+			return AddRoles((IEnumerable<String>)roles);
 		}
     }
 }
