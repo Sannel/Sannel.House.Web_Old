@@ -66,7 +66,7 @@ namespace Sannel.House.Web.Base.Models
 
 		[Required]
 		[Generation(IsNow = true, CantUpdate = true)]
-		public DateTimeOffset CreatedDate
+		public DateTime CreatedDate
 		{
 			get;
 			set;

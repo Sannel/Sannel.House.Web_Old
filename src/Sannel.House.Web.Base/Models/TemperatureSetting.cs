@@ -107,7 +107,7 @@ namespace Sannel.House.Web.Base.Models
 		}
 
 
-		private DateTimeOffset? startTime;
+		private DateTime? startTime;
 		/// <summary>
 		/// Gets or sets the Start
 		/// </summary>
@@ -115,8 +115,7 @@ namespace Sannel.House.Web.Base.Models
 		/// The Start
 		/// </value>
 		[JsonProperty(nameof(StartTime))]
-		[JsonConverter(typeof(UtcDateTimeOffsetConverter))]
-		public DateTimeOffset? StartTime
+		public DateTime? StartTime
 		{
 			get
 			{
@@ -128,7 +127,7 @@ namespace Sannel.House.Web.Base.Models
 			}
 		}
 
-		private DateTimeOffset? endTime;
+		private DateTime? endTime;
 		/// <summary>
 		/// Gets or sets the End
 		/// </summary>
@@ -136,8 +135,7 @@ namespace Sannel.House.Web.Base.Models
 		/// The End
 		/// </value>
 		[JsonProperty(nameof(EndTime))]
-		[JsonConverter(typeof(UtcDateTimeOffsetConverter))]
-		public DateTimeOffset? EndTime
+		public DateTime? EndTime
 		{
 			get
 			{
@@ -215,7 +213,7 @@ namespace Sannel.House.Web.Base.Models
 			}
 		}
 
-		private DateTimeOffset dateCreated;
+		private DateTime dateCreated;
 		/// <summary>
 		/// Gets or sets the DateCreated
 		/// </summary>
@@ -223,8 +221,7 @@ namespace Sannel.House.Web.Base.Models
 		/// The DateCreated
 		/// </value>
 		[JsonProperty(nameof(DateCreated))]
-		[JsonConverter(typeof(UtcDateTimeOffsetConverter))]
-		public DateTimeOffset DateCreated
+		public DateTime DateCreated
 		{
 			get
 			{
@@ -237,7 +234,7 @@ namespace Sannel.House.Web.Base.Models
 		}
 
 
-		private DateTimeOffset dateModified;
+		private DateTime dateModified;
 		/// <summary>
 		/// Gets or sets the DateModified
 		/// </summary>
@@ -246,7 +243,7 @@ namespace Sannel.House.Web.Base.Models
 		/// </value>
 		[JsonProperty(nameof(DateModified))]
 		[JsonConverter(typeof(UtcDateTimeOffsetConverter))]
-		public DateTimeOffset DateModified
+		public DateTime DateModified
 		{
 			get
 			{

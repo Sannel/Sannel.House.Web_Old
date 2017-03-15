@@ -86,7 +86,7 @@ namespace Sannel.House.Web.Base.Models
 		/// </value>
 		[JsonProperty("DateCreated")]
 		[Generation(IsNow = true, CantUpdate = true)]
-		public DateTimeOffset DateCreated { get; set; }
+		public DateTime DateCreated { get; set; }
 
 		/// <summary>
 		/// Gets or sets if this device is readonly

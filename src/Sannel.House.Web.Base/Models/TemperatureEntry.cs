@@ -54,6 +54,6 @@ namespace Sannel.House.Web.Base.Models
 		public double Pressure { get; set; }
 
 		[JsonProperty(nameof(CreatedDateTime))]
-		public DateTimeOffset CreatedDateTime { get; set; }
+		public DateTime CreatedDateTime { get; set; }
 	}
 }
