@@ -24,7 +24,7 @@ gulp.task("Compile-Typescript", function (callback) {
 		}
 		))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest("src\\Sannel.House.Web\\wwwroot\\js"));
+		.pipe(gulp.dest("src/Sannel.House.Web/wwwroot/js"));
 });
 
 gulp.task("Compile-SCSS", function (callback) {
@@ -35,5 +35,5 @@ gulp.task("Compile-SCSS", function (callback) {
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(sourcemaps.write())
 		.pipe(debug({ title: "Compiling "}))
-		.pipe(gulp.dest("src\\Sannel.House.Web\\wwwroot\\css"));
+		.pipe(gulp.dest("src/Sannel.House.Web/wwwroot/css"));
 });

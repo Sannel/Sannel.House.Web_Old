@@ -50,6 +50,7 @@ namespace Sannel.House.Web
 
 		public virtual async Task SeedDataAsync()
 		{
+			((DataContext)context).Database.EnsureCreated();
 			await addRolesAsync();
 			await addUsersAsync();
 
