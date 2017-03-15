@@ -103,7 +103,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			data.DisplayOrder = context.Devices.Count();
-			data.DateCreated = DateTimeOffset.Now;
+			data.DateCreated = DateTime.Now;
 			postExtraReset(data);
 			context.Devices.Add(data);
 			try

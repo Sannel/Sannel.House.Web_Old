@@ -60,7 +60,7 @@ namespace Sannel.House.Web
 				logger.LogInformation("Thermostat does not exist adding it");
 				thermostat = new Device();
 				thermostat.IsReadOnly = true;
-				thermostat.DateCreated = DateTimeOffset.Now;
+				thermostat.DateCreated = DateTime.Now;
 				thermostat.DisplayOrder = 0;
 				thermostat.Name = "Thermostat";
 				thermostat.Description = "The thermostat and centeral relay for all devices";

@@ -46,40 +46,40 @@ namespace Sannel.House.Web.Tests
 					var var5 = new TemperatureEntry();
 					// var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 47;
-					var1.TemperatureCelsius = 0.26538432541554063;
-					var1.Humidity = 0.898438749787602;
-					var1.Pressure = 0.80758469216878748;
-					var1.CreatedDateTime = DateTimeOffset.Now;
+					var1.DeviceId = 55;
+					var1.TemperatureCelsius = 0.45889742181585053;
+					var1.Humidity = 0.034340253581451367;
+					var1.Pressure = 0.48840980347637541;
+					var1.CreatedDateTime = DateTime.Now;
 					// var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 19;
-					var2.TemperatureCelsius = 0.65478008829745471;
-					var2.Humidity = 0.26605444227627217;
-					var2.Pressure = 0.63775847090303828;
-					var2.CreatedDateTime = DateTimeOffset.Now;
+					var2.DeviceId = 74;
+					var2.TemperatureCelsius = 0.55487456710770477;
+					var2.Humidity = 0.70296795838650683;
+					var2.Pressure = 0.10514065162518092;
+					var2.CreatedDateTime = DateTime.Now;
 					// var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 39;
-					var3.TemperatureCelsius = 0.7507572335893089;
-					var3.Humidity = 0.93468214708132769;
-					var3.Pressure = 0.25448931905184374;
-					var3.CreatedDateTime = DateTimeOffset.Now;
+					var3.DeviceId = 94;
+					var3.TemperatureCelsius = 0.650851712399559;
+					var3.Humidity = 0.37159566319156234;
+					var3.Pressure = 0.72187149977398646;
+					var3.CreatedDateTime = DateTime.Now;
 					// var4
 					var4.Id = Guid.NewGuid();
-					var4.DeviceId = 58;
-					var4.TemperatureCelsius = 0.8467343788811631;
-					var4.Humidity = 0.6033098518863832;
-					var4.Pressure = 0.87122016720064921;
-					var4.CreatedDateTime = DateTimeOffset.Now;
+					var4.DeviceId = 14;
+					var4.TemperatureCelsius = 0.74682885769141316;
+					var4.Humidity = 0.040223367996617861;
+					var4.Pressure = 0.33860234792279187;
+					var4.CreatedDateTime = DateTime.Now;
 					// var5
 					var5.Id = Guid.NewGuid();
-					var5.DeviceId = 77;
-					var5.TemperatureCelsius = 0.9427115241730174;
-					var5.Humidity = 0.27193755669143871;
-					var5.Pressure = 0.48795101534945473;
-					var5.CreatedDateTime = DateTimeOffset.Now;
-					var order = DateTimeOffset.Now;
+					var5.DeviceId = 85;
+					var5.TemperatureCelsius = 0.13622462057332724;
+					var5.Humidity = 0.40783906327925579;
+					var5.Pressure = 0.16877612665704272;
+					var5.CreatedDateTime = DateTime.Now;
+					var order = DateTime.Now;
 					var1.CreatedDateTime = order;
 					var2.CreatedDateTime = order.AddDays(-1);
 					var3.CreatedDateTime = order.AddDays(-2);
@@ -198,27 +198,27 @@ namespace Sannel.House.Web.Tests
 					var var3 = new TemperatureEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 77;
-					var1.TemperatureCelsius = 0.48795101534945473;
-					var1.Humidity = 0.42179141073571119;
-					var1.Pressure = 0.96075820129400036;
-					var1.CreatedDateTime = DateTimeOffset.Now;
+					var1.DeviceId = 85;
+					var1.TemperatureCelsius = 0.16877612665704272;
+					var1.Humidity = 0.60063508832856782;
+					var1.Pressure = 0.19387192707223441;
+					var1.CreatedDateTime = DateTime.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 94;
-					var2.TemperatureCelsius = 0.62767846166513785;
-					var2.Humidity = 0.030877385302855345;
-					var2.Pressure = 0.90485089919755746;
-					var2.CreatedDateTime = DateTimeOffset.Now;
+					var2.DeviceId = 14;
+					var2.TemperatureCelsius = 0.76373298827732583;
+					var2.Humidity = 0.63024506421305471;
+					var2.Pressure = 0.27180772054558977;
+					var2.CreatedDateTime = DateTime.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 27;
-					var3.TemperatureCelsius = 0.22913098485634242;
-					var3.Humidity = 0.76246736420433381;
-					var3.Pressure = 0.46558304944335627;
-					var3.CreatedDateTime = DateTimeOffset.Now;
+					var3.DeviceId = 41;
+					var3.TemperatureCelsius = 0.20295659229297033;
+					var3.Humidity = 0.26864240889839941;
+					var3.Pressure = 0.62231230671625226;
+					var3.CreatedDateTime = DateTime.Now;
 					//Fix Order
-					var order = DateTimeOffset.Now;
+					var order = DateTime.Now;
 					var3.CreatedDateTime = order;
 					var2.CreatedDateTime = order.AddDays(-1);
 					var1.CreatedDateTime = order.AddDays(-2);
@@ -295,11 +295,11 @@ namespace Sannel.House.Web.Tests
 					// Success Test
 					expected = new TemperatureEntry();
 					expected.Id = Guid.NewGuid();
-					expected.DeviceId = 49;
-					expected.TemperatureCelsius = 0.33210728705493142;
-					expected.Humidity = 0.63955325197407664;
-					expected.Pressure = 0.31812479408370553;
-					expected.CreatedDateTime = DateTimeOffset.Now;
+					expected.DeviceId = 5;
+					expected.TemperatureCelsius = 0.23220176586518146;
+					expected.Humidity = 0.076466768084311285;
+					expected.Pressure = 0.78550697480584819;
+					expected.CreatedDateTime = DateTime.Now;
 					postPreCall(expected, wrapper);
 					result = controller.Post(expected);
 					Assert.NotNull(result);

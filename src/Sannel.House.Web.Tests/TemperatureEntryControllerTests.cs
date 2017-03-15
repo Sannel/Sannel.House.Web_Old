@@ -28,7 +28,7 @@ namespace Sannel.House.Web.Tests
 					Id = 1,
 					Name = "Controller",
 					Description = "",
-					DateCreated = DateTimeOffset.Now,
+					DateCreated = DateTime.Now,
 					DisplayOrder = 0,
 					IsReadOnly = true
 				});
@@ -37,7 +37,7 @@ namespace Sannel.House.Web.Tests
 					Id = 2,
 					Name = "Default",
 					Description = "",
-					DateCreated = DateTimeOffset.Now,
+					DateCreated = DateTime.Now,
 					DisplayOrder = 0,
 					IsReadOnly = true
 				});
@@ -49,7 +49,7 @@ namespace Sannel.House.Web.Tests
 					var temp = new TemperatureEntry();
 					temp.TemperatureCelsius = 20;
 					temp.DeviceId = 500;
-					temp.CreatedDateTime = DateTimeOffset.Now;
+					temp.CreatedDateTime = DateTime.Now;
 					var result = controller.Post(temp);
 					Assert.True(result.Success);
 					var d = result.Data;
@@ -73,7 +73,7 @@ namespace Sannel.House.Web.Tests
 						newContext.Devices.Add(new Device()
 						{
 							Id = e.DeviceId,
-							DateCreated = DateTimeOffset.Now,
+							DateCreated = DateTime.Now,
 							Description = "",
 							DisplayOrder = 0,
 							IsReadOnly = true,
@@ -100,7 +100,7 @@ namespace Sannel.House.Web.Tests
 					context.Devices.Add(new Device()
 						{
 							Id = data.DeviceId,
-							DateCreated = DateTimeOffset.Now,
+							DateCreated = DateTime.Now,
 							Description = "",
 							DisplayOrder = 0,
 							IsReadOnly = true,

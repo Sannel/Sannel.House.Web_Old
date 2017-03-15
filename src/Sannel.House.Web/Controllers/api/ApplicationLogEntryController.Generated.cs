@@ -102,7 +102,7 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
-			data.CreatedDate = DateTimeOffset.Now;
+			data.CreatedDate = DateTime.Now;
 			postExtraReset(data);
 			context.ApplicationLogEntries.Add(data);
 			try
