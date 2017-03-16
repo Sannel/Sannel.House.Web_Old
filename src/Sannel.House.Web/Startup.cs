@@ -40,14 +40,19 @@ namespace Sannel.House.Web
 		{
 			// Add framework services.
 			services.AddEntityFramework();
-			if(String.Compare(Configuration["UseMySql"], "true", true) == 0)
+			switch(Configuration["SqlProvider"]?.ToLower())
 			{
-				services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));	
+				case "mysql":
+					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));	
+					break;
+				case "sqlite":
+					services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
+					break;
+				default:
+					services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+					break;
 			}
-			else
-			{
-				services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
-			}
+
 			services.AddMvc();
 			services.AddMvcCore();
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
