@@ -17,6 +17,12 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.DataProtection;
 using MySQL.Data.Entity.Extensions;
+using System.IO;
+using System.Security.Cryptography;
+using Newtonsoft.Json;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Sannel.House.Web
 {
@@ -39,6 +45,24 @@ namespace Sannel.House.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			// Add framework services.
+			var file = Configuration["RSAKeysFile"];
+			if (File.Exists(file))
+			{
+				var data = File.ReadAllText(file);
+				var provider = new RSACryptoServiceProvider();
+				provider.ImportParameters(JsonConvert.DeserializeObject<RSAParameters>(data));
+				var key = new RsaSecurityKey(provider.ExportParameters(true));
+
+				services.AddSingleton(key);
+				services.AddSingleton<TokenAuthOptions>(new TokenAuthOptions
+				{
+					Audience = Configuration["Audience"],
+					Issuer = Configuration["Issuer"],
+					Credentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
+				});
+
+			}
+
 			services.AddEntityFramework();
 			if(String.Compare(Configuration["UseMySql"], "true", true) == 0)
 			{
@@ -62,6 +86,12 @@ namespace Sannel.House.Web
 			})
 			.AddEntityFrameworkStores<DataContext>()
 				.AddDefaultTokenProviders();
+			services.AddAuthorization(auth =>
+			{
+				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+			});
 			services.AddAntiforgery();
 			services.AddSingleton(Configuration);
 			services.AddScoped<IDataContext, DataContext>();
@@ -72,7 +102,8 @@ namespace Sannel.House.Web
 		public async void Configure(IApplicationBuilder app, 
 			IHostingEnvironment env, 
 			ILoggerFactory loggerFactory, 
-			DataSeeder seeder)
+			DataSeeder seeder, 
+			TokenAuthOptions tokenOptions)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
@@ -98,11 +129,21 @@ namespace Sannel.House.Web
 				}
 				catch { }
 			}
+			app.UseJwtBearerAuthentication(new JwtBearerOptions()
+			{
+				TokenValidationParameters = new TokenValidationParameters()
+				{
+					IssuerSigningKey = tokenOptions.Credentials.Key,
+					ValidAudience = tokenOptions.Audience,
+					ValidIssuer = tokenOptions.Issuer,
+					ValidateLifetime = true,
+					ClockSkew = TimeSpan.FromMinutes(3)
+				}
+			});
 			app.UseStaticFiles();
 
 			app.UseIdentity();
 			// To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
-
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(

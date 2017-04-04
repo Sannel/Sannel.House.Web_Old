@@ -22,10 +22,11 @@ using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
 using Sannel.House.Web.Base;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Authorize(Roles = "DeviceManager")]
+	[Authorize()]
 	[Route("api/[controller]")]
 	public partial class DeviceController : Controller
 	{
@@ -41,6 +42,7 @@ namespace Sannel.House.Web.Controllers.api
 		[Authorize(Roles = "DeviceList")]
 		public PagedResults<Device> GetPaged()
 		{
+			var use = User.Claims.FirstOrDefault(i => i.Type == JwtRegisteredClaimNames.Sub);
 			return GetPaged(1, 25);
 		}
 
