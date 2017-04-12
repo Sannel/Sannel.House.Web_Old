@@ -10,58 +10,97 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using Sannel.House.Web.Base.Interfaces;
+using System.Security.Cryptography;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	public class AuthzController : Controller
 	{
 		private readonly UserManager<ApplicationUser> userManager;
 		private readonly SignInManager<ApplicationUser> signInManager;
 		private readonly RoleManager<IdentityRole> roleManager;
 		private readonly TokenAuthOptions tokenOptions;
+		private readonly IDataContext context;
+		private readonly RSA rsa;
 
 		public AuthzController(
 			UserManager<ApplicationUser> userManager,
 			SignInManager<ApplicationUser> signInManager,
 			RoleManager<IdentityRole> roleManager,
-			TokenAuthOptions tokenOptions)
+			TokenAuthOptions tokenOptions,
+			IDataContext context,
+			RSA rsa)
 		{
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 			this.roleManager = roleManager;
 			this.tokenOptions = tokenOptions;
+			this.context = context;
+			this.rsa = rsa;
 		}
 
 		// POST api/values
 		[HttpPost]
-		public async Task<LoginResult> Post([FromBody]LoginViewModel viewModel)
+		public async Task<TokenResponseViewModel> Post([FromBody]TokenRequestViewModel viewModel)
 		{
-			var signInResult = await signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
+			if(String.Compare(viewModel.GrantType, "password") != 0)
+			{
+				return new ErrorTokenResponseViewModel
+				{
+					Error = "invalid_grant_type",
+					ErrorDescription = $"Grant type {viewModel.GrantType} is not supported."
+				};
+			}
+			var signInResult = await signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
 			if (signInResult.Succeeded)
 			{
-				var user = await userManager.FindByNameAsync(viewModel.Email);
+				var user = await userManager.FindByNameAsync(viewModel.Username);
 				var claims = await signInManager.CreateUserPrincipalAsync(user);
-				// return Bearor;
-				return new LoginResult()
+				var utcNow = DateTime.UtcNow;
+				var expires = utcNow.AddMinutes(20);
+				var token = getToken(claims, expires);
+				var refreshToken = getRefreshToken(token, expires);
+
+				var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
+
+				return new SuccessTokenResponseViewModel
 				{
-					Success = true,
-					Data = getToken(claims, null)
-				}.AddRoles(await userManager.GetRolesAsync(user));
+					TokenType = "bearer",
+					AccessToken = token,
+					RefreshToken = refreshToken,
+					ExpiresIn = (long)expiresIn.TotalSeconds
+				};
 			}
 			else
 			{
-				// return Error;
-				return (LoginResult)new LoginResult()
+				return new ErrorTokenResponseViewModel
 				{
-					Success = false
-				}.AddError("Invalid username and password");
+					Error = "invalid_credentials",
+					ErrorDescription = "Invalid Username/Password was provided"
+				};
 			}
 		}
 
-		private string getToken(ClaimsPrincipal claims, DateTime? expires)
+		private String getRefreshToken(String token, DateTime expiresIn)
+		{
+			var refreshToken = new RefreshToken();
+			refreshToken.RefreshTokenId = Guid.NewGuid();
+			refreshToken.Expires = expiresIn.AddHours(2);
+			refreshToken.AccessToken = token;
+
+			context.RefreshTokens.Add(refreshToken);
+			context.SaveChanges();
+
+			var rTokenBytes = rsa.Encrypt(refreshToken.RefreshTokenId.ToByteArray(), RSAEncryptionPadding.OaepSHA1);
+
+			return Convert.ToBase64String(rTokenBytes);
+		}
+
+		private string getToken(ClaimsPrincipal claims, DateTime expiresIn)
 		{
 			var handler = new JwtSecurityTokenHandler();
 
@@ -81,7 +120,8 @@ namespace Sannel.House.Web.Controllers.api
 				Audience = tokenOptions.Audience,
 				SigningCredentials = tokenOptions.Credentials,
 				Subject = claims.Identities.FirstOrDefault(),
-				Expires = expires
+				Expires = expiresIn,
+				NotBefore = DateTime.UtcNow.AddTicks(-1)
 			});
 			return handler.WriteToken(securityToken);
 		}

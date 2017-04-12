@@ -52,6 +52,11 @@ namespace Sannel.House.Web.Data
 			get;
 			set;
 		}
+		public DbSet<RefreshToken> RefreshTokens
+		{
+			get;
+			set;
+		}
 
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{

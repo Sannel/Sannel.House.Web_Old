@@ -37,6 +37,9 @@ namespace Sannel.House.Web.Base.Interfaces
 
 		DbSet<TemperatureEntry> TemperatureEntries { get; set; }
 
+		[Generation(Ignore = true)]
+		DbSet<RefreshToken> RefreshTokens { get; set; }
+
 		int SaveChanges();
 
 		Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));

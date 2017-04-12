@@ -51,6 +51,8 @@ namespace Sannel.House.Web
 				var data = File.ReadAllText(file);
 				var provider = new RSACryptoServiceProvider();
 				provider.ImportParameters(JsonConvert.DeserializeObject<RSAParameters>(data));
+				services.AddSingleton<RSA>(provider);
+
 				var key = new RsaSecurityKey(provider.ExportParameters(true));
 
 				services.AddSingleton(key);
