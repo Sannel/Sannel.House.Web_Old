@@ -27,7 +27,7 @@ using System.IdentityModel.Tokens.Jwt;
 namespace Sannel.House.Web.Controllers.api
 {
 	[Authorize()]
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	public partial class DeviceController : Controller
 	{
 		private IDataContext context;

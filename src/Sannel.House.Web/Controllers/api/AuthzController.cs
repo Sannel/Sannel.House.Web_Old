@@ -61,8 +61,7 @@ namespace Sannel.House.Web.Controllers.api
 				var user = await userManager.FindByNameAsync(viewModel.Username);
 				var claims = await signInManager.CreateUserPrincipalAsync(user);
 				var utcNow = DateTime.UtcNow;
-				var expires = utcNow.AddMinutes(20);
-				var token = getToken(claims, expires);
+				var (token, expires) = getToken(claims, utcNow.AddMinutes(20));
 				var refreshToken = getRefreshToken(token, expires);
 
 				var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
@@ -92,7 +91,7 @@ namespace Sannel.House.Web.Controllers.api
 			refreshToken.Expires = expiresIn.AddHours(2);
 			refreshToken.AccessToken = token;
 
-			context.RefreshTokens.Add(refreshToken);
+			//context.RefreshTokens.Add(refreshToken);
 			context.SaveChanges();
 
 			var rTokenBytes = rsa.Encrypt(refreshToken.RefreshTokenId.ToByteArray(), RSAEncryptionPadding.OaepSHA1);
@@ -100,7 +99,7 @@ namespace Sannel.House.Web.Controllers.api
 			return Convert.ToBase64String(rTokenBytes);
 		}
 
-		private string getToken(ClaimsPrincipal claims, DateTime expiresIn)
+		private (string token, DateTime expires) getToken(ClaimsPrincipal claims, DateTime expiresIn)
 		{
 			var handler = new JwtSecurityTokenHandler();
 
@@ -123,7 +122,7 @@ namespace Sannel.House.Web.Controllers.api
 				Expires = expiresIn,
 				NotBefore = DateTime.UtcNow.AddTicks(-1)
 			});
-			return handler.WriteToken(securityToken);
+			return (handler.WriteToken(securityToken), securityToken.ValidTo);
 		}
 	}
 }
