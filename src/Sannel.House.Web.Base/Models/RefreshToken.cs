@@ -16,8 +16,8 @@ namespace Sannel.House.Web.Base.Models
 			set;
 		}
 
-		public String AccessToken { get; set; }
-
 		public DateTime Expires { get; set; }
+
+		public String UserId { get; set; }
 	}
 }

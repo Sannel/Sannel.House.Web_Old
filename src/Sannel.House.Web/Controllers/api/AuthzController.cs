@@ -43,36 +43,13 @@ namespace Sannel.House.Web.Controllers.api
 			this.rsa = rsa;
 		}
 
-		// POST api/values
-		[HttpPost]
-		public async Task<TokenResponseViewModel> Post([FromBody]TokenRequestViewModel viewModel)
+		private async Task<TokenResponseViewModel> passwordGrantAsync(TokenRequestViewModel viewModel)
 		{
-			if(String.Compare(viewModel.GrantType, "password") != 0)
-			{
-				return new ErrorTokenResponseViewModel
-				{
-					Error = "invalid_grant_type",
-					ErrorDescription = $"Grant type {viewModel.GrantType} is not supported."
-				};
-			}
 			var signInResult = await signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
 			if (signInResult.Succeeded)
 			{
 				var user = await userManager.FindByNameAsync(viewModel.Username);
-				var claims = await signInManager.CreateUserPrincipalAsync(user);
-				var utcNow = DateTime.UtcNow;
-				var (token, expires) = getToken(claims, utcNow.AddMinutes(20));
-				var refreshToken = getRefreshToken(token, expires);
-
-				var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
-
-				return new SuccessTokenResponseViewModel
-				{
-					TokenType = "bearer",
-					AccessToken = token,
-					RefreshToken = refreshToken,
-					ExpiresIn = (long)expiresIn.TotalSeconds
-				};
+				return await generateTokensForUserAsync(user);
 			}
 			else
 			{
@@ -84,17 +61,145 @@ namespace Sannel.House.Web.Controllers.api
 			}
 		}
 
-		private String getRefreshToken(String token, DateTime expiresIn)
+		private async Task<TokenResponseViewModel> generateTokensForUserAsync(ApplicationUser user)
+		{
+			var claims = await signInManager.CreateUserPrincipalAsync(user ?? throw new ArgumentNullException(nameof(user)));
+				var utcNow = DateTime.UtcNow;
+				var (token, expires) = getToken(claims, utcNow.AddMinutes(20));
+				var refreshToken = getRefreshToken(user.Id, expires);
+
+				var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
+
+				return new SuccessTokenResponseViewModel
+				{
+					TokenType = "bearer",
+					AccessToken = token,
+					RefreshToken = refreshToken,
+					ExpiresIn = (long)expiresIn.TotalSeconds
+				};
+		}
+
+		private async Task<TokenResponseViewModel> refreshTokenGrantAsync(TokenRequestViewModel viewModel)
+		{
+			var token = viewModel.RefreshToken;
+			if (string.IsNullOrWhiteSpace(token))
+			{
+				return new ErrorTokenResponseViewModel
+				{
+					Error = "invalid_token",
+					ErrorDescription = "Invalid token was provided"
+				};
+			}
+			else
+			{
+				var data = Convert.FromBase64String(token);
+				var rTokenBytes = rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
+
+				if(rTokenBytes.Length < 16 + sizeof(long))
+				{
+					return new ErrorTokenResponseViewModel
+					{
+						Error = "invalid_token",
+						ErrorDescription = "Invalid token was provided"
+					};
+				}
+				else
+				{
+					var guid = new Guid(rTokenBytes.Take(16).ToArray());
+					var rt = context.RefreshTokens.FirstOrDefault(i => i.RefreshTokenId == guid);
+					if(rt == null)
+					{
+						return new ErrorTokenResponseViewModel
+						{
+							Error = "invalid_token",
+							ErrorDescription = "Invalid token was provided"
+						};
+					}
+					var expires = rt.Expires;
+
+					var ticks = BitConverter.ToInt64(rTokenBytes, 16);
+					if(expires.Ticks != ticks)
+					{
+						context.RefreshTokens.Remove(rt);
+						await context.SaveChangesAsync();
+						return new ErrorTokenResponseViewModel
+						{
+							Error = "invalid_token",
+							ErrorDescription = "Invalid token was provided"
+						};
+					}
+
+					if (DateTime.UtcNow > expires)
+					{
+						context.RefreshTokens.Remove(rt);
+						await context.SaveChangesAsync();
+						return new ErrorTokenResponseViewModel
+						{
+							Error = "token_expired",
+							ErrorDescription = "The refresh token has expired"
+						};
+					}
+
+					var user = await userManager.FindByIdAsync(rt.UserId);
+					if (user == null)
+					{
+						return new ErrorTokenResponseViewModel
+						{
+							Error = "invalid_token",
+							ErrorDescription = "Invalid token was provided"
+						};
+					}
+
+					return await generateTokensForUserAsync(user);
+				}
+			}
+		}
+
+		// POST api/values
+		[HttpPost]
+		public async Task<TokenResponseViewModel> Post([FromBody]TokenRequestViewModel viewModel)
+		{
+			if(viewModel == null)
+			{
+				return new ErrorTokenResponseViewModel
+				{
+					Error = "request_null",
+					ErrorDescription = "No request was sent"
+				};
+			}
+
+			switch (viewModel.GrantType)
+			{
+				case "password":
+					return await passwordGrantAsync(viewModel);
+
+				case "refresh_token":
+					return await refreshTokenGrantAsync(viewModel);
+
+				default:
+					return new ErrorTokenResponseViewModel
+					{
+						Error = "invalid_grant_type",
+						ErrorDescription = $"Grant type {viewModel.GrantType} is not supported."
+					};
+			}
+		}
+
+		private String getRefreshToken(String userId, DateTime expiresIn)
 		{
 			var refreshToken = new RefreshToken();
 			refreshToken.RefreshTokenId = Guid.NewGuid();
 			refreshToken.Expires = expiresIn.AddHours(2);
-			refreshToken.AccessToken = token;
+			refreshToken.UserId = userId;
 
-			//context.RefreshTokens.Add(refreshToken);
+			context.RefreshTokens.Add(refreshToken);
 			context.SaveChanges();
 
-			var rTokenBytes = rsa.Encrypt(refreshToken.RefreshTokenId.ToByteArray(), RSAEncryptionPadding.OaepSHA1);
+			List<byte> data = new List<byte>(refreshToken.RefreshTokenId.ToByteArray());
+
+			data.AddRange(BitConverter.GetBytes(refreshToken.Expires.Ticks));
+
+			var rTokenBytes = rsa.Encrypt(data.ToArray(), RSAEncryptionPadding.OaepSHA1);
 
 			return Convert.ToBase64String(rTokenBytes);
 		}
