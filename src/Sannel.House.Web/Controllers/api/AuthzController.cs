@@ -43,7 +43,7 @@ namespace Sannel.House.Web.Controllers.api
 			this.rsa = rsa;
 		}
 
-		private async Task<TokenResponseViewModel> passwordGrantAsync(TokenRequestViewModel viewModel)
+		private async Task<Result<String>> passwordGrantAsync(TokenRequestViewModel viewModel)
 		{
 			var signInResult = await signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
 			if (signInResult.Succeeded)
@@ -53,7 +53,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			else
 			{
-				return new ErrorTokenResponseViewModel
+				return new ErrorTokenResult
 				{
 					Error = "invalid_credentials",
 					ErrorDescription = "Invalid Username/Password was provided"
@@ -61,30 +61,31 @@ namespace Sannel.House.Web.Controllers.api
 			}
 		}
 
-		private async Task<TokenResponseViewModel> generateTokensForUserAsync(ApplicationUser user)
+		private async Task<Result<String>> generateTokensForUserAsync(ApplicationUser user)
 		{
 			var claims = await signInManager.CreateUserPrincipalAsync(user ?? throw new ArgumentNullException(nameof(user)));
-				var utcNow = DateTime.UtcNow;
-				var (token, expires) = getToken(claims, utcNow.AddMinutes(20));
-				var refreshToken = getRefreshToken(user.Id, expires);
+			var utcNow = DateTime.UtcNow;
+			var (token, expires) = getToken(claims, utcNow.AddMinutes(20));
+			var refreshToken = getRefreshToken(user.Id, expires);
 
-				var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
+			var expiresIn = TimeSpan.FromTicks(expires.Ticks) - TimeSpan.FromTicks(utcNow.Ticks);
 
-				return new SuccessTokenResponseViewModel
-				{
-					TokenType = "bearer",
-					AccessToken = token,
-					RefreshToken = refreshToken,
-					ExpiresIn = (long)expiresIn.TotalSeconds
-				};
+			return new SuccessTokenResult
+			{
+				TokenType = "bearer",
+				AccessToken = token,
+				RefreshToken = refreshToken,
+				ExpiresIn = (long)expiresIn.TotalSeconds,
+				ExpiresAt = expires.ToUniversalTime()
+			};
 		}
 
-		private async Task<TokenResponseViewModel> refreshTokenGrantAsync(TokenRequestViewModel viewModel)
+		private async Task<Result<String>> refreshTokenGrantAsync(TokenRequestViewModel viewModel)
 		{
 			var token = viewModel.RefreshToken;
 			if (string.IsNullOrWhiteSpace(token))
 			{
-				return new ErrorTokenResponseViewModel
+				return new ErrorTokenResult
 				{
 					Error = "invalid_token",
 					ErrorDescription = "Invalid token was provided"
@@ -92,12 +93,24 @@ namespace Sannel.House.Web.Controllers.api
 			}
 			else
 			{
-				var data = Convert.FromBase64String(token);
-				var rTokenBytes = rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
-
-				if(rTokenBytes.Length < 16 + sizeof(long))
+				byte[] rTokenBytes = null;
+				try
 				{
-					return new ErrorTokenResponseViewModel
+					var data = Convert.FromBase64String(token);
+					rTokenBytes = rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
+				}
+				catch (FormatException fe)
+				{
+					return new ErrorTokenResult
+					{
+						Error = "invalid_token",
+						ErrorDescription = "Invalid token was provided"
+					};
+				}
+
+				if (rTokenBytes.Length < 16 + sizeof(long))
+				{
+					return new ErrorTokenResult
 					{
 						Error = "invalid_token",
 						ErrorDescription = "Invalid token was provided"
@@ -107,9 +120,9 @@ namespace Sannel.House.Web.Controllers.api
 				{
 					var guid = new Guid(rTokenBytes.Take(16).ToArray());
 					var rt = context.RefreshTokens.FirstOrDefault(i => i.RefreshTokenId == guid);
-					if(rt == null)
+					if (rt == null)
 					{
-						return new ErrorTokenResponseViewModel
+						return new ErrorTokenResult
 						{
 							Error = "invalid_token",
 							ErrorDescription = "Invalid token was provided"
@@ -118,11 +131,11 @@ namespace Sannel.House.Web.Controllers.api
 					var expires = rt.Expires;
 
 					var ticks = BitConverter.ToInt64(rTokenBytes, 16);
-					if(expires.Ticks != ticks)
+					if (expires.Ticks != ticks)
 					{
 						context.RefreshTokens.Remove(rt);
 						await context.SaveChangesAsync();
-						return new ErrorTokenResponseViewModel
+						return new ErrorTokenResult
 						{
 							Error = "invalid_token",
 							ErrorDescription = "Invalid token was provided"
@@ -133,7 +146,7 @@ namespace Sannel.House.Web.Controllers.api
 					{
 						context.RefreshTokens.Remove(rt);
 						await context.SaveChangesAsync();
-						return new ErrorTokenResponseViewModel
+						return new ErrorTokenResult
 						{
 							Error = "token_expired",
 							ErrorDescription = "The refresh token has expired"
@@ -143,7 +156,7 @@ namespace Sannel.House.Web.Controllers.api
 					var user = await userManager.FindByIdAsync(rt.UserId);
 					if (user == null)
 					{
-						return new ErrorTokenResponseViewModel
+						return new ErrorTokenResult
 						{
 							Error = "invalid_token",
 							ErrorDescription = "Invalid token was provided"
@@ -157,11 +170,11 @@ namespace Sannel.House.Web.Controllers.api
 
 		// POST api/values
 		[HttpPost]
-		public async Task<TokenResponseViewModel> Post([FromBody]TokenRequestViewModel viewModel)
+		public async Task<Result<String>> Post([FromBody]TokenRequestViewModel viewModel)
 		{
-			if(viewModel == null)
+			if (viewModel == null)
 			{
-				return new ErrorTokenResponseViewModel
+				return new ErrorTokenResult
 				{
 					Error = "request_null",
 					ErrorDescription = "No request was sent"
@@ -177,7 +190,7 @@ namespace Sannel.House.Web.Controllers.api
 					return await refreshTokenGrantAsync(viewModel);
 
 				default:
-					return new ErrorTokenResponseViewModel
+					return new ErrorTokenResult
 					{
 						Error = "invalid_grant_type",
 						ErrorDescription = $"Grant type {viewModel.GrantType} is not supported."

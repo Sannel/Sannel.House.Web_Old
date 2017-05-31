@@ -21,6 +21,7 @@ using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sannel.House.Web.Controllers.api
 {

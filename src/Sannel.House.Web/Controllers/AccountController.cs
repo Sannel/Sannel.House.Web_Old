@@ -70,7 +70,7 @@ namespace Sannel.House.Web.Controllers
 		/// </summary>
 		/// <param name="model">The model.</param>
 		/// <returns></returns>
-		[HttpPost]
+		/*[HttpPost]
 		[AllowAnonymous]
 		public async Task<JsonResult> LoginFromDevice(LoginViewModel model)
 		{
@@ -92,7 +92,7 @@ namespace Sannel.House.Web.Controllers
 			{
 				Success = false
 			}.AddError("Invalid username and/or password"));
-		}
+		}*/
 
 		[HttpGet]
 		public IActionResult AccessDenied(String returnUrl = null)
