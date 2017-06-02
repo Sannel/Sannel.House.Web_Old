@@ -21,6 +21,7 @@ using Sannel.House.Web.Base;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sannel.House.Web.Controllers.api
 {
@@ -49,7 +50,7 @@ namespace Sannel.House.Web.Controllers.api
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
 			results.CurrentPage = page;
-			results.Data = query;
+			results.Data = query.AsNoTracking();
 			results.Success = true;
 			return results;
 		}
