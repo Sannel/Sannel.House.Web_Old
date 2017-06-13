@@ -30,7 +30,7 @@ namespace Sannel.House.Web
 	{
 		public Startup(IHostingEnvironment env)
 		{
-			
+
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -66,13 +66,14 @@ namespace Sannel.House.Web
 			}
 
 			services.AddEntityFramework();
-			switch(Configuration["SqlProvider"]?.ToLower())
+			switch (Configuration["SqlProvider"]?.ToLower())
 			{
 				case "mysql":
-					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));	
+					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
 					break;
 				case "sqlite":
 					services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
+
 					break;
 				default:
 					services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
@@ -96,8 +97,8 @@ namespace Sannel.House.Web
 			services.AddAuthorization(auth =>
 			{
 				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
-                    .RequireAuthenticatedUser().Build());
+					.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+					.RequireAuthenticatedUser().Build());
 			});
 			services.AddAntiforgery();
 			services.AddSingleton(Configuration);
@@ -106,10 +107,10 @@ namespace Sannel.House.Web
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public async void Configure(IApplicationBuilder app, 
-			IHostingEnvironment env, 
-			ILoggerFactory loggerFactory, 
-			DataSeeder seeder, 
+		public async void Configure(IApplicationBuilder app,
+			IHostingEnvironment env,
+			ILoggerFactory loggerFactory,
+			DataSeeder seeder,
 			TokenAuthOptions tokenOptions)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -124,18 +125,18 @@ namespace Sannel.House.Web
 			{
 				app.UseExceptionHandler("/Home/Error");
 
-				// For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-				try
-				{
-					using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-						.CreateScope())
-					{
-						serviceScope.ServiceProvider.GetService<DataContext>()
-							 .Database.Migrate();
-					}
-				}
-				catch { }
 			}
+			// For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+			try
+			{
+				using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+					.CreateScope())
+				{
+					serviceScope.ServiceProvider.GetService<DataContext>()
+						 .Database.Migrate();
+				}
+			}
+			catch { }
 			app.UseJwtBearerAuthentication(new JwtBearerOptions()
 			{
 				TokenValidationParameters = new TokenValidationParameters()
