@@ -1,4 +1,4 @@
-/* Copyright 2017 Sannel Software, L.L.C.
+﻿/* Copyright 2017 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	public partial class TemperatureEntryController : Controller
 	{
 		private IDataContext context;

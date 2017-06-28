@@ -59,5 +59,18 @@ namespace Sannel.House.Web.Base.Models
 			get;
 			set;
 		}
+
+		/// <summary>
+		/// Gets or sets the count for the current result set
+		/// </summary>
+		/// <value>
+		/// The count.
+		/// </value>
+		[JsonProperty(nameof(Count))]
+		public virtual int Count
+		{
+			get;
+			set;
+		}
     }
 }

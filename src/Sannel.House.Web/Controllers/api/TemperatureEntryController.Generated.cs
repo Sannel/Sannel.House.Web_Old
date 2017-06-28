@@ -11,6 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
+/* This is generated code so probably best not to edit it */
 
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,7 @@ namespace Sannel.House.Web.Controllers.api
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
 			results.CurrentPage = page;
+			results.Count = query.Count();
 			results.Data = query.AsNoTracking();
 			results.Success = true;
 			return results;

@@ -20,12 +20,8 @@ using System.Threading.Tasks;
 
 namespace Sannel.House.Web.Base.Models
 {
-	/// <summary>
-	/// The results of an action to any of the api calls
-	/// </summary>
-	/// <typeparam name="T">Any type thats returned from an api call</typeparam>
-	public class Result<T>
-    {
+	public abstract class Result
+	{
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Result{T}"/> is success.
 		/// </summary>
@@ -42,14 +38,21 @@ namespace Sannel.House.Web.Base.Models
 		/// The errors.
 		/// </value>
 		[JsonProperty(nameof(Errors))]
-		public virtual List<String> Errors { get; } = new List<String>();
+		public virtual List<string> Errors { get; } = new List<string>();
+	}
+	/// <summary>
+	/// The results of an action to any of the api calls
+	/// </summary>
+	/// <typeparam name="T">Any type thats returned from an api call</typeparam>
+	public class Result<T> : Result
+    {
 
 		/// <summary>
 		/// Adds an Error to the errors list and returns this object
 		/// </summary>
 		/// <param name="error">The error.</param>
 		/// <returns></returns>
-		public virtual Result<T> AddError(String error)
+		public virtual Result<T> AddError(string error)
 		{
 			Errors.Add(error);
 			return this;
