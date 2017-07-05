@@ -83,14 +83,5 @@ namespace Sannel.House.Web.Controllers.api
 				data.DeviceId = SystemDeviceIds.DefaultId;
 			}
 		}
-
-		partial void postExtraVerification(TemperatureEntry data, Result<TemperatureEntry> result)
-		{
-			var d = context.Devices.FirstOrDefault(i => i.Id == data.DeviceId);
-			if(d == null)
-			{
-				result.AddError($"There is no device with id {data.DeviceId}");
-			}
-		}
 	}
 }
