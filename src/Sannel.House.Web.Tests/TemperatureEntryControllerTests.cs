@@ -49,7 +49,7 @@ namespace Sannel.House.Web.Tests
 					var temp = new TemperatureEntry();
 					temp.TemperatureCelsius = 20;
 					temp.DeviceId = 500;
-					temp.CreatedDateTime = DateTime.Now;
+					temp.DateCreated = DateTime.Now;
 					var result = controller.Post(temp);
 					Assert.True(result.Success);
 					var d = result.Data;

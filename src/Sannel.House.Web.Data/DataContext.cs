@@ -57,6 +57,7 @@ namespace Sannel.House.Web.Data
 			get;
 			set;
 		}
+		public DbSet<SensorEntry> SensorEntries { get; set; }
 
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{

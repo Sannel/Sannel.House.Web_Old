@@ -53,7 +53,7 @@ namespace Sannel.House.Web.Base.Models
 		[JsonProperty(nameof(Pressure))]
 		public double Pressure { get; set; }
 
-		[JsonProperty(nameof(CreatedDateTime))]
-		public DateTime CreatedDateTime { get; set; }
+		[JsonProperty(nameof(DateCreated))]
+		public DateTime DateCreated { get; set; }
 	}
 }

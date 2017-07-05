@@ -46,7 +46,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			IQueryable<TemperatureEntry> query;
-			query = context.TemperatureEntries.OrderByDescending(i => i.CreatedDateTime);
+			query = context.TemperatureEntries.OrderByDescending(i => i.DateCreated);
 			results.TotalResults = query.LongCount();
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
