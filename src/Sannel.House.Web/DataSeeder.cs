@@ -30,11 +30,11 @@ namespace Sannel.House.Web
 			this.roleManager = roleManager;
 		}
 
-		protected virtual String[] Roles
+		protected virtual string[] Roles
 		{
 			get
 			{
-				return new String[]
+				return new string[]
 				{
 					"ApplicationLogList",
 					"ApplicationLogAdd",
@@ -43,7 +43,9 @@ namespace Sannel.House.Web
 					"TemperatureEntryList",
 					"TemperatureEntryAdd",
 					"TemperatureSettingEdit",
-					"TemperatureSettingList"
+					"TemperatureSettingList",
+					"SensorEntryList",
+					"SensorEntryAdd"
 				};
 			}
 		}
@@ -78,7 +80,7 @@ namespace Sannel.House.Web
 			}
 		}
 
-		protected virtual async Task<ApplicationUser> checkAndCreateUserAsync(String email, String password, String name)
+		protected virtual async Task<ApplicationUser> checkAndCreateUserAsync(string email, string password, string name)
 		{
 			var user = await userManager.FindByEmailAsync(email);
 			if(user == null)
@@ -116,7 +118,7 @@ namespace Sannel.House.Web
 			}
 		}
 
-		protected virtual async Task checkAndCreateRoleAsync(String roleName)
+		protected virtual async Task checkAndCreateRoleAsync(string roleName)
 		{
 			var role = await roleManager.FindByNameAsync(roleName);
 			if(role == null)
