@@ -21,6 +21,6 @@ namespace Sannel.House.Web.Base.Models
 {
 	public class ApplicationUser : IdentityUser
 	{
-        public string Name { get; set; }
+        public String Name { get; set; }
     }
 }

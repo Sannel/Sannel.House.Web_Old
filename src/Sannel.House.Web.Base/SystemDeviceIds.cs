@@ -7,7 +7,7 @@ namespace Sannel.House.Web.Base
 {
     public static class SystemDeviceIds
     {
-		public static readonly uint ControllerId = 1;
-		public static readonly uint DefaultId = 2;
+		public static readonly int ControllerId = 1;
+		public static readonly int DefaultId = 2;
     }
 }

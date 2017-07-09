@@ -35,7 +35,7 @@ namespace Sannel.House.Web.Base.Models
 			set;
 		}
 
-		public uint? DeviceId
+		public int? DeviceId
 		{
 			get;
 			set;
@@ -44,7 +44,7 @@ namespace Sannel.House.Web.Base.Models
 		[Required]
 		[MaxLength(256)]
 		[Generation(IsRequired = true)]
-		public string ApplicationId
+		public String ApplicationId
 		{
 			get;
 			set;

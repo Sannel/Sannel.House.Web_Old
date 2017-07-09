@@ -41,7 +41,7 @@ namespace Sannel.House.Web.Base.Models
 #endif
 		[Key]
 		[JsonProperty("Id")]
-		public uint Id { get; set; }
+		public int Id { get; set; }
 
 		/// <summary>
 		/// Gets or sets the name.

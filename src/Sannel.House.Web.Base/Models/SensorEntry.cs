@@ -22,7 +22,7 @@ namespace Sannel.House.Web.Base.Models
 
 		[JsonProperty(nameof(DeviceId))]
 		[Generation(GreaterThenZero = true)]
-		public uint DeviceId { get; set; }
+		public int DeviceId { get; set; }
 
 		[JsonIgnore]
 		[Generation(Ignore = true)]
