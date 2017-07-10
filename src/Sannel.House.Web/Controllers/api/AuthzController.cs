@@ -43,7 +43,7 @@ namespace Sannel.House.Web.Controllers.api
 			this.rsa = rsa;
 		}
 
-		private async Task<Result<String>> passwordGrantAsync(TokenRequestViewModel viewModel)
+		private async Task<Result<string>> passwordGrantAsync(TokenRequestViewModel viewModel)
 		{
 			var signInResult = await signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
 			if (signInResult.Succeeded)
@@ -61,7 +61,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 		}
 
-		private async Task<Result<String>> generateTokensForUserAsync(ApplicationUser user)
+		private async Task<Result<string>> generateTokensForUserAsync(ApplicationUser user)
 		{
 			var claims = await signInManager.CreateUserPrincipalAsync(user ?? throw new ArgumentNullException(nameof(user)));
 			var utcNow = DateTime.UtcNow;
@@ -80,7 +80,7 @@ namespace Sannel.House.Web.Controllers.api
 			};
 		}
 
-		private async Task<Result<String>> refreshTokenGrantAsync(TokenRequestViewModel viewModel)
+		private async Task<Result<string>> refreshTokenGrantAsync(TokenRequestViewModel viewModel)
 		{
 			var token = viewModel.RefreshToken;
 			if (string.IsNullOrWhiteSpace(token))
@@ -170,7 +170,7 @@ namespace Sannel.House.Web.Controllers.api
 
 		// POST api/values
 		[HttpPost]
-		public async Task<Result<String>> Post([FromBody]TokenRequestViewModel viewModel)
+		public async Task<Result<string>> Post([FromBody]TokenRequestViewModel viewModel)
 		{
 			if (viewModel == null)
 			{
@@ -198,17 +198,18 @@ namespace Sannel.House.Web.Controllers.api
 			}
 		}
 
-		private String getRefreshToken(String userId, DateTime expiresIn)
+		private string getRefreshToken(string userId, DateTime expiresIn)
 		{
-			var refreshToken = new RefreshToken();
-			refreshToken.RefreshTokenId = Guid.NewGuid();
-			refreshToken.Expires = expiresIn.AddHours(2);
-			refreshToken.UserId = userId;
-
+			var refreshToken = new RefreshToken()
+			{
+				RefreshTokenId = Guid.NewGuid(),
+				Expires = expiresIn.AddDays(1),
+				UserId = userId
+			};
 			context.RefreshTokens.Add(refreshToken);
 			context.SaveChanges();
 
-			List<byte> data = new List<byte>(refreshToken.RefreshTokenId.ToByteArray());
+			var data = new List<byte>(refreshToken.RefreshTokenId.ToByteArray());
 
 			data.AddRange(BitConverter.GetBytes(refreshToken.Expires.Ticks));
 
