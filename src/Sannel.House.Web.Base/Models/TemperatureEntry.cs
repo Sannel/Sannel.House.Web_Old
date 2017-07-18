@@ -48,10 +48,13 @@ namespace Sannel.House.Web.Base.Models
 		public double TemperatureCelsius { get; set; }
 
 		[JsonProperty(nameof(Humidity))]
-		public double Humidity { get; set; }
+		public double? Humidity { get; set; }
+
+		[JsonProperty(nameof(RelativeHumidity))]
+		public double? RelativeHumidity { get; set; }
 
 		[JsonProperty(nameof(Pressure))]
-		public double Pressure { get; set; }
+		public double? Pressure { get; set; }
 
 		[JsonProperty(nameof(DateCreated))]
 		public DateTime DateCreated { get; set; }

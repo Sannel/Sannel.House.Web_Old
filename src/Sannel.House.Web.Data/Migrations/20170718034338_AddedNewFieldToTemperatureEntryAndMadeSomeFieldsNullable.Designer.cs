@@ -9,9 +9,10 @@ using Sannel.House.Sensor;
 namespace Sannel.House.Web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20170718034338_AddedNewFieldToTemperatureEntryAndMadeSomeFieldsNullable")]
+    partial class AddedNewFieldToTemperatureEntryAndMadeSomeFieldsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
