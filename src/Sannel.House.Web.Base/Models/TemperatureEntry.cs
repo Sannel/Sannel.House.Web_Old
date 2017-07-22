@@ -50,9 +50,6 @@ namespace Sannel.House.Web.Base.Models
 		[JsonProperty(nameof(Humidity))]
 		public double? Humidity { get; set; }
 
-		[JsonProperty(nameof(RelativeHumidity))]
-		public double? RelativeHumidity { get; set; }
-
 		[JsonProperty(nameof(Pressure))]
 		public double? Pressure { get; set; }
 
