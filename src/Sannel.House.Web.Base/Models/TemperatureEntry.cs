@@ -44,6 +44,9 @@ namespace Sannel.House.Web.Base.Models
 		[Generation(Ignore = true)]
 		public Device Device { get; set; }
 
+		[NotMapped]
+		public long? DeviceMacAddress {get;set;}
+
 		[JsonProperty(nameof(TemperatureCelsius))]
 		public double TemperatureCelsius { get; set; }
 
