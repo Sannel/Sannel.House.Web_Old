@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Sannel.House.Web
 {
@@ -81,6 +82,16 @@ namespace Sannel.House.Web
 			}
 
 			services.AddMvc();
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Info()
+				{
+					Title = "Sannel House Api",
+					Version = "v1",
+					Description = "API to store and query Sannel.House info",
+					TermsOfService = "None"
+				});
+			});
 			services.AddMvcCore();
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
@@ -115,6 +126,12 @@ namespace Sannel.House.Web
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
+
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sannel House API");
+			});
 
 			if (env.IsDevelopment())
 			{

@@ -47,38 +47,43 @@ namespace Sannel.House.Web.Tests
 					var var5 = new TemperatureEntry();
 					// var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 34;
-					var1.TemperatureCelsius = 0.94140137822432512;
-					var1.Humidity = 0.10319381258599172;
-					var1.Pressure = 0.17272071781229262;
+					var1.DeviceId = 21;
+					var1.DeviceMacAddress = 19;
+					var1.TemperatureCelsius = 0.84771622849987649;
+					var1.Humidity = 0.52071471536565328;
+					var1.Pressure = 0.43798061154688739;
 					var1.DateCreated = DateTime.MinValue;
 					// var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 53;
-					var2.TemperatureCelsius = 0.037378523516179304;
-					var2.Humidity = 0.77182152018501493;
-					var2.Pressure = 0.78945156596109811;
+					var2.DeviceId = 41;
+					var2.DeviceMacAddress = 29;
+					var2.TemperatureCelsius = 0.51634393051096417;
+					var2.Humidity = 0.13744556351445875;
+					var2.Pressure = 0.43403854427581584;
 					var2.DateCreated = DateTime.MinValue;
 					// var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 73;
-					var3.TemperatureCelsius = 0.13335566880803354;
-					var3.Humidity = 0.44044922219610272;
-					var3.Pressure = 0.40618241410990358;
+					var3.DeviceId = 13;
+					var3.DeviceMacAddress = 67;
+					var3.TemperatureCelsius = 0.88395962858756982;
+					var3.Humidity = 0.9676193422487096;
+					var3.Pressure = 0.88158221677019366;
 					var3.DateCreated = DateTime.MinValue;
 					// var4
 					var4.Id = Guid.NewGuid();
-					var4.DeviceId = 45;
-					var4.TemperatureCelsius = 0.52275143168994753;
-					var4.Humidity = 0.80806491747874065;
-					var4.Pressure = 0.23635619284415441;
+					var4.DeviceId = 32;
+					var4.DeviceMacAddress = 77;
+					var4.TemperatureCelsius = 0.55258733059865761;
+					var4.Humidity = 0.584350190397515;
+					var4.Pressure = 0.87764014949912217;
 					var4.DateCreated = DateTime.MinValue;
 					// var5
 					var5.Id = Guid.NewGuid();
-					var5.DeviceId = 64;
-					var5.TemperatureCelsius = 0.61872857698180184;
-					var5.Humidity = 0.47669262228379616;
-					var5.Pressure = 0.85308704099295984;
+					var5.DeviceId = 51;
+					var5.DeviceMacAddress = 86;
+					var5.TemperatureCelsius = 0.22121503819768085;
+					var5.Humidity = 0.20108103854632053;
+					var5.Pressure = 0.87369808222805057;
 					var5.DateCreated = DateTime.MinValue;
 					var order = DateTime.Now;
 					var1.DateCreated = order;
@@ -120,6 +125,7 @@ namespace Sannel.House.Web.Tests
 					// var1 -> actual
 					Assert.Equal(var1.Id, actual.Id);
 					Assert.Equal(var1.DeviceId, actual.DeviceId);
+					Assert.Equal(var1.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var1.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var1.Humidity, actual.Humidity);
 					Assert.Equal(var1.Pressure, actual.Pressure);
@@ -129,6 +135,7 @@ namespace Sannel.House.Web.Tests
 					// var2 -> actual
 					Assert.Equal(var2.Id, actual.Id);
 					Assert.Equal(var2.DeviceId, actual.DeviceId);
+					Assert.Equal(var2.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var2.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var2.Humidity, actual.Humidity);
 					Assert.Equal(var2.Pressure, actual.Pressure);
@@ -148,6 +155,7 @@ namespace Sannel.House.Web.Tests
 					// var3 -> actual
 					Assert.Equal(var3.Id, actual.Id);
 					Assert.Equal(var3.DeviceId, actual.DeviceId);
+					Assert.Equal(var3.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var3.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var3.Humidity, actual.Humidity);
 					Assert.Equal(var3.Pressure, actual.Pressure);
@@ -157,6 +165,7 @@ namespace Sannel.House.Web.Tests
 					// var4 -> actual
 					Assert.Equal(var4.Id, actual.Id);
 					Assert.Equal(var4.DeviceId, actual.DeviceId);
+					Assert.Equal(var4.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var4.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var4.Humidity, actual.Humidity);
 					Assert.Equal(var4.Pressure, actual.Pressure);
@@ -176,6 +185,7 @@ namespace Sannel.House.Web.Tests
 					// var5 -> actual
 					Assert.Equal(var5.Id, actual.Id);
 					Assert.Equal(var5.DeviceId, actual.DeviceId);
+					Assert.Equal(var5.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var5.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var5.Humidity, actual.Humidity);
 					Assert.Equal(var5.Pressure, actual.Pressure);
@@ -199,24 +209,27 @@ namespace Sannel.House.Web.Tests
 					var var3 = new TemperatureEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 64;
-					var1.TemperatureCelsius = 0.85308704099295984;
-					var1.Humidity = 0.62344402709204894;
-					var1.Pressure = 0.13023426296665996;
+					var1.DeviceId = 51;
+					var1.DeviceMacAddress = 20;
+					var1.TemperatureCelsius = 0.35937443206057623;
+					var1.Humidity = 0.2153674239364301;
+					var1.Pressure = 0.42525045081286245;
 					var1.DateCreated = DateTime.MinValue;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 62;
-					var2.TemperatureCelsius = 0.12593708379470608;
-					var2.Humidity = 0.76432439627327231;
-					var2.Pressure = 0.61398472106735447;
+					var2.DeviceId = 86;
+					var2.DeviceMacAddress = 87;
+					var2.TemperatureCelsius = 0.98226409218379485;
+					var2.Humidity = 0.38112247706443186;
+					var2.Pressure = 0.29256184319619177;
 					var2.DateCreated = DateTime.MinValue;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 48;
-					var3.TemperatureCelsius = 0.38640990172811313;
-					var3.Humidity = 0.47819602511739173;
-					var3.Pressure = 0.18511597541399114;
+					var3.DeviceId = 22;
+					var3.DeviceMacAddress = 43;
+					var3.TemperatureCelsius = 0.98831676598094254;
+					var3.Humidity = 0.036352247947991009;
+					var3.Pressure = 0.0050949924649181738;
 					var3.DateCreated = DateTime.MinValue;
 					//Fix Order
 					var order = DateTime.Now;
@@ -236,6 +249,7 @@ namespace Sannel.House.Web.Tests
 					// var1 -> actual
 					Assert.Equal(var1.Id, actual.Id);
 					Assert.Equal(var1.DeviceId, actual.DeviceId);
+					Assert.Equal(var1.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var1.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var1.Humidity, actual.Humidity);
 					Assert.Equal(var1.Pressure, actual.Pressure);
@@ -249,6 +263,7 @@ namespace Sannel.House.Web.Tests
 					// var2 -> actual
 					Assert.Equal(var2.Id, actual.Id);
 					Assert.Equal(var2.DeviceId, actual.DeviceId);
+					Assert.Equal(var2.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var2.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var2.Humidity, actual.Humidity);
 					Assert.Equal(var2.Pressure, actual.Pressure);
@@ -262,6 +277,7 @@ namespace Sannel.House.Web.Tests
 					// var3 -> actual
 					Assert.Equal(var3.Id, actual.Id);
 					Assert.Equal(var3.DeviceId, actual.DeviceId);
+					Assert.Equal(var3.DeviceMacAddress, actual.DeviceMacAddress);
 					Assert.Equal(var3.TemperatureCelsius, actual.TemperatureCelsius);
 					Assert.Equal(var3.Humidity, actual.Humidity);
 					Assert.Equal(var3.Pressure, actual.Pressure);
@@ -296,10 +312,11 @@ namespace Sannel.House.Web.Tests
 					// Success Test
 					expected = new TemperatureEntry();
 					expected.Id = Guid.NewGuid();
-					expected.DeviceId = 83;
-					expected.TemperatureCelsius = 0.714705722273656;
-					expected.Humidity = 0.14532032708885165;
-					expected.Pressure = 0.46981788914176537;
+					expected.DeviceId = 71;
+					expected.DeviceMacAddress = 96;
+					expected.TemperatureCelsius = 0.88984274020876863;
+					expected.Humidity = 0.81781188669512606;
+					expected.Pressure = 0.86975601495697907;
 					expected.DateCreated = DateTime.MinValue;
 					postPreCall(expected, wrapper);
 					result = controller.Post(expected);
@@ -313,6 +330,7 @@ namespace Sannel.House.Web.Tests
 					var resultData = result.Data;
 					Assert.Equal(first.Id, resultData.Id);
 					Assert.Equal(first.DeviceId, resultData.DeviceId);
+					Assert.Equal(first.DeviceMacAddress, resultData.DeviceMacAddress);
 					Assert.Equal(first.TemperatureCelsius, resultData.TemperatureCelsius);
 					Assert.Equal(first.Humidity, resultData.Humidity);
 					Assert.Equal(first.Pressure, resultData.Pressure);

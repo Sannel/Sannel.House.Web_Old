@@ -77,7 +77,8 @@ namespace Sannel.House.Web.Tests
 							Description = "",
 							DisplayOrder = 0,
 							IsReadOnly = true,
-							Name = ""
+							Name = "",
+							MacAddress = e.DeviceMacAddress
 						});
 						newContext.SaveChanges();
 					}
@@ -104,7 +105,8 @@ namespace Sannel.House.Web.Tests
 							Description = "",
 							DisplayOrder = 0,
 							IsReadOnly = true,
-							Name = ""
+							Name = "",
+							MacAddress = data.DeviceMacAddress
 						});
 					context.SaveChanges();
 				}
