@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,15 +11,15 @@ using Newtonsoft.Json;
 
 namespace Sannel.House.Web
 {
-    public class Program
-    {
-		private static void generateKeys(String fileName)
+	public class Program
+	{
+		private static void generateKeys(string fileName)
 		{
-			RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+			var rsa = new RSACryptoServiceProvider(2048);
 			var publicKey = rsa.ExportParameters(true);
 			var data = JsonConvert.SerializeObject(publicKey);
 			var dir = Path.GetDirectoryName(fileName);
-			if (!String.IsNullOrWhiteSpace(dir))
+			if (!string.IsNullOrWhiteSpace(dir))
 			{
 				if (!Directory.Exists(dir))
 				{
@@ -29,11 +29,11 @@ namespace Sannel.House.Web
 			File.WriteAllText(fileName, data);
 		}
 
-        public static void Main(string[] args)
-        {
-			if(args.Length > 0 && String.Compare(args[0], "--generate-keys", true) == 0)
+		public static void Main(string[] args)
+		{
+			if (args.Length > 0 && string.Compare(args[0], "--generate-keys", true) == 0)
 			{
-				if (args.Length > 1 && !String.IsNullOrWhiteSpace(args[1]))
+				if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
 				{
 					generateKeys(args[1]);
 				}
@@ -44,20 +44,20 @@ namespace Sannel.House.Web
 				return;
 			}
 
-            var cbuilder = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .Build();
+			var cbuilder = new ConfigurationBuilder()
+				.AddCommandLine(args)
+				.Build();
 
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseConfiguration(cbuilder)
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+			var host = new WebHostBuilder()
+				.UseKestrel()
+				.UseContentRoot(Directory.GetCurrentDirectory())
+				.UseConfiguration(cbuilder)
+				.UseIISIntegration()
+				.UseStartup<Startup>()
+				.Build();
 
-            host.Run();
-        }
-    }
+			host.Run();
+		}
+	}
 }

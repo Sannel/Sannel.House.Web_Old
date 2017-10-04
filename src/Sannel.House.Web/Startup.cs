@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,36 +46,43 @@ namespace Sannel.House.Web
 		{
 			// Add framework services.
 			var file = Configuration["RSAKeysFile"];
+			TokenAuthOptions tokenOptions = null;
+
 			if (File.Exists(file))
 			{
 				var data = File.ReadAllText(file);
-				var provider = new RSACryptoServiceProvider();
-				provider.ImportParameters(JsonConvert.DeserializeObject<RSAParameters>(data));
+				var provider = new RSACryptoServiceProvider(2048);
+				//provider.ImportParameters(JsonConvert.DeserializeObject<RSAParameters>(data));
 				services.AddSingleton<RSA>(provider);
 
 				var key = new RsaSecurityKey(provider.ExportParameters(true));
 
 				services.AddSingleton(key);
-				services.AddSingleton<TokenAuthOptions>(new TokenAuthOptions
+
+				tokenOptions = new TokenAuthOptions
 				{
 					Audience = Configuration["Audience"],
 					Issuer = Configuration["Issuer"],
 					Credentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
-				});
+				};
+
+				services.AddSingleton(tokenOptions);
 
 			}
 
-			services.AddEntityFramework();
 			switch (Configuration["SqlProvider"]?.ToLower())
 			{
 				case "mysql":
+					services.AddMySQL();
 					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
 					break;
 				case "sqlite":
+					services.AddEntityFrameworkSqlite();
 					services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
 
 					break;
 				default:
+					services.AddEntityFrameworkSqlServer();
 					services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 					break;
 			}
@@ -84,9 +91,9 @@ namespace Sannel.House.Web
 			services.AddMvcCore();
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
-				options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
-				options.Cookies.ApplicationCookie.CookieName = "Authz";
-				options.Cookies.ApplicationCookie.CookiePath = "/";
+				//options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
+				//options.Cookies.ApplicationCookie.CookieName = "Authz";
+				//options.Cookies.ApplicationCookie.CookiePath = "/";
 				options.Password.RequireDigit = false;
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequireUppercase = false;
@@ -94,12 +101,34 @@ namespace Sannel.House.Web
 			})
 			.AddEntityFrameworkStores<DataContext>()
 				.AddDefaultTokenProviders();
-			services.AddAuthorization(auth =>
+
+			services.ConfigureApplicationCookie(option =>
 			{
-				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+				option.Cookie.Name = "Authz";
+				option.Cookie.Path = "/";
+			});
+			services.AddAuthorization(authz =>
+			{
+				authz.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
 					.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
 					.RequireAuthenticatedUser().Build());
 			});
+			var auth = services.AddAuthentication();
+			auth.AddCookie();
+			if (tokenOptions != null)
+			{
+				auth.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters()
+					{
+						IssuerSigningKey = tokenOptions.Credentials.Key,
+						ValidAudience = tokenOptions.Audience,
+						ValidIssuer = tokenOptions.Issuer,
+						ValidateLifetime = true,
+						ClockSkew = TimeSpan.FromMinutes(3)
+					};
+				});
+			}
 			services.AddAntiforgery();
 			services.AddSingleton(Configuration);
 			services.AddScoped<IDataContext, DataContext>();
@@ -137,20 +166,10 @@ namespace Sannel.House.Web
 				}
 			}
 			catch { }
-			app.UseJwtBearerAuthentication(new JwtBearerOptions()
-			{
-				TokenValidationParameters = new TokenValidationParameters()
-				{
-					IssuerSigningKey = tokenOptions.Credentials.Key,
-					ValidAudience = tokenOptions.Audience,
-					ValidIssuer = tokenOptions.Issuer,
-					ValidateLifetime = true,
-					ClockSkew = TimeSpan.FromMinutes(3)
-				}
-			});
+			app.UseAuthentication();
+
 			app.UseStaticFiles();
 
-			app.UseIdentity();
 			// To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 			app.UseMvc(routes =>
 			{

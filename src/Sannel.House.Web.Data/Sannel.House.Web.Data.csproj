@@ -1,35 +1,34 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <AssemblyName>Sannel.House.Web.Data</AssemblyName>
-    <PackageId>Sannel.House.Web.Data</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-  </PropertyGroup>
+	<PropertyGroup>
+		<VersionPrefix>0.2.0</VersionPrefix>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>Sannel.House.Web.Data</AssemblyName>
+		<PackageId>Sannel.House.Web.Data</PackageId>
+		<NetStandardImplicitPackageVersion>2.0.0</NetStandardImplicitPackageVersion>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
-    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.4.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+	</ItemGroup>
 
 </Project>
