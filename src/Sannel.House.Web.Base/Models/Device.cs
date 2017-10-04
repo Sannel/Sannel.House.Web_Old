@@ -53,7 +53,7 @@ namespace Sannel.House.Web.Base.Models
 		[Required]
 		[JsonProperty("Name")]
 		[Generation(CheckForEmptyString = true)]
-		public String Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets or sets the description.
@@ -65,7 +65,7 @@ namespace Sannel.House.Web.Base.Models
 		[Required]
 		[JsonProperty("Description")]
 		[Generation(IsRequired = true)]
-		public String Description { get; set; }
+		public string Description { get; set; }
 
 
 		/// <summary>
@@ -87,6 +87,20 @@ namespace Sannel.House.Web.Base.Models
 		[JsonProperty("DateCreated")]
 		[Generation(IsNow = true, CantUpdate = true)]
 		public DateTime DateCreated { get; set; }
+
+
+		/// <summary>
+		/// Gets or sets the mac address.
+		/// </summary>
+		/// <value>
+		/// The mac address.
+		/// </value>
+		[JsonProperty(nameof(MacAddress))]
+		public long? MacAddress
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Gets or sets if this device is readonly

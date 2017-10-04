@@ -1,4 +1,4 @@
-/* Copyright 2017 Sannel Software, L.L.C.
+﻿/* Copyright 2017 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			IQueryable<TemperatureEntry> query;
-			query = context.TemperatureEntries.OrderByDescending(i => i.DateCreated);
+			query = context.TemperatureEntries.Include(i => i.Device).OrderByDescending(i => i.DateCreated);
 			results.TotalResults = query.LongCount();
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);

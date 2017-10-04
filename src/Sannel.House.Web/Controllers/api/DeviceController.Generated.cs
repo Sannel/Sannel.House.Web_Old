@@ -167,6 +167,7 @@ namespace Sannel.House.Web.Controllers.api
 			current.Name = data.Name;
 			current.Description = data.Description;
 			current.DisplayOrder = data.DisplayOrder;
+			current.MacAddress = data.MacAddress;
 			try
 			{
 				context.SaveChanges();

@@ -45,39 +45,44 @@ namespace Sannel.House.Web.Tests
 					var var4 = new Device();
 					var var5 = new Device();
 					// var1
-					var1.Id = 56;
-					var1.Name = "v4v,'(*tsWKjp[zb*[0m=(v";
-					var1.Description = "])\\{)u@D6*C'$gWbf*eI?vgx316q;B%tfL^qGh6";
-					var1.DisplayOrder = 10;
+					var1.Id = 64;
+					var1.Name = "`${Nxyh{]aD@'%=+18HdVe(TwIP>MZ8wa:C/C";
+					var1.Description = "Gft),o!pC,rjr_~$|EN4.LmkSl";
+					var1.DisplayOrder = 34;
 					var1.DateCreated = DateTime.MinValue;
+					var1.MacAddress = 50;
 					var1.IsReadOnly = false;
 					// var2
-					var2.Id = 75;
-					var2.Name = ")WvOaF6|+:@,8|vG7[*&o7mQ6f?";
-					var2.Description = "Il,xZcbWj7f^%{/`'7jQ.?bn{;5@4C/<Gu5|(b";
-					var2.DisplayOrder = 73;
+					var2.Id = 84;
+					var2.Name = "QF{3dXr#),0w*x!jK8N5@=+,MCqB[5z7)&bA&2n76";
+					var2.Description = "<WI:NPCgLcuAm;;97'noA$7231<p+HgL>[@bV7Mx";
+					var2.DisplayOrder = 3;
 					var2.DateCreated = DateTime.MinValue;
+					var2.MacAddress = 92;
 					var2.IsReadOnly = false;
 					// var3
-					var3.Id = 94;
-					var3.Name = "CqcFruX$-7g}D-m3C[uHmXQbOWzW~E9";
-					var3.Description = "OC+DGE_HB(?w8x;|(M-CN0C";
-					var3.DisplayOrder = 2;
+					var3.Id = 4;
+					var3.Name = "ta{=yd!n8J\\\\BV$OT86Q]<exn-KXJ&1K7x_X;m]TF_r<(";
+					var3.Description = ">HlspZxigi0@l&b(|:Gxyo/q";
+					var3.DisplayOrder = 19;
 					var3.DateCreated = DateTime.MinValue;
+					var3.MacAddress = 7;
 					var3.IsReadOnly = false;
 					// var4
-					var4.Id = 66;
-					var4.Name = "q02AQ]L?T5g[$96\"SDnW28D#*jpsM0<~ZeSnqKJO(::h>5Q";
-					var4.Description = "Mooau>X%eJ'!1]2v8rk\"rfvVMZ\\!^e%@J[hcP;DC[cqdeWTJJ";
-					var4.DisplayOrder = 29;
+					var4.Id = 23;
+					var4.Name = "`4P&*`?3V3Pz.q&B;9#_.Duk_r]:qph,XXN2J&^w'SQ+DJ`C-";
+					var4.Description = "C^AMt%E&MXv0}'z9/Pt%9w\":OL";
+					var4.DisplayOrder = 14;
 					var4.DateCreated = DateTime.MinValue;
+					var4.MacAddress = 8;
 					var4.IsReadOnly = false;
 					// var5
-					var5.Id = 86;
-					var5.Name = "MP2LzMT\\;)S";
-					var5.Description = "Zf99mDP+_CJ-\"IN]]+aVO/fPbd,r>o^";
-					var5.DisplayOrder = 79;
+					var5.Id = 94;
+					var5.Name = "o:#$c5NJk1P%3_WA[ha-4>h8";
+					var5.Description = "!).9Gua7qdJr[A$K[;dEy=~JJ@P#Hepo8]\\FwPEQq";
+					var5.DisplayOrder = 13;
 					var5.DateCreated = DateTime.MinValue;
+					var5.MacAddress = 74;
 					var5.IsReadOnly = false;
 					// Fix order
 					var5.DisplayOrder = 1;
@@ -122,6 +127,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var5.Description, actual.Description);
 					Assert.Equal(var5.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var5.DateCreated, actual.DateCreated);
+					Assert.Equal(var5.MacAddress, actual.MacAddress);
 					Assert.Equal(var5.IsReadOnly, actual.IsReadOnly);
 					// var4
 					actual = list[1];
@@ -131,6 +137,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var4.Description, actual.Description);
 					Assert.Equal(var4.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var4.DateCreated, actual.DateCreated);
+					Assert.Equal(var4.MacAddress, actual.MacAddress);
 					Assert.Equal(var4.IsReadOnly, actual.IsReadOnly);
 					// Success Tests
 					paged = controller.GetPaged(2, 2);
@@ -150,6 +157,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var3.Description, actual.Description);
 					Assert.Equal(var3.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var3.DateCreated, actual.DateCreated);
+					Assert.Equal(var3.MacAddress, actual.MacAddress);
 					Assert.Equal(var3.IsReadOnly, actual.IsReadOnly);
 					// var2
 					actual = list[1];
@@ -159,6 +167,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var2.Description, actual.Description);
 					Assert.Equal(var2.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var2.DateCreated, actual.DateCreated);
+					Assert.Equal(var2.MacAddress, actual.MacAddress);
 					Assert.Equal(var2.IsReadOnly, actual.IsReadOnly);
 					// Success Tests
 					paged = controller.GetPaged(3, 2);
@@ -178,6 +187,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var1.Description, actual.Description);
 					Assert.Equal(var1.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var1.DateCreated, actual.DateCreated);
+					Assert.Equal(var1.MacAddress, actual.MacAddress);
 					Assert.Equal(var1.IsReadOnly, actual.IsReadOnly);
 				}
 			}
@@ -197,25 +207,28 @@ namespace Sannel.House.Web.Tests
 					var var2 = new Device();
 					var var3 = new Device();
 					//var1
-					var1.Id = 61;
-					var1.Name = "*2j8y$`!]0h#\"fP`8\\s@gqN3j";
-					var1.Description = "F*H`&@P9nT&~T";
-					var1.DisplayOrder = 1;
+					var1.Id = 78;
+					var1.Name = "NqqvFizP3`;.>";
+					var1.Description = "Z`6ihAqN8K)=3Tbmt";
+					var1.DisplayOrder = 81;
 					var1.DateCreated = DateTime.MinValue;
-					var1.IsReadOnly = true;
+					var1.MacAddress = 8;
+					var1.IsReadOnly = false;
 					//var2
-					var2.Id = 91;
-					var2.Name = "%HD\"M26ZM{k?n%tg5Ae";
-					var2.Description = "x|?1Q4[j&!0;mKq,`n!7o&hZOXPhjqN%Go\"y`hra";
-					var2.DisplayOrder = 3;
+					var2.Id = 77;
+					var2.Name = "FwaFv^M{Ws[P.";
+					var2.Description = "(BWqs@ui/rz\"`oQ]#S0mELG_;?VBE8{nuHk>lbzZ";
+					var2.DisplayOrder = 51;
 					var2.DateCreated = DateTime.MinValue;
+					var2.MacAddress = 38;
 					var2.IsReadOnly = true;
 					//var3
-					var3.Id = 48;
-					var3.Name = "mkb.#$feZN7fb0>#ul!d9?j>h";
-					var3.Description = "w1Q\"Ez:F>En?mpy+8q}eX?B%XI*MBmlqO[7%G";
-					var3.DisplayOrder = 35;
+					var3.Id = 86;
+					var3.Name = "pFeB\"5\"Cqia9sQScb=vb6S#>#.0^mJ$7PSy*Ev}V";
+					var3.Description = "00<p%J\"g,k";
+					var3.DisplayOrder = 71;
 					var3.DateCreated = DateTime.MinValue;
+					var3.MacAddress = 13;
 					var3.IsReadOnly = true;
 					//Fix Order
 					var3.DisplayOrder = 1;
@@ -237,6 +250,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var1.Description, actual.Description);
 					Assert.Equal(var1.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var1.DateCreated, actual.DateCreated);
+					Assert.Equal(var1.MacAddress, actual.MacAddress);
 					Assert.Equal(var1.IsReadOnly, actual.IsReadOnly);
 					// verify var2
 					results = controller.Get(var2.Id);
@@ -250,6 +264,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var2.Description, actual.Description);
 					Assert.Equal(var2.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var2.DateCreated, actual.DateCreated);
+					Assert.Equal(var2.MacAddress, actual.MacAddress);
 					Assert.Equal(var2.IsReadOnly, actual.IsReadOnly);
 					// verify var3
 					results = controller.Get(var3.Id);
@@ -263,6 +278,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(var3.Description, actual.Description);
 					Assert.Equal(var3.DisplayOrder, actual.DisplayOrder);
 					Assert.Equal(var3.DateCreated, actual.DateCreated);
+					Assert.Equal(var3.MacAddress, actual.MacAddress);
 					Assert.Equal(var3.IsReadOnly, actual.IsReadOnly);
 					// Failed Test
 					results = controller.Get(0);
@@ -293,10 +309,11 @@ namespace Sannel.House.Web.Tests
 					var expected = new Device();
 					// Name
 					expected = new Device();
-					expected.Id = 80;
-					expected.Description = "~?*0p.#mJu";
+					expected.Id = 34;
+					expected.Description = "I9@iu@mT#\\uda?{^7jWt;.x<7coc?~q>";
 					expected.DisplayOrder = 72;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 98;
 					expected.IsReadOnly = false;
 					expected.Name = "";
 					postPreCall(expected, wrapper);
@@ -308,10 +325,11 @@ namespace Sannel.House.Web.Tests
 					Assert.NotNull(result.Data);
 					// Description
 					expected = new Device();
-					expected.Id = 99;
-					expected.Name = "Gm*^+$14Wx2i\"Z";
-					expected.DisplayOrder = 95;
+					expected.Id = 53;
+					expected.Name = "oP@d(Od=2,Qv=yAsCjDBAfnXPAB'ae}|zrj^";
+					expected.DisplayOrder = 25;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 21;
 					expected.IsReadOnly = false;
 					expected.Description = null;
 					postPreCall(expected, wrapper);
@@ -323,11 +341,12 @@ namespace Sannel.House.Web.Tests
 					Assert.NotNull(result.Data);
 					// Success Test
 					expected = new Device();
-					expected.Id = 72;
-					expected.Name = "#sW#m(<K)'21q\"[{+[cgt`T}|+fBX";
-					expected.Description = "b*S9BN50W0[JZ)4(hG':CD?*!#}V]tS3B";
-					expected.DisplayOrder = 67;
+					expected.Id = 25;
+					expected.Name = "}zm\\cA]VbnQ";
+					expected.Description = ";t&+SZ4S#.{h(nSe({m";
+					expected.DisplayOrder = 57;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 72;
 					expected.IsReadOnly = false;
 					postPreCall(expected, wrapper);
 					result = controller.Post(expected);
@@ -344,6 +363,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(first.Description, resultData.Description);
 					Assert.Equal(first.DisplayOrder, resultData.DisplayOrder);
 					Assert.Equal(first.DateCreated, resultData.DateCreated);
+					Assert.Equal(first.MacAddress, resultData.MacAddress);
 					Assert.Equal(first.IsReadOnly, resultData.IsReadOnly);
 				}
 			}
@@ -370,10 +390,11 @@ namespace Sannel.House.Web.Tests
 					var expected = new Device();
 					// Name
 					expected = new Device();
-					expected.Id = 27;
-					expected.Description = "3gZ(WHD#\"*tf#*!\"zbH1+";
-					expected.DisplayOrder = 43;
+					expected.Id = 29;
+					expected.Description = "Xoom$K9Zhl+@P5zD2T!6NO(6D9hi*L0";
+					expected.DisplayOrder = 72;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 78;
 					expected.IsReadOnly = false;
 					expected.Name = "";
 					putPreCall(expected, wrapper);
@@ -385,10 +406,11 @@ namespace Sannel.House.Web.Tests
 					Assert.NotNull(result.Data);
 					// Description
 					expected = new Device();
-					expected.Id = 47;
-					expected.Name = "I8Ztxo,nOs/b\"b$9pbNml)tCH";
-					expected.DisplayOrder = 61;
+					expected.Id = 1;
+					expected.Name = "_%Hv;X5T5k+G-4`.Z8]VuZp/eBr=4q>lM8n#7Qmb`ox&}lM";
+					expected.DisplayOrder = 98;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 43;
 					expected.IsReadOnly = false;
 					expected.Description = null;
 					putPreCall(expected, wrapper);
@@ -400,19 +422,21 @@ namespace Sannel.House.Web.Tests
 					Assert.NotNull(result.Data);
 					// Success Test
 					expected = new Device();
-					expected.Id = 66;
-					expected.Name = "iIZadBf4z.MOvM&r&n5&}7oLgGxO~";
-					expected.Description = "a<JH&*O1u[|#i(-N=&^`=";
-					expected.DisplayOrder = 1;
+					expected.Id = 20;
+					expected.Name = "BGHW\\dZ-XIb";
+					expected.Description = "H]3LP8;;bP\\bM~\"9hddwSaqwp_\\%{\"X;w1?72w*[3Q\\^[*O";
+					expected.DisplayOrder = 28;
 					expected.DateCreated = DateTime.MinValue;
+					expected.MacAddress = 57;
 					expected.IsReadOnly = false;
 					putPreCall(expected, wrapper);
 					context.Devices.Add(expected);
 					context.SaveChanges();
 					// Reset props and call put
-					expected.Name = "c3r\"lyhwg[K_K+e)'6n#H?C]D=2=EbfZ{Q@Xu3n!`jEI";
-					expected.Description = "Wa@rF<Qe22c-C8prun\"BNl#9]Zkdd@t";
-					expected.DisplayOrder = 31;
+					expected.Name = "-naGAe`Pz{XX6;|67c9/=Jzf;";
+					expected.Description = "ud6BmC7nA<aTL^Ggp)HJj2#,+|O()+4<q!";
+					expected.DisplayOrder = 95;
+					expected.MacAddress = 56;
 					putPreCall(expected, wrapper);
 					result = controller.Put(expected);
 					Assert.NotNull(result);
@@ -428,6 +452,7 @@ namespace Sannel.House.Web.Tests
 					Assert.Equal(first.Description, resultData.Description);
 					Assert.Equal(first.DisplayOrder, resultData.DisplayOrder);
 					Assert.Equal(first.DateCreated, resultData.DateCreated);
+					Assert.Equal(first.MacAddress, resultData.MacAddress);
 					Assert.Equal(first.IsReadOnly, resultData.IsReadOnly);
 				}
 			}

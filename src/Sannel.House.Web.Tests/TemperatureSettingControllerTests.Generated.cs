@@ -1,4 +1,4 @@
-/* Copyright 2017 Sannel Software, L.L.C.
+﻿/* Copyright 2017 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -46,58 +46,58 @@ namespace Sannel.House.Web.Tests
 					var var4 = new TemperatureSetting();
 					var var5 = new TemperatureSetting();
 					// var1
-					var1.Id = 77;
-					var1.DayOfWeek = 6;
-					var1.Month = 8;
-					var1.IsTimeOnly = true;
+					var1.Id = 59;
+					var1.DayOfWeek = 22;
+					var1.Month = 28;
+					var1.IsTimeOnly = false;
 					var1.StartTime = DateTime.MinValue;
 					var1.EndTime = DateTime.MinValue;
-					var1.HeatTemperatureC = 0.33117236910908127;
-					var1.CoolTemperatureC = 0.57718412279020259;
+					var1.HeatTemperatureC = 0.81973372018883639;
+					var1.CoolTemperatureC = 0.86180329502644171;
 					var1.DateCreated = DateTime.MinValue;
 					var1.DateModified = DateTime.MinValue;
 					// var2
-					var2.Id = 96;
-					var2.DayOfWeek = 16;
-					var2.Month = 74;
-					var2.IsTimeOnly = false;
+					var2.Id = 31;
+					var2.DayOfWeek = 61;
+					var2.Month = 64;
+					var2.IsTimeOnly = true;
 					var2.StartTime = DateTime.MinValue;
 					var2.EndTime = DateTime.MinValue;
-					var2.HeatTemperatureC = 0.32723030183800977;
-					var2.CoolTemperatureC = 0.668016129950069;
+					var2.HeatTemperatureC = 0.26727739268321421;
+					var2.CoolTemperatureC = 0.82653310886888443;
 					var2.DateCreated = DateTime.MinValue;
 					var2.DateModified = DateTime.MinValue;
 					// var3
-					var3.Id = 16;
-					var3.DayOfWeek = 25;
-					var3.Month = 42;
-					var3.IsTimeOnly = false;
+					var3.Id = 50;
+					var3.DayOfWeek = 70;
+					var3.Month = 31;
+					var3.IsTimeOnly = true;
 					var3.StartTime = DateTime.MinValue;
 					var3.EndTime = DateTime.MinValue;
-					var3.HeatTemperatureC = 0.32328823456693823;
-					var3.CoolTemperatureC = 0.75884813710993537;
+					var3.HeatTemperatureC = 0.26333532541214272;
+					var3.CoolTemperatureC = 0.91736511602875082;
 					var3.DateCreated = DateTime.MinValue;
 					var3.DateModified = DateTime.MinValue;
 					// var4
-					var4.Id = 87;
-					var4.DayOfWeek = 64;
-					var4.Month = 78;
-					var4.IsTimeOnly = true;
+					var4.Id = 69;
+					var4.DayOfWeek = 80;
+					var4.Month = 98;
+					var4.IsTimeOnly = false;
 					var4.StartTime = DateTime.MinValue;
 					var4.EndTime = DateTime.MinValue;
-					var4.HeatTemperatureC = 0.770831907061316;
-					var4.CoolTemperatureC = 0.72357795095237809;
+					var4.HeatTemperatureC = 0.25939325814107117;
+					var4.CoolTemperatureC = 0.00819712318861723;
 					var4.DateCreated = DateTime.MinValue;
 					var4.DateModified = DateTime.MinValue;
 					// var5
-					var5.Id = 8;
-					var5.DayOfWeek = 73;
-					var5.Month = 45;
+					var5.Id = 89;
+					var5.DayOfWeek = 89;
+					var5.Month = 65;
 					var5.IsTimeOnly = true;
 					var5.StartTime = DateTime.MinValue;
 					var5.EndTime = DateTime.MinValue;
-					var5.HeatTemperatureC = 0.7668898397902445;
-					var5.CoolTemperatureC = 0.81440995811224448;
+					var5.HeatTemperatureC = 0.25545119086999968;
+					var5.CoolTemperatureC = 0.099029130348483624;
 					var5.DateCreated = DateTime.MinValue;
 					var5.DateModified = DateTime.MinValue;
 					var order = DateTime.Now;
@@ -238,36 +238,36 @@ namespace Sannel.House.Web.Tests
 					var var2 = new TemperatureSetting();
 					var var3 = new TemperatureSetting();
 					//var1
-					var1.Id = 8;
-					var1.DayOfWeek = 46;
-					var1.Month = 58;
-					var1.IsTimeOnly = true;
+					var1.Id = 89;
+					var1.DayOfWeek = 73;
+					var1.Month = 21;
+					var1.IsTimeOnly = false;
 					var1.StartTime = DateTime.MinValue;
 					var1.EndTime = DateTime.MinValue;
-					var1.HeatTemperatureC = 0.51116894535309121;
-					var1.CoolTemperatureC = 0.72804411674292946;
+					var1.HeatTemperatureC = 0.14793913538937417;
+					var1.CoolTemperatureC = 0.19414655919845522;
 					var1.DateCreated = DateTime.MinValue;
 					var1.DateModified = DateTime.MinValue;
 					//var2
-					var2.Id = 73;
-					var2.DayOfWeek = 76;
-					var2.Month = 80;
+					var2.Id = 70;
+					var2.DayOfWeek = 26;
+					var2.Month = 27;
 					var2.IsTimeOnly = true;
 					var2.StartTime = DateTime.MinValue;
 					var2.EndTime = DateTime.MinValue;
-					var2.HeatTemperatureC = 0.66079991621002554;
-					var2.CoolTemperatureC = 0.28126692831575262;
+					var2.HeatTemperatureC = 0.22902324573557042;
+					var2.CoolTemperatureC = 0.64924999310134446;
 					var2.DateCreated = DateTime.MinValue;
 					var2.DateModified = DateTime.MinValue;
 					//var3
-					var3.Id = 45;
-					var3.DayOfWeek = 81;
-					var3.Month = 56;
+					var3.Id = 65;
+					var3.DayOfWeek = 10;
+					var3.Month = 4;
 					var3.IsTimeOnly = true;
 					var3.StartTime = DateTime.MinValue;
 					var3.EndTime = DateTime.MinValue;
-					var3.HeatTemperatureC = 0.877505124023885;
-					var3.CoolTemperatureC = 0.10216462523777253;
+					var3.HeatTemperatureC = 0.72532353770235714;
+					var3.CoolTemperatureC = 0.79948671525320347;
 					var3.DateCreated = DateTime.MinValue;
 					var3.DateModified = DateTime.MinValue;
 					//Fix Order
@@ -359,14 +359,14 @@ namespace Sannel.House.Web.Tests
 					var expected = new TemperatureSetting();
 					// Success Test
 					expected = new TemperatureSetting();
-					expected.Id = 27;
-					expected.DayOfWeek = 83;
-					expected.Month = 12;
-					expected.IsTimeOnly = false;
+					expected.Id = 61;
+					expected.DayOfWeek = 29;
+					expected.Month = 2;
+					expected.IsTimeOnly = true;
 					expected.StartTime = DateTime.MinValue;
 					expected.EndTime = DateTime.MinValue;
-					expected.HeatTemperatureC = 0.762947772519173;
-					expected.CoolTemperatureC = 0.90524196527211087;
+					expected.HeatTemperatureC = 0.70299486336437744;
+					expected.CoolTemperatureC = 0.063758944190926356;
 					expected.DateCreated = DateTime.MinValue;
 					expected.DateModified = DateTime.MinValue;
 					postPreCall(expected, wrapper);
@@ -414,27 +414,27 @@ namespace Sannel.House.Web.Tests
 					var expected = new TemperatureSetting();
 					// Success Test
 					expected = new TemperatureSetting();
-					expected.Id = 46;
-					expected.DayOfWeek = 92;
-					expected.Month = 79;
-					expected.IsTimeOnly = true;
+					expected.Id = 80;
+					expected.DayOfWeek = 38;
+					expected.Month = 68;
+					expected.IsTimeOnly = false;
 					expected.StartTime = DateTime.MinValue;
 					expected.EndTime = DateTime.MinValue;
-					expected.HeatTemperatureC = 0.75900570524810151;
-					expected.CoolTemperatureC = 0.99607397243197726;
+					expected.HeatTemperatureC = 0.699052796093306;
+					expected.CoolTemperatureC = 0.15459095135079276;
 					expected.DateCreated = DateTime.MinValue;
 					expected.DateModified = DateTime.MinValue;
 					putPreCall(expected, wrapper);
 					context.TemperatureSettings.Add(expected);
 					context.SaveChanges();
 					// Reset props and call put
-					expected.DayOfWeek = 18;
-					expected.Month = 32;
+					expected.DayOfWeek = 99;
+					expected.Month = 48;
 					expected.IsTimeOnly = false;
 					expected.StartTime = DateTime.MinValue;
 					expected.EndTime = DateTime.MinValue;
-					expected.HeatTemperatureC = 0.51912867814261865;
-					expected.CoolTemperatureC = 0.20654937774247928;
+					expected.HeatTemperatureC = 0.79924942264298415;
+					expected.CoolTemperatureC = 0.69511072882223446;
 					expected.DateCreated = DateTime.MinValue;
 					expected.DateModified = DateTime.MinValue;
 					putPreCall(expected, wrapper);

@@ -76,6 +76,24 @@ namespace Sannel.House.Web.Controllers.api
 			var device = context.Devices.FirstOrDefault(i => i.Id == data.DeviceId);
 			if(device == null)
 			{
+				if(data.DeviceMacAddress != null) // No device id was passed but a mac address was. look for a device with that address if none are found add one.
+				{
+					device = context.Devices.FirstOrDefault(i => i.MacAddress == data.DeviceMacAddress);
+					if(device == null)
+					{
+						device = new Device()
+						{
+							Name = $"Auto device {data.DeviceMacAddress}",
+							Description = "Auto ",
+							DateCreated = DateTime.Now,
+							IsReadOnly = false,
+							MacAddress = data.DeviceMacAddress,
+							DisplayOrder = context.Devices.Count()
+						};
+
+						context.Devices.Add(device);
+					}
+				}
 				if (logger.IsEnabled(LogLevel.Error))
 				{
 					logger.LogError(LoggingIds.DeviceNotFoundError, $"A device with id {data.DeviceId} was not found setting device to default");
