@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,7 +24,9 @@ namespace Sannel.House.Web.Base
 		public bool ShouldBeCount { get; set; }
 
 		public bool CantUpdate { get; set; }
-		public Object AlwaysValue { get; set; }
+		public object AlwaysValue { get; set; }
+
+		public string[] GetIncludes { get; set; }
 
 		public ApiCalls[] DontGenerateMethods
 		{
