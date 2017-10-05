@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Sannel.House.Web.Base.Models
@@ -10,7 +11,7 @@ namespace Sannel.House.Web.Base.Models
 	{
 		GenerationAttribute.ApiCalls.Delete,
 		GenerationAttribute.ApiCalls.Put
-	})]
+	}, GetIncludes = new string[] { nameof(Device) })]
 	public class SensorEntry
 	{
 		[Key]
@@ -23,6 +24,25 @@ namespace Sannel.House.Web.Base.Models
 		[JsonProperty(nameof(DeviceId))]
 		[Generation(GreaterThenZero = true)]
 		public int DeviceId { get; set; }
+
+		private long? storedDeviceMacAddress;
+		[NotMapped]
+		public long? DeviceMacAddress
+		{
+			get
+			{
+				if (storedDeviceMacAddress == null)
+				{
+					return Device?.MacAddress;
+				}
+
+				return storedDeviceMacAddress;
+			}
+			set
+			{
+				storedDeviceMacAddress = value;
+			}
+		}
 
 		[JsonIgnore]
 		[Generation(Ignore = true)]
