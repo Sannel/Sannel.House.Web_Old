@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -63,7 +63,7 @@ namespace Sannel.House.Web
 				thermostat.DateCreated = DateTime.Now;
 				thermostat.DisplayOrder = 0;
 				thermostat.Name = "Thermostat";
-				thermostat.Description = "The thermostat and centeral relay for all devices";
+				thermostat.Description = "The thermostat and central relay for all devices";
 				context.Devices.Add(thermostat);
 				await context.SaveChangesAsync();
 			}

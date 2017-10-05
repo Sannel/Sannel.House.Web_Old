@@ -74,16 +74,16 @@ namespace Sannel.House.Web
 			switch (Configuration["SqlProvider"]?.ToLower())
 			{
 				case "mysql":
-					services.AddMySQL();
+					//services.AddMySQL();
 					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
 					break;
 				case "sqlite":
-					services.AddEntityFrameworkSqlite();
+					//services.AddEntityFrameworkSqlite();
 					services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
 
 					break;
 				default:
-					services.AddEntityFrameworkSqlServer();
+					//services.AddEntityFrameworkSqlServer();
 					services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 					break;
 			}
@@ -182,7 +182,11 @@ namespace Sannel.House.Web
 						 .Database.Migrate();
 				}
 			}
-			catch { }
+			catch(Exception ex)
+			{
+				var log = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
+				log.LogDebug(ex, "Exception while migrating database");
+			}
 			app.UseAuthentication();
 
 			app.UseStaticFiles();
