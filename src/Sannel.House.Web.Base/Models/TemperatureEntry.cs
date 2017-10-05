@@ -1,4 +1,4 @@
-﻿/* Copyright 2017 Sannel Software, L.L.C.
+/* Copyright 2017 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ namespace Sannel.House.Web.Base.Models
 	{
 		GenerationAttribute.ApiCalls.Delete,
 		GenerationAttribute.ApiCalls.Put
-	})]
+	}, GetIncludes = new string[] { nameof(TemperatureEntry.Device) })]
 	public class TemperatureEntry
 	{
 		public TemperatureEntry()
