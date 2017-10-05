@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using System.Net;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Sannel.House.Web
 {
@@ -45,12 +49,41 @@ namespace Sannel.House.Web
 			}
 
 			var cbuilder = new ConfigurationBuilder()
+				.SetBasePath(Environment.CurrentDirectory)
+				.AddEnvironmentVariables()
 				.AddCommandLine(args)
+				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+#if DEBUG
+				.AddJsonFile("appsettings.development.json", optional: true)
+#else
+				.AddJsonFile("appsettings.production.json", optional: true)
+#endif
 				.Build();
 
 
 			var host = new WebHostBuilder()
-				.UseKestrel()
+				.UseKestrel(option =>
+				{
+					void portOption(ListenOptions o)
+					{
+						if(bool.TryParse(cbuilder["UseSSL"], out var r))
+						{
+							if (r)
+							{
+								o.UseHttps(cbuilder["SSLCert"], cbuilder["SSLPassword"]);
+							}
+						}
+					};
+
+					if(ushort.TryParse(cbuilder["Port"], out var port))
+					{
+						option.Listen(IPAddress.Any, port, portOption);
+					}
+					else
+					{
+						option.Listen(IPAddress.Any, 8150, portOption);
+					}
+				})
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				.UseConfiguration(cbuilder)
 				.UseIISIntegration()
