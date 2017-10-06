@@ -22,7 +22,6 @@ namespace Sannel.House.Web.Base.Models
 		public Sannel.House.Sensor.SensorTypes SensorType { get; set; }
 
 		[JsonProperty(nameof(DeviceId))]
-		[Generation(GreaterThenZero = true)]
 		public int DeviceId { get; set; }
 
 		private long? storedDeviceMacAddress;

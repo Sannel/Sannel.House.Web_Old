@@ -37,7 +37,6 @@ namespace Sannel.House.Web.Base.Models
 		public Guid Id { get; set; }
 
 		[JsonProperty(nameof(DeviceId))]
-		[Generation(GreaterThenZero = true)]
 		public int DeviceId { get; set; }
 
 		[JsonIgnore]

@@ -1,4 +1,4 @@
-﻿using Sannel.House.Web.Base.Models;
+using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Mocks;
 using System;
 using System.Collections.Generic;
@@ -32,6 +32,7 @@ namespace Sannel.House.Web.Tests
 							Description = "",
 							DisplayOrder = 0,
 							IsReadOnly = true,
+							MacAddress = e.DeviceMacAddress,
 							Name = ""
 						});
 						newContext.SaveChanges();

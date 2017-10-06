@@ -46,7 +46,7 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			IQueryable<SensorEntry> query;
-			query = context.SensorEntries.OrderByDescending(i => i.DateCreated);
+			query = context.SensorEntries.Include(i => i.Device).OrderByDescending(i => i.DateCreated);
 			results.TotalResults = query.LongCount();
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
