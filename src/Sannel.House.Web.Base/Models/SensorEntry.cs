@@ -65,6 +65,8 @@ namespace Sannel.House.Web.Base.Models
 		public double? Value8 { get; set; }
 		[JsonProperty(nameof(Value9))]
 		public double? Value9 { get; set; }
+		[JsonProperty(nameof(Value10))]
+		public double? Value10 { get; set; }
 
 		[JsonProperty(nameof(DateCreated))]
 		public DateTime DateCreated { get; set; }
