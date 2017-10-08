@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -53,11 +54,7 @@ namespace Sannel.House.Web
 				.AddEnvironmentVariables()
 				.AddCommandLine(args)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-#if DEBUG
-				.AddJsonFile("appsettings.development.json", optional: true)
-#else
-				.AddJsonFile("appsettings.production.json", optional: true)
-#endif
+				.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
 				.Build();
 
 

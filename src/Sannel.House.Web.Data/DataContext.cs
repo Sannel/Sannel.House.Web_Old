@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Sannel.House.Web.Data
 {
-	public class DataContext : IdentityDbContext<ApplicationUser>, IDataContext
+	public abstract class DataContext : IdentityDbContext<ApplicationUser>, IDataContext
 	{
 		/// <summary>
 		/// Gets or sets the devices.
@@ -59,7 +59,7 @@ namespace Sannel.House.Web.Data
 		}
 		public DbSet<SensorEntry> SensorEntries { get; set; }
 
-		public DataContext(DbContextOptions<DataContext> options) : base(options)
+		public DataContext(DbContextOptions options) : base(options)
 		{
 		}
 	}

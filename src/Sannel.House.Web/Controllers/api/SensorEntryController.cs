@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sannel.House.Web.Base;
@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace Sannel.House.Web.Controllers.api
 {
 	[Route("api/v1/[controller]")]
-    public partial class SensorEntryController
-    {
+	public partial class SensorEntryController
+	{
 		private IDataContext context;
 		private ILogger logger;
 		public SensorEntryController(IDataContext context, ILogger<SensorEntryController> logger)
@@ -25,42 +25,63 @@ namespace Sannel.House.Web.Controllers.api
 		[HttpGet("GetPaged")]
 		[Authorize(Roles = "TemperatureEntryList")]
 		public PagedResults<SensorEntry> GetPaged()
-		{
-			return GetPaged(1);
-		}
+			=> GetPaged(1);
 
 		[HttpGet("GetPaged/{page}")]
 		[Authorize(Roles = "TemperatureEntryList")]
 		public PagedResults<SensorEntry> GetPaged(int page)
-		{
-			return GetPaged(page, 25);
-		}
+			=> GetPaged(page, 25);
 
 		[HttpGet("GetPaged/{page}/{pageSize}")]
 		[Authorize(Roles = "TemperatureEntryList")]
 		public PagedResults<SensorEntry> GetPaged(int page, int pageSize)
-		{
-			return internalGetPaged(page, pageSize);
-		}
+			=> internalGetPaged(page, pageSize);
 
 		[HttpGet("{id}")]
 		[Authorize(Roles = "TemperatureEntryList")]
 		public Result<SensorEntry> Get(Guid id)
-		{
-			return internalGet(id);
-		}
+			=> internalGet(id);
 
 		[HttpPost]
 		[Authorize(Roles = "TemperatureEntryAdd")]
 		public Result<SensorEntry> Post([FromBody]SensorEntry data)
+			=> internalPost(data);
+
+		private Device checkMacAddress(SensorEntry data)
 		{
-			return internalPost(data);
+			if (data.DeviceMacAddress != null) // No device id was passed but a mac address was. look for a device with that address if none are found add one.
+			{
+				var device = context.Devices.FirstOrDefault(i => i.MacAddress == data.DeviceMacAddress);
+				if (device == null && data.DeviceMacAddress > 0)
+				{
+					device = new Device()
+					{
+						Name = $"Auto device {data.DeviceMacAddress}",
+						Description = "Auto ",
+						DateCreated = DateTime.Now,
+						IsReadOnly = false,
+						MacAddress = data.DeviceMacAddress,
+						DisplayOrder = context.Devices.Count()
+					};
+
+					context.Devices.Add(device);
+					context.SaveChanges();
+					data.DeviceId = device.Id;
+				}
+				else if(device != null)
+				{
+					data.DeviceId = device.Id;
+				}
+
+				return device;
+			}
+
+			return null;
 		}
 
-		partial void postExtraReset(SensorEntry data)
+		private void checkForDeviceNull(SensorEntry data, Device device)
 		{
-			var device = context.Devices.FirstOrDefault(i => i.Id == data.DeviceId);
-			if(device == null)
+			if (device == null)
 			{
 				if (logger.IsEnabled(LogLevel.Error))
 				{
@@ -69,5 +90,25 @@ namespace Sannel.House.Web.Controllers.api
 				data.DeviceId = SystemDeviceIds.DefaultId;
 			}
 		}
-    }
+
+		partial void postExtraReset(SensorEntry data)
+		{
+			if (data.DeviceId > default(int))
+			{
+				var device = context.Devices.FirstOrDefault(i => i.Id == data.DeviceId);
+				if (device == null)
+				{
+					device = checkMacAddress(data);
+				}
+
+				checkForDeviceNull(data, device);
+			}
+			else
+			{
+				var device = checkMacAddress(data);
+
+				checkForDeviceNull(data, device);
+			}
+		}
+	}
 }

@@ -8,9 +8,9 @@ using System.Text;
 
 namespace Sannel.House.Web.Data
 {
-	public class DesignDbContextFactory : IDesignTimeDbContextFactory<DataContext>
+	public class SqlServerDesignTimeFactory : IDesignTimeDbContextFactory<SqlServerDataContext>
 	{
-		public DataContext CreateDbContext(string[] args)
+		public SqlServerDataContext CreateDbContext(string[] args)
 		{
 			IConfigurationRoot configuration = new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
@@ -19,10 +19,8 @@ namespace Sannel.House.Web.Data
 
 			var builder = new DbContextOptionsBuilder<DataContext>();
 
-			var connectionString = configuration["SqliteConnectionString"];
-
-			builder.UseSqlite(connectionString);
-			return new DataContext(builder.Options);
+			builder.UseSqlServer(configuration["SqlServerConnectionString"]);
+			return new SqlServerDataContext(builder.Options);
 		}
 	}
 }

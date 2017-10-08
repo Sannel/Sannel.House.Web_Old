@@ -87,12 +87,6 @@ namespace Sannel.House.Web.Controllers.api
 			}
 
 			data.Id = Guid.NewGuid();
-			if (data.DeviceId <= 0)
-			{
-				result.Errors.Add($"{nameof(data.DeviceId)} must be greater then 0");
-				return result;
-			}
-
 			postExtraVerification(data, result);
 			if (result.Errors.Count > 0)
 			{

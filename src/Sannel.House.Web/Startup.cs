@@ -73,20 +73,25 @@ namespace Sannel.House.Web
 
 			switch (Configuration["SqlProvider"]?.ToLower())
 			{
-				case "mysql":
+				//case "mysql":
 					//services.AddMySQL();
-					services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
-					break;
+					//services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
+					//break;
 				case "sqlite":
 					//services.AddEntityFrameworkSqlite();
-					services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
-
+					services.AddDbContext<SqliteDataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
+					services.AddScoped(typeof(DataContext), (prov) => prov.GetService<SqliteDataContext>());
+					services.AddScoped(typeof(IDataContext), (prov) => prov.GetService<SqliteDataContext>());
 					break;
 				default:
 					//services.AddEntityFrameworkSqlServer();
-					services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+					services.AddDbContext<SqlServerDataContext>(options => options.UseSqlServer(Configuration["SqlServerConnectionString"]));
+					services.AddScoped(typeof(DataContext), (prov) => prov.GetService<SqlServerDataContext>());
+					services.AddScoped(typeof(IDataContext), (prov) => prov.GetService<SqlServerDataContext>());
 					break;
 			}
+
+			//services.AddScoped<IDataContext, DataContext>();
 
 			services.AddMvc();
 			services.AddSwaggerGen(c =>
@@ -142,15 +147,12 @@ namespace Sannel.House.Web
 			}
 			services.AddAntiforgery();
 			services.AddSingleton(Configuration);
-			services.AddScoped<IDataContext, DataContext>();
-			services.AddScoped<DataSeeder>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public async void Configure(IApplicationBuilder app,
 			IHostingEnvironment env,
 			ILoggerFactory loggerFactory,
-			DataSeeder seeder,
 			TokenAuthOptions tokenOptions)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -201,6 +203,11 @@ namespace Sannel.House.Web
 
 			if (env.IsDevelopment())
 			{
+				var seeder = new DataSeeder(
+					app.ApplicationServices.GetService<IDataContext>(),
+					app.ApplicationServices.GetService<ILogger<DataSeeder>>(),
+					app.ApplicationServices.GetService<UserManager<ApplicationUser>>(),
+					app.ApplicationServices.GetService<RoleManager<IdentityRole>>());
 				await seeder.SeedDataAsync();
 			}
 		}

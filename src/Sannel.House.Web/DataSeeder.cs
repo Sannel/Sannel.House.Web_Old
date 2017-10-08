@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace Sannel.House.Web
 {
-    public class DataSeeder
-    {
+	public class DataSeeder
+	{
 		protected readonly IDataContext context;
 		protected readonly ILogger<DataSeeder> logger;
 		protected readonly UserManager<ApplicationUser> userManager;
 		protected readonly RoleManager<IdentityRole> roleManager;
 
-		public DataSeeder(IDataContext context, 
+		public DataSeeder(IDataContext context,
 			ILogger<DataSeeder> logger,
 			UserManager<ApplicationUser> userManager,
 			RoleManager<IdentityRole> roleManager)
@@ -55,7 +55,7 @@ namespace Sannel.House.Web
 			await addUsersAsync();
 
 			var thermostat = context.Devices.FirstOrDefault();
-			if(thermostat == null)
+			if (thermostat == null)
 			{
 				logger.LogInformation("Thermostat does not exist adding it");
 				thermostat = new Device();
@@ -72,7 +72,7 @@ namespace Sannel.House.Web
 		protected virtual async Task addUsersAsync()
 		{
 			var user = await checkAndCreateUserAsync("admin@asp.net", "P@ssword1", "Admin");
-			if(!await userManager.IsInRoleAsync(user, Roles[Roles.Length - 1]))
+			if (!await userManager.IsInRoleAsync(user, Roles[Roles.Length - 1]))
 			{
 				await userManager.AddToRolesAsync(user, Roles);
 			}
@@ -81,7 +81,7 @@ namespace Sannel.House.Web
 		protected virtual async Task<ApplicationUser> checkAndCreateUserAsync(String email, String password, String name)
 		{
 			var user = await userManager.FindByEmailAsync(email);
-			if(user == null)
+			if (user == null)
 			{
 				var results = await userManager.CreateAsync(new ApplicationUser()
 				{
@@ -110,7 +110,7 @@ namespace Sannel.House.Web
 
 		protected virtual async Task addRolesAsync()
 		{
-			foreach(var role in Roles)
+			foreach (var role in Roles)
 			{
 				await checkAndCreateRoleAsync(role);
 			}
@@ -119,7 +119,7 @@ namespace Sannel.House.Web
 		protected virtual async Task checkAndCreateRoleAsync(String roleName)
 		{
 			var role = await roleManager.FindByNameAsync(roleName);
-			if(role == null)
+			if (role == null)
 			{
 				var result = await roleManager.CreateAsync(new IdentityRole(roleName));
 				if (!result.Succeeded)
@@ -136,5 +136,5 @@ namespace Sannel.House.Web
 				logger.LogInformation($"Role {roleName} already exists with id {role.Id}");
 			}
 		}
-    }
+	}
 }

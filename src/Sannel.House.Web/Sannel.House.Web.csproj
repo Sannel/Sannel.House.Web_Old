@@ -20,6 +20,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
+		<ProjectReference Include="..\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj" />
+		<ProjectReference Include="..\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj" />
 		<ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
 	</ItemGroup>
 	<ItemGroup>
@@ -51,7 +53,6 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
 		<PackageReference Include="Sannel.House" Version="0.4.0-alpha-0001" />
 		<PackageReference Include="SapientGuardian.EntityFrameworkCore.MySql" Version="7.1.23" />
-		<PackageReference Include="Swashbuckle" Version="5.6.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />

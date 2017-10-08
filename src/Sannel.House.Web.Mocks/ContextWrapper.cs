@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,13 +31,13 @@ namespace Sannel.House.Web.Mocks
 			options = new DbContextOptionsBuilder<DataContext>()
 					.UseSqlite(connection)
 					.Options;
-			context = new DataContext(options);
+			context = new SqliteDataContext(options);
 			context.Database.EnsureCreated();
 		}
 
 		public DataContext CreateSubContext()
 		{
-			return new DataContext(options);
+			return new SqliteDataContext(options);
 		}
 
 		public void SaveChanges()
