@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  sannel.house.web:
+    image: sannel.house.web
+    build:
+      context: ./src/Sannel.House.Web
+      dockerfile: Dockerfile

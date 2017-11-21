@@ -5,6 +5,10 @@ indent_style = tab
 end_of_line = crlf
 charset = utf-8
 
+[*.yml]
+indent_style = space
+indent_size = 2
+
 [*.{cs,vb}]
 dotnet_style_qualification_for_field = true:silent
 dotnet_style_qualification_for_property = true:silent

@@ -6,6 +6,7 @@
 		<OutputType>Exe</OutputType>
 		<PackageId>Sannel.House.Web</PackageId>
 		<RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="Properties\PublishProfiles\Test.pubxml" />

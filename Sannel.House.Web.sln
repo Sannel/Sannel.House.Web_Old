@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F84321D6-5C74-4960-AC46-AED4DB263C94}"
 EndProject
@@ -23,9 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Tests", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web", "src\Sannel.House.Web\Sannel.House.Web.csproj", "{BE5AF709-F450-4A63-BD73-0D4F988A69E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sannel.House.Web.Data.Sqlite", "src\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj", "{EA4D0D68-1807-4BCF-BA63-F45FBC0168BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data.Sqlite", "src\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj", "{EA4D0D68-1807-4BCF-BA63-F45FBC0168BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sannel.House.Web.Data.SqlServer", "src\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj", "{2678D1DC-B3F1-49E6-A33E-EEC0A837AD1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data.SqlServer", "src\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj", "{2678D1DC-B3F1-49E6-A33E-EEC0A837AD1C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C359AC2A-E057-4746-A8E7-9959E91BD851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{2678D1DC-B3F1-49E6-A33E-EEC0A837AD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2678D1DC-B3F1-49E6-A33E-EEC0A837AD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2678D1DC-B3F1-49E6-A33E-EEC0A837AD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C359AC2A-E057-4746-A8E7-9959E91BD851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C359AC2A-E057-4746-A8E7-9959E91BD851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C359AC2A-E057-4746-A8E7-9959E91BD851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C359AC2A-E057-4746-A8E7-9959E91BD851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

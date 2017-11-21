@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  sannel.house.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+      - "443"
+networks:
+  default:
+    external:
+      name: nat
