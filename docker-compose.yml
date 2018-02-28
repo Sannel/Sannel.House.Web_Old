@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: src/Sannel.House.Web/Dockerfile
+    environment:
+      - DELAY_START=30
     ports:
       - "80:80"
       - "443:443"

@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM microsoft/aspnetcore-build:2.0.5 AS build
+FROM microsoft/aspnetcore-build:2.0.5-2.1.4 AS build
 WORKDIR /src
 COPY *.sln ./
 COPY .nuget/ ./

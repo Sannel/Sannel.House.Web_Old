@@ -58,6 +58,13 @@ namespace Sannel.House.Web
 				.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
 				.Build();
 
+			var delay = Environment.GetEnvironmentVariable("DELAY_START");
+			if(int.TryParse(delay, out var d))
+			{
+				Console.WriteLine($"Delaying start by {d} milliseconds");
+				Task.Delay(d).Wait();
+			}
+
 
 			var host = new WebHostBuilder()
 				.UseKestrel(option =>
