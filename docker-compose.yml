@@ -1,8 +1,27 @@
-version: '3'
+version: '3.5'
 
 services:
-  sannel.house.web:
+  web:
     image: sannel.house.web
     build:
-      context: ./src/Sannel.House.Web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: src/Sannel.House.Web/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - sql
+    networks:
+      - house_web
+
+  sql:
+    image: microsoft/mssql-server-windows-express
+    environment:
+      - ACCEPT_EULA=no
+      - sa_password=@password1
+    networks:
+      - house_web
+
+networks:
+  house_web:
+    driver: nat

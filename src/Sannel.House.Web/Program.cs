@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using Newtonsoft.Json;
 using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Sannel.House.Web
 {
@@ -67,7 +68,8 @@ namespace Sannel.House.Web
 						{
 							if (r)
 							{
-								o.UseHttps(cbuilder["SSLCert"], cbuilder["SSLPassword"]);
+								var cert = new X509Certificate2(cbuilder["SSLCert"], cbuilder["SSLPassword"]);
+								o.UseHttps(cert);
 							}
 						}
 					};
@@ -78,7 +80,7 @@ namespace Sannel.House.Web
 					}
 					else
 					{
-						option.Listen(IPAddress.Any, 8150, portOption);
+						option.Listen(IPAddress.Any, 80, portOption);
 					}
 				})
 				.UseContentRoot(Directory.GetCurrentDirectory())
