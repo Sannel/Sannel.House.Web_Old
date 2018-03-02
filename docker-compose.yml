@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   web:
-    image: holtsoftware/sannel.house.web:dev
+    image: sannel/house.web:dev
     build:
       context: .
       dockerfile: src/Sannel.House.Web/Dockerfile
