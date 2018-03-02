@@ -69,25 +69,38 @@ namespace Sannel.House.Web
 			var host = new WebHostBuilder()
 				.UseKestrel(option =>
 				{
+					var sslCert = cbuilder["SSLCert"];
+					Console.WriteLine($"Looking for ssl cert {sslCert}");
 					void portOption(ListenOptions o)
 					{
-						if(bool.TryParse(cbuilder["UseSSL"], out var r))
-						{
-							if (r)
-							{
-								var cert = new X509Certificate2(cbuilder["SSLCert"], cbuilder["SSLPassword"]);
-								o.UseHttps(cert);
-							}
-						}
+
+						var cert = new X509Certificate2(sslCert, cbuilder["SSLPassword"]);
+						o.UseHttps(cert);
 					};
 
-					if(ushort.TryParse(cbuilder["Port"], out var port))
+					if (File.Exists(sslCert)) // use ssl
 					{
-						option.Listen(IPAddress.Any, port, portOption);
+						if (ushort.TryParse(cbuilder["SSLPort"], out var port))
+						{
+							option.Listen(IPAddress.Any, port, portOption);
+						}
+						else
+						{
+							Console.Write("Could not parse port defaulting to 443 for ssl");
+							option.Listen(IPAddress.Any, 443, portOption);
+						}
 					}
 					else
 					{
-						option.Listen(IPAddress.Any, 80, portOption);
+						if(ushort.TryParse(cbuilder["Port"], out var port))
+						{
+							option.Listen(IPAddress.Any, port);
+						}
+						else
+						{
+							Console.Write("Could not parse port defaulting to 80 for non ssl");
+							option.Listen(IPAddress.Any, 80);
+						}
 					}
 				})
 				.UseContentRoot(Directory.GetCurrentDirectory())

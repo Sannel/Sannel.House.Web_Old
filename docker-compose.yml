@@ -2,12 +2,12 @@ version: '3.5'
 
 services:
   web:
-    image: sannel.house.web
+    image: holtsoftware/sannel.house.web:dev
     build:
       context: .
       dockerfile: src/Sannel.House.Web/Dockerfile
     environment:
-      - DELAY_START=30
+      - DELAY_START=30000
     ports:
       - "80:80"
       - "443:443"

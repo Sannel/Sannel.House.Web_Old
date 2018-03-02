@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  web:
+    image: holtsoftware/sannel.house.web:dev-linux
+    build:
+      dockerfile: src/Sannel.House.Web/Dockerfile.linux
+
+  sql:
+    image: microsoft/mssql-server-linux
+    environment:
+      - SA_PASSWORD=@password1
+
+networks:
+  house_web:
+    driver: bridge

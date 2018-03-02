@@ -49,9 +49,9 @@ namespace Sannel.House.Web
 			var file = Configuration["RSAKeysFile"];
 			TokenAuthOptions tokenOptions = null;
 
-			if (File.Exists(file))
-			{
-				var data = File.ReadAllText(file);
+			//if (File.Exists(file))
+			//{
+				//var data = File.ReadAllText(file);
 				var provider = new RSACryptoServiceProvider(2048);
 				//provider.ImportParameters(JsonConvert.DeserializeObject<RSAParameters>(data));
 				services.AddSingleton<RSA>(provider);
@@ -69,7 +69,7 @@ namespace Sannel.House.Web
 
 				services.AddSingleton(tokenOptions);
 
-			}
+			//}
 
 			switch (Configuration["SqlProvider"]?.ToLower())
 			{
