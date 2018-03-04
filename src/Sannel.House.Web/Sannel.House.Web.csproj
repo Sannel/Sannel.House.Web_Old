@@ -62,9 +62,6 @@
 		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="Start.bat">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
 		<None Update="Start.sh">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
