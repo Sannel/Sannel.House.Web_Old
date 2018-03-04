@@ -12,9 +12,6 @@
 		<None Remove="Properties\PublishProfiles\Test.pubxml" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="wwwroot\ts\file.ts" />
-	</ItemGroup>
-	<ItemGroup>
 		<None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</None>
@@ -26,6 +23,7 @@
 		<ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="2.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
@@ -54,9 +52,9 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
 		<PackageReference Include="Sannel.House" Version="0.4.0-alpha-0001" />
 		<PackageReference Include="SapientGuardian.EntityFrameworkCore.MySql" Version="7.1.23" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.1.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.1.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.2.0" />
 		<PackageReference Include="System.Security.Cryptography.Csp" Version="4.3.0" />
 		<PackageReference Include="System.ValueTuple" Version="4.4.0" />
 	</ItemGroup>
@@ -73,10 +71,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="wwwroot\css\" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Update="App_Data\RSAKeys.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 </Project>

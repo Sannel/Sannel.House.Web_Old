@@ -24,6 +24,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Swashbuckle.AspNetCore.Swagger;
+using Sannel.House.Web.Extensions;
 
 namespace Sannel.House.Web
 {
@@ -157,6 +158,7 @@ namespace Sannel.House.Web
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
+			loggerFactory.AddLog4Net();
 
 			app.UseSwagger();
 			app.UseSwaggerUI(c =>
