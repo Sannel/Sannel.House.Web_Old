@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: src/Sannel.House.Web/Dockerfile
+#    volumes:
+#      - "d:/Data/dev/logs:c:/app/logs"
+#      - "d:/Data/dev/config:c:/app/config"
     environment:
       - DELAY_START=30000
     ports:
@@ -21,6 +24,9 @@ services:
     environment:
       - ACCEPT_EULA=no
       - sa_password=@password1
+#      - "attach_dbs=[{'dbName':'devHouse','dbFiles':['C:\\\\data\\\\devHouse.mdf','C:\\\\data\\\\devHouse_log.ldf']}]"
+#    volumes:
+#      - "D:/Data/dev:c:/Data"
     networks:
       - house_web
 

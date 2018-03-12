@@ -36,7 +36,7 @@ namespace Sannel.House.Web
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+				.AddJsonFile($"config/appsettings.{env.EnvironmentName}.json", optional: true)
 				.AddEnvironmentVariables();
 			Configuration = builder.Build();
 		}
@@ -72,27 +72,26 @@ namespace Sannel.House.Web
 
 			//}
 
-			switch (Configuration["SqlProvider"]?.ToLower())
+			var db = Configuration.GetSection("DB");
+
+			switch (db["Provider"]?.ToLower())
 			{
 				//case "mysql":
 					//services.AddMySQL();
 					//services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration["MySqlConnectionString"], b => b.MigrationsAssembly("AspNet5MultipleProject")));
 					//break;
 				case "sqlite":
-					//services.AddEntityFrameworkSqlite();
-					services.AddDbContext<SqliteDataContext>(options => options.UseSqlite(Configuration["SqliteConnectionString"]));
+					services.AddDbContext<SqliteDataContext>(options => options.UseSqlite(db["ConnectionString"]));
 					services.AddScoped(typeof(DataContext), (prov) => prov.GetService<SqliteDataContext>());
 					services.AddScoped(typeof(IDataContext), (prov) => prov.GetService<SqliteDataContext>());
 					break;
+				case "mssql":
 				default:
-					//services.AddEntityFrameworkSqlServer();
-					services.AddDbContext<SqlServerDataContext>(options => options.UseSqlServer(Configuration["SqlServerConnectionString"]));
+					services.AddDbContext<SqlServerDataContext>(options => options.UseSqlServer(db["ConnectionString"]));
 					services.AddScoped(typeof(DataContext), (prov) => prov.GetService<SqlServerDataContext>());
 					services.AddScoped(typeof(IDataContext), (prov) => prov.GetService<SqlServerDataContext>());
 					break;
 			}
-
-			//services.AddScoped<IDataContext, DataContext>();
 
 			services.AddMvc();
 			services.AddSwaggerGen(c =>

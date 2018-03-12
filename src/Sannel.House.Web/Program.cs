@@ -37,7 +37,7 @@ namespace Sannel.House.Web
 
 		public static void Main(string[] args)
 		{
-			if (args.Length > 0 && string.Compare(args[0], "--generate-keys", true) == 0)
+			/*if (args.Length > 0 && string.Compare(args[0], "--generate-keys", true) == 0)
 			{
 				if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
 				{
@@ -48,18 +48,18 @@ namespace Sannel.House.Web
 					generateKeys("App_Data\\RSAKeys.json");
 				}
 				return;
-			}
+			}*/
 
 			var cbuilder = new ConfigurationBuilder()
 				.SetBasePath(Environment.CurrentDirectory)
 				.AddEnvironmentVariables()
 				.AddCommandLine(args)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+				.AddJsonFile($"config/appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
 				.Build();
 
 			var delay = Environment.GetEnvironmentVariable("DELAY_START");
-			if(int.TryParse(delay, out var d))
+			if (int.TryParse(delay, out var d))
 			{
 				Console.WriteLine($"Delaying start by {d} milliseconds");
 				Task.Delay(d).Wait();
@@ -69,18 +69,18 @@ namespace Sannel.House.Web
 			var host = new WebHostBuilder()
 				.UseKestrel(option =>
 				{
-					var sslCert = cbuilder["SSLCert"];
+					var ssl = cbuilder.GetSection("SSL");
+					var sslCert = ssl["PFX"];
 					Console.WriteLine($"Looking for ssl cert {sslCert}");
 					void portOption(ListenOptions o)
 					{
-
-						var cert = new X509Certificate2(sslCert, cbuilder["SSLPassword"]);
+						var cert = new X509Certificate2(sslCert, ssl["Password"]);
 						o.UseHttps(cert);
 					};
 
 					if (File.Exists(sslCert)) // use ssl
 					{
-						if (ushort.TryParse(cbuilder["SSLPort"], out var port))
+						if (ushort.TryParse(ssl["Port"], out var port))
 						{
 							option.Listen(IPAddress.Any, port, portOption);
 						}
@@ -92,7 +92,7 @@ namespace Sannel.House.Web
 					}
 					else
 					{
-						if(ushort.TryParse(cbuilder["Port"], out var port))
+						if (ushort.TryParse(cbuilder["Port"], out var port))
 						{
 							option.Listen(IPAddress.Any, port);
 						}
