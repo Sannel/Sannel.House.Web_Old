@@ -19,6 +19,11 @@ namespace Sannel.House.Web.Base.Interfaces
 		/// </value>
 		DbSet<Device> Devices { get; set; }
 
+		DbSet<DeviceIds> DeviceIds
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Gets or sets the temperature settings.
