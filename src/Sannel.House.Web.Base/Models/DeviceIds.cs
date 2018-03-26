@@ -25,6 +25,16 @@ namespace Sannel.House.Web.Base.Models
 		[JsonIgnore]
 		[Generation(Ignore = true)]
 		public Device Device { get; set; }
+		
+		/// <summary>
+		/// Gets or sets the date created.
+		/// </summary>
+		/// <value>
+		/// The date created.
+		/// </value>
+		[JsonProperty("DateCreated")]
+		[Generation(IsNow = true, CantUpdate = true)]
+		public DateTime DateCreated { get; set; }
 
 		/// <summary>
 		/// Gets or sets the Id of the network adapter to use instead of the mac address

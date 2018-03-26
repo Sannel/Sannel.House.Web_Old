@@ -236,6 +236,8 @@ namespace Sannel.House.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("DateCreated");
+
                     b.Property<int>("DeviceId");
 
                     b.Property<Guid?>("NetworkAdapterGuidId");
