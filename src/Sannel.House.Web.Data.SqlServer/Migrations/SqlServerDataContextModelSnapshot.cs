@@ -129,6 +129,24 @@ namespace Sannel.House.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.AlternateDeviceId", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<int>("DeviceId");
+
+                    b.Property<Guid?>("Uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("AlternateDeviceIds");
+                });
+
             modelBuilder.Entity("Sannel.House.Web.Base.Models.ApplicationLogEntry", b =>
                 {
                     b.Property<Guid>("Id")
@@ -229,24 +247,6 @@ namespace Sannel.House.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
-                });
-
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.DeviceIds", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<int>("DeviceId");
-
-                    b.Property<Guid?>("NetworkAdapterGuidId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
-
-                    b.ToTable("DeviceIds");
                 });
 
             modelBuilder.Entity("Sannel.House.Web.Base.Models.RefreshToken", b =>
@@ -395,7 +395,7 @@ namespace Sannel.House.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.DeviceIds", b =>
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.AlternateDeviceId", b =>
                 {
                     b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
                         .WithMany()

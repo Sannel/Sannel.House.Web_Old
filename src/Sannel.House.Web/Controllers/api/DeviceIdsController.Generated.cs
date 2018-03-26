@@ -26,11 +26,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	public partial class TemperatureEntryController : Controller
+	public partial class DeviceIdsController : Controller
 	{
-		private PagedResults<TemperatureEntry> internalGetPaged(int page, int pageSize)
+		private PagedResults<AlternateDeviceId> internalGetPaged(int page, int pageSize)
 		{
-			var results = new PagedResults<TemperatureEntry>();
+			var results = new PagedResults<AlternateDeviceId>();
 			if (page <= 0)
 			{
 				results.Success = false;
@@ -45,8 +45,8 @@ namespace Sannel.House.Web.Controllers.api
 				return results;
 			}
 
-			IQueryable<TemperatureEntry> query;
-			query = context.TemperatureEntries.Include(i => i.Device).OrderByDescending(i => i.DateCreated);
+			IQueryable<AlternateDeviceId> query;
+			query = context.AlternateDeviceIds.Include(i => i.Device).OrderByDescending(i => i.DateCreated);
 			results.TotalResults = query.LongCount();
 			results.PageSize = pageSize;
 			query = query.Skip((page - 1) * results.PageSize).Take(results.PageSize);
@@ -57,10 +57,10 @@ namespace Sannel.House.Web.Controllers.api
 			return results;
 		}
 
-		private Result<TemperatureEntry> internalGet(Guid id)
+		private Result<AlternateDeviceId> internalGet(Int32 id)
 		{
-			var results = new Result<TemperatureEntry>();
-			var data = context.TemperatureEntries.FirstOrDefault(i => i.Id == id);
+			var results = new Result<AlternateDeviceId>();
+			var data = context.AlternateDeviceIds.FirstOrDefault(i => i.Id == id);
 			if (data != null)
 			{
 				results.Success = true;
@@ -70,14 +70,14 @@ namespace Sannel.House.Web.Controllers.api
 			else
 			{
 				results.Success = false;
-				results.Errors.Add($"Could not find TemperatureEntry with Id {id}");
+				results.Errors.Add($"Could not find DeviceIds with Id {id}");
 				return results;
 			}
 		}
 
-		private Result<TemperatureEntry> internalPost(TemperatureEntry data)
+		private Result<AlternateDeviceId> internalPost(AlternateDeviceId data)
 		{
-			var result = new Result<TemperatureEntry>();
+			var result = new Result<AlternateDeviceId>();
 			result.Data = data;
 			result.Success = false;
 			if (data == null)
@@ -86,15 +86,16 @@ namespace Sannel.House.Web.Controllers.api
 				return result;
 			}
 
-			data.Id = Guid.NewGuid();
+			data.Id = 0;
 			postExtraVerification(data, result);
 			if (result.Errors.Count > 0)
 			{
 				return result;
 			}
 
+			data.DateCreated = DateTime.Now;
 			postExtraReset(data);
-			context.TemperatureEntries.Add(data);
+			context.AlternateDeviceIds.Add(data);
 			try
 			{
 				context.SaveChanges();
@@ -102,7 +103,7 @@ namespace Sannel.House.Web.Controllers.api
 			catch (Exception ex)
 			{
 				if (logger.IsEnabled(LogLevel.Error))
-					logger.LogError(LoggingIds.PostException, ex, "Error during TemperatureEntry Post");
+					logger.LogError(LoggingIds.PostException, ex, "Error during DeviceIds Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}
@@ -111,7 +112,7 @@ namespace Sannel.House.Web.Controllers.api
 			return result;
 		}
 
-		partial void postExtraVerification(TemperatureEntry data, Result<TemperatureEntry> result);
-		partial void postExtraReset(TemperatureEntry data);
+		partial void postExtraVerification(AlternateDeviceId data, Result<AlternateDeviceId> result);
+		partial void postExtraReset(AlternateDeviceId data);
 	}
 }

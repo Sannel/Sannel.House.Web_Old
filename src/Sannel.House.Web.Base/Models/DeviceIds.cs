@@ -12,7 +12,7 @@ namespace Sannel.House.Web.Base.Models
 		GenerationAttribute.ApiCalls.Delete,
 		GenerationAttribute.ApiCalls.Put
 	}, GetIncludes = new string[] { nameof(TemperatureEntry.Device) })]
-	public class DeviceIds
+	public class AlternateDeviceId
 	{
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Key]
@@ -37,11 +37,11 @@ namespace Sannel.House.Web.Base.Models
 		public DateTime DateCreated { get; set; }
 
 		/// <summary>
-		/// Gets or sets the Id of the network adapter to use instead of the mac address
+		/// Gets or sets the UUID for the alternate id.
 		/// </summary>
 		/// <value>
-		/// The unique identifier.
+		/// The UUID.
 		/// </value>
-		public Guid? NetworkAdapterGuidId { get; set; }
+		public Guid? Uuid { get; set; }
 	}
 }

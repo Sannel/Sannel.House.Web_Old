@@ -30,7 +30,7 @@ namespace Sannel.House.Web.Data
 		/// <value>
 		/// The device ids.
 		/// </value>
-		public DbSet<DeviceIds> DeviceIds
+		public DbSet<AlternateDeviceId> AlternateDeviceIds
 		{
 			get;
 			set;

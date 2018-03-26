@@ -12,9 +12,10 @@ using System;
 namespace Sannel.House.Web.Data.Migrations
 {
     [DbContext(typeof(SqliteDataContext))]
-    partial class SqliteDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180326040206_FixedNames")]
+    partial class FixedNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

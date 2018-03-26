@@ -19,7 +19,7 @@ namespace Sannel.House.Web.Base.Interfaces
 		/// </value>
 		DbSet<Device> Devices { get; set; }
 
-		DbSet<DeviceIds> DeviceIds
+		DbSet<AlternateDeviceId> AlternateDeviceIds
 		{
 			get;
 			set;

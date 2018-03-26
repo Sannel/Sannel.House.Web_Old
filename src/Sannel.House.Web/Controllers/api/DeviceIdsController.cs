@@ -1,4 +1,4 @@
-﻿/* Copyright 2018 Sannel Software, L.L.C.
+/* Copyright 2018 Sannel Software, L.L.C.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,66 +20,57 @@ using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Base.Interfaces;
 using Microsoft.Extensions.Logging;
+using Sannel.House.Web.Base;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	[Authorize(Roles = "TemperatureSettingEdit")]
+	[Authorize()]
 	[Route("api/v1/[controller]")]
-	public partial class TemperatureSettingController : Controller
+	public partial class DeviceIdsController : Controller
 	{
 		private IDataContext context;
 		private ILogger logger;
-		public TemperatureSettingController(IDataContext context, ILogger<TemperatureSettingController> logger)
+		public DeviceIdsController(IDataContext context, ILogger<DeviceIdsController> logger)
 		{
 			this.context = context;
 			this.logger = logger;
 		}
 
 		[HttpGet("GetPaged")]
-		[Authorize(Roles = "TemperatureSettingList")]
-		public PagedResults<TemperatureSetting> GetPaged()
+		[Authorize(Roles = "DeviceList")]
+		public PagedResults<AlternateDeviceId> GetPaged()
 		{
-			return GetPaged(1);
+			var use = User.Claims.FirstOrDefault(i => i.Type == JwtRegisteredClaimNames.Sub);
+			return GetPaged(1, 25);
 		}
 
 		[HttpGet("GetPaged/{page}")]
-		[Authorize(Roles = "TemperatureSettingList")]
-		public PagedResults<TemperatureSetting> GetPaged(int page)
+		[Authorize(Roles = "DeviceList")]
+		public PagedResults<AlternateDeviceId> GetPaged(int page)
 		{
 			return GetPaged(page, 25);
 		}
 
 		[HttpGet("GetPaged/{page}/{pageSize}")]
-		[Authorize(Roles = "TemperatureSettingList")]
-		public PagedResults<TemperatureSetting> GetPaged(int page, int pageSize)
+		[Authorize(Roles = "DeviceList")]
+		public PagedResults<AlternateDeviceId> GetPaged(int page, int pageSize)
 		{
 			return internalGetPaged(page, pageSize);
 		}
 
 		[HttpGet("{id}")]
-		[Authorize(Roles = "TemperatureSettingList")]
-		public Result<TemperatureSetting> Get(long id)
+		[Authorize(Roles = "DeviceList")]
+		public Result<AlternateDeviceId> Get(int id)
 		{
 			return internalGet(id);
 		}
 
 		[HttpPost]
-		public Result<TemperatureSetting> Post([FromBody]TemperatureSetting data)
+		public Result<AlternateDeviceId> Post([FromBody]AlternateDeviceId data)
 		{
 			return internalPost(data);
-		}
-
-		[HttpPut]
-		public Result<TemperatureSetting> Put([FromBody]TemperatureSetting data)
-		{
-			return internalPut(data);
-		}
-
-		[HttpDelete("{key}")]
-		public Result<TemperatureSetting> Delete(long key)
-		{
-			return internalDelete(key);
 		}
 	}
 }

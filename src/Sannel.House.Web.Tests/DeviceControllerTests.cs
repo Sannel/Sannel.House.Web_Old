@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Sannel.House.Web.Base.Models;
 using Sannel.House.Web.Controllers.api;
 using Sannel.House.Web.Mocks;
