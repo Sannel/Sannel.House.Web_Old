@@ -26,7 +26,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Sannel.House.Web.Controllers.api
 {
-	public partial class DeviceIdsController : Controller
+	public partial class AlternateDeviceIdController : Controller
 	{
 		private PagedResults<AlternateDeviceId> internalGetPaged(int page, int pageSize)
 		{
@@ -70,7 +70,7 @@ namespace Sannel.House.Web.Controllers.api
 			else
 			{
 				results.Success = false;
-				results.Errors.Add($"Could not find DeviceIds with Id {id}");
+				results.Errors.Add($"Could not find AlternateDeviceId with Id {id}");
 				return results;
 			}
 		}
@@ -103,7 +103,7 @@ namespace Sannel.House.Web.Controllers.api
 			catch (Exception ex)
 			{
 				if (logger.IsEnabled(LogLevel.Error))
-					logger.LogError(LoggingIds.PostException, ex, "Error during DeviceIds Post");
+					logger.LogError(LoggingIds.PostException, ex, "Error during AlternateDeviceId Post");
 				result.Errors.Add(ex.Message);
 				return result;
 			}

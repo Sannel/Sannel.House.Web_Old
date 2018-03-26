@@ -28,11 +28,11 @@ namespace Sannel.House.Web.Controllers.api
 {
 	[Authorize()]
 	[Route("api/v1/[controller]")]
-	public partial class DeviceIdsController : Controller
+	public partial class AlternateDeviceIdController : Controller
 	{
 		private IDataContext context;
 		private ILogger logger;
-		public DeviceIdsController(IDataContext context, ILogger<DeviceIdsController> logger)
+		public AlternateDeviceIdController(IDataContext context, ILogger<AlternateDeviceIdController> logger)
 		{
 			this.context = context;
 			this.logger = logger;
@@ -65,6 +65,26 @@ namespace Sannel.House.Web.Controllers.api
 		public Result<AlternateDeviceId> Get(int id)
 		{
 			return internalGet(id);
+		}
+
+		[HttpGet("{id}")]
+		public Result<AlternateDeviceId> GetFromSystemUuid(Guid uuid)
+		{
+			var results = new Result<AlternateDeviceId>();
+			var ids = context.AlternateDeviceIds.FirstOrDefault(i => i.Uuid == uuid);
+
+			if(ids == null)
+			{
+				results.Success = false;
+				results.AddError($"No alternate id for {uuid}");
+			}
+			else
+			{
+				results.Success = true;
+				results.Data = ids;
+			}
+
+			return results;
 		}
 
 		[HttpPost]

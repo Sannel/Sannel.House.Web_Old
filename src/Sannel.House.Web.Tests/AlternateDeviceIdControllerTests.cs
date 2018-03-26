@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Sannel.House.Web.Tests
 {
-	public partial class DeviceIdsControllerTests : IContextWrapperTest
+	public partial class AlternateDeviceIdControllerTests : IContextWrapperTest
 	{
-		public DeviceIdsControllerTests()
+		public AlternateDeviceIdControllerTests()
 		{
 		}
 		public void PreSaveChanges(ContextWrapper wrapper)

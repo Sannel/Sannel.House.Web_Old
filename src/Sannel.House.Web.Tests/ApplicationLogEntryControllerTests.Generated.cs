@@ -47,38 +47,38 @@ namespace Sannel.House.Web.Tests
 					var var5 = new ApplicationLogEntry();
 					// var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 98;
-					var1.ApplicationId = "(Zx+ZGM38N_C|:P)>\\;e2KgyN=igNfZOqiJ%P0a";
-					var1.Message = "v'}(e?VsGCoJvWI[\\^r|dg7m5'm[2;l:?OOg8*3M%C";
-					var1.Exception = "384=m/aAkDQu0f-#|o;\\qpjJLN&w$#ix;G3l";
+					var1.DeviceId = 91;
+					var1.ApplicationId = "PLk[#`ms=XIy}#;!I]]q{&VT|is$xn\";M-t\\o_wZAHGTtn3yw";
+					var1.Message = "M'Em)jBF.Gz\\:;2#p";
+					var1.Exception = "J9Ss0llX]*i!t8Zo/tJt:Hhx,gtyNqQ~&[k";
 					var1.CreatedDate = DateTime.Now;
 					// var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 43;
-					var2.ApplicationId = "Aqqyrc~dC*gskI?&-nh>=Zm+{(8Q$D";
-					var2.Message = "`T\"pqv=ekS?L/\"3E";
-					var2.Exception = "z6jT0ao:Q1n6hg)-6g{mrT";
+					var2.DeviceId = 72;
+					var2.ApplicationId = "pf<^\\:{))?P!T:F+h84T>}>,Ikc5-";
+					var2.Message = "~P|{x/I]L(O1iJ{1QE`I*n51h,ht";
+					var2.Exception = "CqE=DK?pMw~c7*D><p=\"EJZ4]&;W{(";
 					var2.CreatedDate = DateTime.Now;
 					// var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 22;
-					var3.ApplicationId = ";K6utqN$PK%K,";
-					var3.Message = "'xzbKQCF=KhWjf|ccZ-F,";
-					var3.Exception = "@a!=H6M'\\#/<7ABnmx@OI";
+					var3.DeviceId = 73;
+					var3.ApplicationId = "5l/j{|=..{XWOQK-%_i9hFNMVly@'o*!";
+					var3.Message = ";xSg5%oJ^4/ii,Mq2u[%m6(xTc&\\M8)j}Z$85.~6>";
+					var3.Exception = "_}wvz\"o\"l2JN!dr^Sh<M";
 					var3.CreatedDate = DateTime.Now;
 					// var4
 					var4.Id = Guid.NewGuid();
-					var4.DeviceId = 87;
-					var4.ApplicationId = "5nA^Bt22W\\Bci65.n?i>WNb%$6Ps|4js8/w:n";
-					var4.Message = "5)6)q4<IgEm-[";
-					var4.Exception = "KZ101c2Lnv),ChgOA#2";
+					var4.DeviceId = 48;
+					var4.ApplicationId = "\\9]AB\\c!TTSZ=(#";
+					var4.Message = "r.84H86;W>hX,J)HGrT+{TPHI5BXxDvL*&";
+					var4.Exception = "2Oaer2\"9NBW;KsM7F'Z:,";
 					var4.CreatedDate = DateTime.Now;
 					// var5
 					var5.Id = Guid.NewGuid();
-					var5.DeviceId = 15;
-					var5.ApplicationId = "AjPh$65F+qK,Hv+<bGW21`x?e;v*";
-					var5.Message = "HwE>]d:qc})&HtuFIovwaAjV0sABP#/hH1s?@/]=]";
-					var5.Exception = "15\\F#Q%$n!`Vu4D|L<WVx[9A[G\"u.5MsZ}}ak";
+					var5.DeviceId = 69;
+					var5.ApplicationId = "6\\=X.dbhx6d\"i|W|{{l%a:a|!~I0j4%N`7";
+					var5.Message = "X-NwzFvX_)@~q$p7d]";
+					var5.Exception = "@$>i{h{h?kLj\"+xA.Da<pJ<!j?`\\V";
 					var5.CreatedDate = DateTime.Now;
 					var order = DateTime.Now;
 					var1.CreatedDate = order;
@@ -199,24 +199,24 @@ namespace Sannel.House.Web.Tests
 					var var3 = new ApplicationLogEntry();
 					//var1
 					var1.Id = Guid.NewGuid();
-					var1.DeviceId = 92;
-					var1.ApplicationId = "u*bXi_;\"lel]W`=6o9qW`BlFBQ.";
-					var1.Message = ">IT|\\'?)_GN.3]BwVL:=.g+i2x(uqnD,Oj";
-					var1.Exception = "}$aM|[C)Xg&(A";
+					var1.DeviceId = 40;
+					var1.ApplicationId = "(]%k$;a3p'\\&F|=<!GVpjxI];n";
+					var1.Message = "i|9kn[>%158H0PwEPJ{kx50]Q";
+					var1.Exception = ">T3{?\"{To49|j~ZvGc+?wZ0c*,J7^iH128;#M";
 					var1.CreatedDate = DateTime.Now;
 					//var2
 					var2.Id = Guid.NewGuid();
-					var2.DeviceId = 34;
-					var2.ApplicationId = "gvlGlM]<5D/_~G:9,}vPDh:G48";
-					var2.Message = "&9Bf!bZ{Akij|-0(e%|>katPKw";
-					var2.Exception = "h7SG]Dw'\">28VaSSKcF/}/^0IH)9xNO_=L+-H4z=S%esVW";
+					var2.DeviceId = 35;
+					var2.ApplicationId = "#I=`^dxvT(*evLOmwe+Lc\\VBc\\yXEIS>vK)t(";
+					var2.Message = "_d_WSvC[v.?{=I|x@iI+'@EAl\"`8Gw/TK";
+					var2.Exception = "H\\X?f<2|a#oX7-:Qo8vdki4";
 					var2.CreatedDate = DateTime.Now;
 					//var3
 					var3.Id = Guid.NewGuid();
-					var3.DeviceId = 78;
-					var3.ApplicationId = "]IS<Im0[BDI\"Iv!1vd1;#5\\##6X";
-					var3.Message = "</2eV;`O%>[O'{{kK/6g*@ugaNkXS|%nLMV";
-					var3.Exception = "gg-,/a0@HLW0c'%<B_}M5!/NF2W:";
+					var3.DeviceId = 74;
+					var3.ApplicationId = "%|(@sPVktlSN[9(}9}A$aD9/X?d(P{n";
+					var3.Message = "-;Bt+jXI~/";
+					var3.Exception = "h`^8P]mImf}L8e\\='g$/TwqT=iIsbkJfi(jf";
 					var3.CreatedDate = DateTime.Now;
 					//Fix Order
 					var order = DateTime.Now;
@@ -296,9 +296,9 @@ namespace Sannel.House.Web.Tests
 					// ApplicationId
 					expected = new ApplicationLogEntry();
 					expected.Id = Guid.NewGuid();
-					expected.DeviceId = 89;
-					expected.Message = "dV26tP(aB{*|X~CKOasFcjkk^I[jILL5yQ9[|^}$OMr'3||M0";
-					expected.Exception = "wDs7\\N\\lK,r{O7:#\\*4l8kE)";
+					expected.DeviceId = 62;
+					expected.Message = ":oL6`42#E`0>G8ej2sxsE4$Oa7rm\"3k&QSXc,[<&i>y=/-";
+					expected.Exception = "=D(My`#&H#=.CO[w.hZe2#{Lmft7TI45e#$H.7!^hx7[j|";
 					expected.CreatedDate = DateTime.Now;
 					expected.ApplicationId = null;
 					postPreCall(expected, wrapper);
@@ -311,9 +311,9 @@ namespace Sannel.House.Web.Tests
 					// Message
 					expected = new ApplicationLogEntry();
 					expected.Id = Guid.NewGuid();
-					expected.DeviceId = 35;
-					expected.ApplicationId = "j|-~0s$[*o_/b$7b'!xn:W(`(_o@6F/xp^p";
-					expected.Exception = "Ta8a>JD!+PKos;S2~}}Hl0ZK62taPI_oD";
+					expected.DeviceId = 86;
+					expected.ApplicationId = "MOw<N<vZ!]k%eDS/%`kX{Qqhe{d{Nx?be}T";
+					expected.Exception = "'%<u'`7qm|Hawrg4QN\"waG/%kJBb\\CZx8H9?3~i{v?LzC2s";
 					expected.CreatedDate = DateTime.Now;
 					expected.Message = "";
 					postPreCall(expected, wrapper);
@@ -326,10 +326,10 @@ namespace Sannel.House.Web.Tests
 					// Success Test
 					expected = new ApplicationLogEntry();
 					expected.Id = Guid.NewGuid();
-					expected.DeviceId = 97;
-					expected.ApplicationId = "a*7?etGqrh31z{j1vu)lcONjMi>Tw/%hO[";
-					expected.Message = "9cAn4on<[WE^~%]_<'d2I+c2By->Wq'w~`[aG}^";
-					expected.Exception = "M}zG+~Hh\"o*N)o3";
+					expected.DeviceId = 45;
+					expected.ApplicationId = "*vrd&o9J7.q?xL*]2I%1z>ruMubyX%`j";
+					expected.Message = "AHJQ~hS|?NF-|Fp0-ci:a";
+					expected.Exception = "(_<hLS}V:.";
 					expected.CreatedDate = DateTime.Now;
 					postPreCall(expected, wrapper);
 					result = controller.Post(expected);
