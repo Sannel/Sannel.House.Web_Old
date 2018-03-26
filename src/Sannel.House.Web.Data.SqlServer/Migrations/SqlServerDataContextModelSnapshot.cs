@@ -18,7 +18,7 @@ namespace Sannel.House.Web.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -231,6 +231,22 @@ namespace Sannel.House.Web.Data.Migrations
                     b.ToTable("Devices");
                 });
 
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.DeviceIds", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DeviceId");
+
+                    b.Property<Guid?>("NetworkAdapterGuidId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceId");
+
+                    b.ToTable("DeviceIds");
+                });
+
             modelBuilder.Entity("Sannel.House.Web.Base.Models.RefreshToken", b =>
                 {
                     b.Property<Guid>("RefreshTokenId");
@@ -374,6 +390,14 @@ namespace Sannel.House.Web.Data.Migrations
                     b.HasOne("Sannel.House.Web.Base.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Sannel.House.Web.Base.Models.DeviceIds", b =>
+                {
+                    b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
+                        .WithMany()
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

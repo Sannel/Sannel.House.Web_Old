@@ -12,14 +12,9 @@ namespace Sannel.House.Web.Data
 	{
 		public SqliteDataContext CreateDbContext(string[] args)
 		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddJsonFile("appsettings.json")
-			.Build();
-
 			var builder = new DbContextOptionsBuilder<DataContext>();
 
-			builder.UseSqlite(configuration["SqliteConnectionString"]);
+			builder.UseSqlite("Data Source=data/data.sqlite");
 			return new SqliteDataContext(builder.Options);
 		}
 	}

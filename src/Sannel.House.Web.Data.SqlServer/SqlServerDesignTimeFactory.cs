@@ -12,14 +12,10 @@ namespace Sannel.House.Web.Data
 	{
 		public SqlServerDataContext CreateDbContext(string[] args)
 		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddJsonFile("appsettings.json")
-			.Build();
 
 			var builder = new DbContextOptionsBuilder<DataContext>();
 
-			builder.UseSqlServer(configuration["SqlServerConnectionString"]);
+			builder.UseSqlServer("Server=sql;Database=devHouse;uid=sa;password=@password1;MultipleActiveResultSets=True");
 			return new SqlServerDataContext(builder.Options);
 		}
 	}

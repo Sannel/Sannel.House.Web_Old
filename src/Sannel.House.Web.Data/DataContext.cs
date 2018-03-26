@@ -25,6 +25,18 @@ namespace Sannel.House.Web.Data
 		}
 
 		/// <summary>
+		/// Gets or sets the alternate device ids.
+		/// </summary>
+		/// <value>
+		/// The device ids.
+		/// </value>
+		public DbSet<DeviceIds> DeviceIds
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Gets or sets the temperature settings.
 		/// </summary>
 		/// <value>

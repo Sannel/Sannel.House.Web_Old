@@ -258,3 +258,4 @@ paket-files/
 /src/Sannel.House.Web/wwwroot/css/Site.css
 
 docker-compose.*.yml
+/src/Sannel.House.Web/logs
