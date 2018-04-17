@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Sannel.House.Sensor;
 using Sannel.House.Web.Data;
 using System;
 
@@ -18,7 +17,7 @@ namespace Sannel.House.Web.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -259,66 +258,6 @@ namespace Sannel.House.Web.Data.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.SensorEntry", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<int>("DeviceId");
-
-                    b.Property<int>("SensorType");
-
-                    b.Property<double>("Value");
-
-                    b.Property<double?>("Value10");
-
-                    b.Property<double?>("Value2");
-
-                    b.Property<double?>("Value3");
-
-                    b.Property<double?>("Value4");
-
-                    b.Property<double?>("Value5");
-
-                    b.Property<double?>("Value6");
-
-                    b.Property<double?>("Value7");
-
-                    b.Property<double?>("Value8");
-
-                    b.Property<double?>("Value9");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
-
-                    b.ToTable("SensorEntries");
-                });
-
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureEntry", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<int>("DeviceId");
-
-                    b.Property<double?>("Humidity");
-
-                    b.Property<double?>("Pressure");
-
-                    b.Property<double>("TemperatureCelsius");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
-
-                    b.ToTable("TemperatureEntries");
-                });
-
             modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureSetting", b =>
                 {
                     b.Property<long>("Id")
@@ -393,22 +332,6 @@ namespace Sannel.House.Web.Data.Migrations
                 });
 
             modelBuilder.Entity("Sannel.House.Web.Base.Models.AlternateDeviceId", b =>
-                {
-                    b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.SensorEntry", b =>
-                {
-                    b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Sannel.House.Web.Base.Models.TemperatureEntry", b =>
                 {
                     b.HasOne("Sannel.House.Web.Base.Models.Device", "Device")
                         .WithMany()

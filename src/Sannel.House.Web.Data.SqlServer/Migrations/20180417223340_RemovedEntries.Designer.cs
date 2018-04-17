@@ -11,9 +11,10 @@ using System;
 namespace Sannel.House.Web.Data.Migrations
 {
     [DbContext(typeof(SqlServerDataContext))]
-    partial class SqlServerDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180417223340_RemovedEntries")]
+    partial class RemovedEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

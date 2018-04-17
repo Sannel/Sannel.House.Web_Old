@@ -35,15 +35,11 @@ namespace Sannel.House.Web.Base.Interfaces
 
 		DbSet<ApplicationLogEntry> ApplicationLogEntries { get; set; }
 
-		DbSet<SensorEntry> SensorEntries { get; set; }
-
 		[Generation(Ignore =true)]
 		DbSet<ApplicationUser> Users { get; set; }
 
 		[Generation(Ignore =true)]
 		DbSet<IdentityRole> Roles { get; set; }
-
-		DbSet<TemperatureEntry> TemperatureEntries { get; set; }
 
 		[Generation(Ignore = true)]
 		DbSet<RefreshToken> RefreshTokens { get; set; }

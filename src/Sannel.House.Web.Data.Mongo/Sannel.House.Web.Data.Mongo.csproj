@@ -2,16 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Sannel.House.Web.Data</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
-    <ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
   </ItemGroup>
 
 </Project>

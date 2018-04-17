@@ -22,56 +22,14 @@ using System.Threading.Tasks;
 
 namespace Sannel.House.Web.Base.Models
 {
-	[Generation(DontGenerateMethods = new GenerationAttribute.ApiCalls[]
+	public class TemperatureEntry : SensorEntry
 	{
-		GenerationAttribute.ApiCalls.Delete,
-		GenerationAttribute.ApiCalls.Put
-	}, GetIncludes = new string[] { nameof(TemperatureEntry.Device) })]
-	public class TemperatureEntry
-	{
-		public TemperatureEntry()
-		{
-		}
-		[Key]
-		[JsonProperty(nameof(Id))]
-		public Guid Id { get; set; }
+		public const string SENSORTYPE = "Temperature";
 
-		[JsonProperty(nameof(DeviceId))]
-		public int DeviceId { get; set; }
+		public override string SensorType { get => SENSORTYPE; set { } }
 
-		[JsonIgnore]
-		[Generation(Ignore = true)]
-		public Device Device { get; set; }
+		[JsonProperty(nameof(Temperature))]
+		public double Temperature { get; set; }
 
-		private long? storedDeviceMacAddress;
-		[NotMapped]
-		public long? DeviceMacAddress
-		{
-			get
-			{
-				if(storedDeviceMacAddress == null)
-				{
-					return Device?.MacAddress;
-				}
-
-				return storedDeviceMacAddress;
-			}
-			set
-			{
-				storedDeviceMacAddress = value;
-			}
-		}
-
-		[JsonProperty(nameof(TemperatureCelsius))]
-		public double TemperatureCelsius { get; set; }
-
-		[JsonProperty(nameof(Humidity))]
-		public double? Humidity { get; set; }
-
-		[JsonProperty(nameof(Pressure))]
-		public double? Pressure { get; set; }
-
-		[JsonProperty(nameof(DateCreated))]
-		public DateTime DateCreated { get; set; }
 	}
 }

@@ -11,7 +11,7 @@ namespace Sannel.House.Web.Base.Models
 	{
 		GenerationAttribute.ApiCalls.Delete,
 		GenerationAttribute.ApiCalls.Put
-	}, GetIncludes = new string[] { nameof(TemperatureEntry.Device) })]
+	}, GetIncludes = new string[] { nameof(Device) })]
 	public class AlternateDeviceId
 	{
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]

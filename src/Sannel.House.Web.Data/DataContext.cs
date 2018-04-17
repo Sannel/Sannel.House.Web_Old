@@ -59,17 +59,11 @@ namespace Sannel.House.Web.Data
 			set;
 		}
 
-		public DbSet<TemperatureEntry> TemperatureEntries
-		{
-			get;
-			set;
-		}
 		public DbSet<RefreshToken> RefreshTokens
 		{
 			get;
 			set;
 		}
-		public DbSet<SensorEntry> SensorEntries { get; set; }
 
 		public DataContext(DbContextOptions options) : base(options)
 		{
