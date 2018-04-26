@@ -1,6 +1,9 @@
-version: '3.5'
+version: "2.4"
 
 services:
+  mongo:
+    image: mongo:3.6.1
+
   web:
     image: sannel/house.web:dev-linux
     build:
@@ -9,7 +12,7 @@ services:
   sql:
     image: microsoft/mssql-server-linux
     environment:
-      - SA_PASSWORD=@password1
+      - SA_PASSWORD=@Password1
 
 networks:
   house_web:

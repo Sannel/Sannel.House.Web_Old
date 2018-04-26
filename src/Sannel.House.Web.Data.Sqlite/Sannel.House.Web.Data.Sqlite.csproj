@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Sannel.House.Web.Data</RootNamespace>
+		<NetStandardImplicitPackageVersion>2.0.2</NetStandardImplicitPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

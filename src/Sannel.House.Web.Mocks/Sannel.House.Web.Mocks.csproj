@@ -5,7 +5,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>Sannel.House.Web.Mocks</AssemblyName>
 		<PackageId>Sannel.House.Web.Mocks</PackageId>
-		<NetStandardImplicitPackageVersion>2.0.0</NetStandardImplicitPackageVersion>
+		<NetStandardImplicitPackageVersion>2.0.2</NetStandardImplicitPackageVersion>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>

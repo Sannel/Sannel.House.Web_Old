@@ -25,6 +25,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Swashbuckle.AspNetCore.Swagger;
 using Sannel.House.Web.Extensions;
+using Sannel.House.Web.Data.Mongo;
+using MongoDB.Bson.Serialization;
+using Sannel.House.Sensor;
 
 namespace Sannel.House.Web
 {
@@ -92,6 +95,8 @@ namespace Sannel.House.Web
 					services.AddScoped(typeof(IDataContext), (prov) => prov.GetService<SqlServerDataContext>());
 					break;
 			}
+
+			services.AddTransient<IMongoContext, MongoContext>(i => new MongoContext(db["MongoConnectionString"]));
 
 			services.AddMvc();
 			services.AddSwaggerGen(c =>
@@ -200,6 +205,16 @@ namespace Sannel.House.Web
 				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
+			});
+
+			BsonClassMap.RegisterClassMap<SensorEntry>(i =>
+			{
+				i.MapIdProperty(c => c.Id);
+				i.MapProperty(c => c.SensorType);
+				i.MapProperty(c => c.DeviceId);
+				i.MapProperty(c => c.DateCreated);
+				i.MapProperty(c => c.Values);
+				i.MapExtraElementsProperty(c => c.ExtraElements);
 			});
 
 			if (env.IsDevelopment())

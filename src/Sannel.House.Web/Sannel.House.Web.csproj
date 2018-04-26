@@ -18,6 +18,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
+		<ProjectReference Include="..\Sannel.House.Web.Data.Mongo\Sannel.House.Web.Data.Mongo.csproj" />
 		<ProjectReference Include="..\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj" />
 		<ProjectReference Include="..\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj" />
 		<ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
@@ -43,15 +44,15 @@
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="2.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.2.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.2.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
-		<PackageReference Include="MongoDB.Driver" Version="2.5.1" />
+		<PackageReference Include="MongoDB.Driver" Version="2.6.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
-		<PackageReference Include="Sannel.House" Version="0.4.0-alpha-0001" />
+		<PackageReference Include="Sannel.House" Version="0.6.0-alpha-0002" />
 		<PackageReference Include="SapientGuardian.EntityFrameworkCore.MySql" Version="7.1.23" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.4.0" />

@@ -1,6 +1,13 @@
-version: '3.5'
+version: '2.4'
 
 services:
+  mongo:
+    image: mongo:3.6.1-windowsservercore-1709
+    volumes:
+      - "./Docker/mongo:c:/data/db"
+    networks:
+      - house_web
+
   web:
     image: sannel/house.web:dev
     build:
@@ -10,12 +17,13 @@ services:
 #      - "d:/Data/dev/logs:c:/app/logs"
 #      - "d:/Data/dev/config:c:/app/config"
     environment:
-      - DELAY_START=30000
+      - DELAY_START=30000 # with out the delay .net core will start way before sql server is up
     ports:
       - "80:80"
       - "443:443"
     depends_on:
       - sql
+      - mongo
     networks:
       - house_web
 

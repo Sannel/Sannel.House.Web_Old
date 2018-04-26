@@ -1,4 +1,5 @@
 using MongoDB.Driver;
+using Sannel.House.Web.Base.Interfaces;
 using Sannel.House.Web.Base.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Sannel.House.Web.Data.Mongo
 {
-	public class MongoContext : IDisposable
+	public class MongoContext : IMongoContext, IDisposable
 	{
 		private MongoClient client;
 		private IMongoDatabase database;
@@ -18,8 +19,8 @@ namespace Sannel.House.Web.Data.Mongo
 			database = client.GetDatabase(url.DatabaseName ?? "sannel_house");
 		}
 
-		public IMongoCollection<SensorEntry> SensorEntries 
-			=> database.GetCollection<SensorEntry>(nameof(SensorEntry));
+		public IMongoCollection<Sannel.House.Sensor.SensorEntry> SensorEntries 
+			=> database.GetCollection<Sannel.House.Sensor.SensorEntry>(nameof(Sannel.House.Sensor.SensorEntry));
 
 		public void Dispose()
 		{

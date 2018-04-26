@@ -40,8 +40,8 @@ namespace Sannel.House.Web
 					"ApplicationLogAdd",
 					"DeviceManager",
 					"DeviceList",
-					"TemperatureEntryList",
-					"TemperatureEntryAdd",
+					"SensorEntryList",
+					"SensorEntryAdd",
 					"TemperatureSettingEdit",
 					"TemperatureSettingList"
 				};
