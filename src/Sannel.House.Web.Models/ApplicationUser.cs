@@ -8,17 +8,15 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
-namespace Sannel.House.Web.Data.SqlServer
+namespace Sannel.House.Web.Models
 {
-	public class SqlServerDataContext : DataContext
+	public class ApplicationUser : IdentityUser
 	{
-		public SqlServerDataContext(DbContextOptions options) : base(options)
-		{
-		}
+		public string Name { get; set; }
 	}
 }

@@ -10,15 +10,13 @@
    limitations under the License.*/
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Sannel.House.Web.Data.SqlServer
+namespace Sannel.House.Web
 {
-	public class SqlServerDataContext : DataContext
+	public static class RoleNames
 	{
-		public SqlServerDataContext(DbContextOptions options) : base(options)
-		{
-		}
+		public const string GetDevices = "GetDevices";
 	}
 }

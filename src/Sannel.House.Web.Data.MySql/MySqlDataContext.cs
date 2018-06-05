@@ -13,11 +13,11 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace Sannel.House.Web.Data.SqlServer
+namespace Sannel.House.Web.Data.MySql
 {
-	public class SqlServerDataContext : DataContext
+	public class MySqlDataContext : DataContext
 	{
-		public SqlServerDataContext(DbContextOptions options) : base(options)
+		public MySqlDataContext(DbContextOptions options) : base(options)
 		{
 		}
 	}

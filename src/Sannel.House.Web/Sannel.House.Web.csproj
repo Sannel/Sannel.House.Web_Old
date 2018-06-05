@@ -1,75 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-	<PropertyGroup>
-		<TargetFramework>netcoreapp2.0</TargetFramework>
-		<PreserveCompilationContext>true</PreserveCompilationContext>
-		<AssemblyName>Sannel.House.Web</AssemblyName>
-		<OutputType>Exe</OutputType>
-		<PackageId>Sannel.House.Web</PackageId>
-		<RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
-	</PropertyGroup>
-	<ItemGroup>
-		<None Remove="Properties\PublishProfiles\Test.pubxml" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Update="wwwroot\**\*;Views\**\*;Areas\**\Views">
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
-		<ProjectReference Include="..\Sannel.House.Web.Data.Mongo\Sannel.House.Web.Data.Mongo.csproj" />
-		<ProjectReference Include="..\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj" />
-		<ProjectReference Include="..\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj" />
-		<ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="log4net" Version="2.0.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="2.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.2.2" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
-		<PackageReference Include="MongoDB.Driver" Version="2.6.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
-		<PackageReference Include="Sannel.House" Version="0.6.0-alpha-0002" />
-		<PackageReference Include="SapientGuardian.EntityFrameworkCore.MySql" Version="7.1.23" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.4.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.4.0" />
-		<PackageReference Include="System.Security.Cryptography.Csp" Version="4.3.0" />
-		<PackageReference Include="System.ValueTuple" Version="4.4.0" />
-		<PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
-	</ItemGroup>
-	<ItemGroup>
-		<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Update="Start.sh">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="wwwroot\css\" />
-	</ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Sannel.House" Version="0.6.1-alpha-0000" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sannel.House.Web.Data.MySql\Sannel.House.Web.Data.MySql.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Interfaces\Sannel.House.Web.Interfaces.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Models\Sannel.House.Web.Models.csproj" />
+  </ItemGroup>
+
 </Project>

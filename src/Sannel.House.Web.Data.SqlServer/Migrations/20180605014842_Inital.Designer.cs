@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sannel.House.Web.Data.SqlServer;
 
 namespace Sannel.House.Web.Data.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerDataContext))]
-    partial class SqlServerDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180605014842_Inital")]
+    partial class Inital
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

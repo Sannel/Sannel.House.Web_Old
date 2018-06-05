@@ -8,17 +8,16 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
+using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Sannel.House.Web.Data.SqlServer
+namespace Sannel.House.Web.Controllers
 {
-	public class SqlServerDataContext : DataContext
+	public abstract class BaseController : Controller
 	{
-		public SqlServerDataContext(DbContextOptions options) : base(options)
-		{
-		}
 	}
 }

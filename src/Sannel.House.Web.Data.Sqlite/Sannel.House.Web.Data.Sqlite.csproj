@@ -2,17 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Sannel.House.Web.Data</RootNamespace>
-		<NetStandardImplicitPackageVersion>2.0.2</NetStandardImplicitPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sannel.House.Web.Base\Sannel.House.Web.Base.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Interfaces\Sannel.House.Web.Interfaces.csproj" />
+    <ProjectReference Include="..\Sannel.House.Web.Models\Sannel.House.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>
