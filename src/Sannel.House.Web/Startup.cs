@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ using Sannel.House.Web.Data;
 using Sannel.House.Web.Data.Sqlite;
 using Sannel.House.Web.Data.SqlServer;
 using Sannel.House.Web.Interfaces;
+using Sannel.House.Web.Models;
 
 namespace Sannel.House.Web
 {
@@ -32,8 +34,16 @@ namespace Sannel.House.Web
 			var dSection = Configuration.GetSection("Database");
 			configureDatabases(services, dSection);
 
+			services.AddIdentity<ApplicationUser, IdentityRole>(o => o.Stores.MaxLengthForKeys = 128)
+				.AddEntityFrameworkStores<DataContext>()
+				.AddDefaultTokenProviders();
+
+			services.AddAuthentication();
+
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddAntiforgery();
+			services.AddSingleton(Configuration);
 
 		}
 

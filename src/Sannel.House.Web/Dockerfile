@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
+COPY .nuget src/
 COPY src/Sannel.House.Web/Sannel.House.Web.csproj src/Sannel.House.Web/
 COPY src/Sannel.House.Web.Models/Sannel.House.Web.Models.csproj src/Sannel.House.Web.Models/
 COPY src/Sannel.House.Web.Interfaces/Sannel.House.Web.Interfaces.csproj src/Sannel.House.Web.Interfaces/
