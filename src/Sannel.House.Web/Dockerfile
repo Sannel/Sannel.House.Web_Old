@@ -7,12 +7,17 @@ WORKDIR /src
 COPY .nuget src/
 COPY src/Sannel.House.Web/Sannel.House.Web.csproj src/Sannel.House.Web/
 COPY src/Sannel.House.Web.Models/Sannel.House.Web.Models.csproj src/Sannel.House.Web.Models/
+COPY src/Sannel.House.Web.Data/Sannel.House.Web.Data.csproj src/Sannel.House.Web.Data/
 COPY src/Sannel.House.Web.Interfaces/Sannel.House.Web.Interfaces.csproj src/Sannel.House.Web.Interfaces/
+COPY src/Sannel.House.Web.Data.SqlServer/Sannel.House.Web.Data.SqlServer.csproj src/Sannel.House.Web.Data.SqlServer/
+COPY src/Sannel.House.Web.Data.Sqlite/Sannel.House.Web.Data.Sqlite.csproj src/Sannel.House.Web.Data.Sqlite/
 RUN dotnet restore src/Sannel.House.Web/Sannel.House.Web.csproj
 COPY . .
 WORKDIR /src/src/Sannel.House.Web
 RUN dotnet build Sannel.House.Web.csproj -c Release -o /app
 
+FROM build AS publish
+RUN dotnet publish Sannel.House.Web.csproj -c Release -o /app
 
 FROM build AS testrunner
 WORKDIR /src/src/Sannel.House.Web.Tests
@@ -21,9 +26,6 @@ ENTRYPOINT ["dotnet", "test", "--logger:trx"]
 FROM build AS test
 WORKDIR /src/src/Sannel.House.Web.Tests
 RUN dotnet test
-
-FROM build AS publish
-RUN dotnet publish Sannel.House.Web.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

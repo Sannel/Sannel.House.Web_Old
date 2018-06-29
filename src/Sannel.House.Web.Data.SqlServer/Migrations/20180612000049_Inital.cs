@@ -209,23 +209,9 @@ namespace Sannel.House.Web.Data.SqlServer.Migrations
 				});
 
 			migrationBuilder.InsertData(
-				table: "AspNetRoles",
-				columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-				values: new object[,]
-				{
-					{ "278b20a3-5f77-46f1-8db3-09df65add03c", "af314573-3b0e-4ea6-97bb-58d63c5f0c48", "DeviceList", null },
-					{ "568035e9-53d6-487d-bb77-6467f6e20c7a", "293e6b47-ccdf-4da5-9f05-a3aac7c80b67", "DeviceManager", null },
-					{ "ea197699-b1a0-42a9-9025-6e89adaf7048", "6270e93e-af1f-436b-998d-f6af0217217f", "SensorEntryAdd", null },
-					{ "9a819f47-fe6f-45df-90e1-ff1fa988818b", "997a4f7d-8e49-4081-9c16-52ef8f7bbd4e", "SensorEntryList", null },
-					{ "240e3936-9c41-43c0-bb54-6f8c069beb82", "a59e6260-b7ae-426f-b466-7defd29f09b8", "TemperatureSettingEdit", null },
-					{ "a6401538-1559-4c08-9fbc-9fb862ca3413", "7b010314-696b-42d3-9e0f-642290c027ea", "TemperatureSettingList", null },
-					{ "bd341710-22aa-48b4-a9f2-052abb9c738a", "b6bcb856-455f-4cfa-b327-fab48a62d7e5", "Admin", null }
-				});
-
-			migrationBuilder.InsertData(
 				table: "Devices",
 				columns: new[] { "Id", "DateCreated", "Description", "DisplayOrder", "IsReadOnly", "Name" },
-				values: new object[] { 1, new DateTime(2018, 6, 5, 1, 48, 41, 936, DateTimeKind.Utc), "Central Control System", 0, true, "Controller" });
+				values: new object[] { 1, new DateTime(2018, 6, 12, 0, 0, 49, 134, DateTimeKind.Utc), "Central Control System", 0, true, "Central Controller" });
 
 			migrationBuilder.CreateIndex(
 				name: "IX_AlternateDeviceIds_DeviceId",

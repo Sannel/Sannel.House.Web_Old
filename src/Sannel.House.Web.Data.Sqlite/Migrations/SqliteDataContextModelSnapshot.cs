@@ -37,16 +37,6 @@ namespace Sannel.House.Web.Data.Sqlite.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = "c545a9d2-3ca4-40d5-963a-6b8fa475d51f", ConcurrencyStamp = "28d8d768-df22-4899-8229-eb9de3a9b506", Name = "DeviceList" },
-                        new { Id = "076625f4-d915-4c4b-ae2c-06465dd433e2", ConcurrencyStamp = "c6d6acce-d1a7-466b-ae7e-f04229d0e670", Name = "DeviceManager" },
-                        new { Id = "46763a6f-ab2a-49c4-9a56-f2ef52576fac", ConcurrencyStamp = "6bcff969-04c6-4f2a-a84b-f4d33ce5ea48", Name = "SensorEntryAdd" },
-                        new { Id = "910fdb6a-1c3b-476d-930a-a340f135f0a6", ConcurrencyStamp = "fde817e7-5a40-4a84-9ce3-539bcd40ef97", Name = "SensorEntryList" },
-                        new { Id = "2aff6ca6-b9d7-4b9f-961a-e0c0523f27dd", ConcurrencyStamp = "1c2e34af-1277-47d5-abba-ce5b1dbdf973", Name = "TemperatureSettingEdit" },
-                        new { Id = "23983e8d-570a-4171-9e31-2fe88bac65ae", ConcurrencyStamp = "fc4ac9d9-b7b2-468b-8648-5c128f39ab16", Name = "TemperatureSettingList" },
-                        new { Id = "07cc5696-f76d-41bc-8292-371404e66baf", ConcurrencyStamp = "1fb8318c-9a75-4133-9188-dfd7e7e19f4f", Name = "Admin" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -247,7 +237,7 @@ namespace Sannel.House.Web.Data.Sqlite.Migrations
                     b.ToTable("Devices");
 
                     b.HasData(
-                        new { Id = 1, DateCreated = new DateTime(2018, 6, 5, 1, 47, 19, 711, DateTimeKind.Utc), Description = "Central Control System", DisplayOrder = 0, IsReadOnly = true, Name = "Controller" }
+                        new { Id = 1, DateCreated = new DateTime(2018, 6, 12, 0, 1, 42, 982, DateTimeKind.Utc), Description = "Central Control System", DisplayOrder = 0, IsReadOnly = true, Name = "Central Controller" }
                     );
                 });
 

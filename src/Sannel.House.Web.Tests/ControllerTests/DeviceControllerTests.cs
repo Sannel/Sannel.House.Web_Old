@@ -10,6 +10,7 @@
    limitations under the License.*/
 using Microsoft.AspNetCore.Mvc;
 using Sannel.House.Web.Controllers;
+using Sannel.House.Web.Controllers.v1;
 using Sannel.House.Web.Interfaces;
 using Sannel.House.Web.Models;
 using Sannel.House.Web.Tests.RepositoryTests;

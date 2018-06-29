@@ -14,13 +14,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sannel.House.Web.Data;
 using Sannel.House.Web.Interfaces;
 using Sannel.House.Web.Models;
 using Sannel.House.Web.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Sannel.House.Web.Controllers
+namespace Sannel.House.Web.Controllers.v1
 {
 	[Route("api/v1/[controller]")]
 	[ApiController]
@@ -39,7 +40,7 @@ namespace Sannel.House.Web.Controllers
 
 		// GET api/<controller>/5
 		[HttpGet("{id}")]
-		[Authorize(Roles = RoleNames.GetDevices)]
+		[Authorize(Roles = RoleNames.GetDevice + "," + RoleNames.Administrators)]
 		public async Task<ActionResult<Device>> Get(int id)
 		{
 			var d = await dataRepo.GetDeviceAsync(id);

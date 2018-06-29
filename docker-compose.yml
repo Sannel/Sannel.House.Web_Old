@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   sannel.house.web:
-    image: ${DOCKER_REGISTRY}house.web:dev
+    image: ${DOCKER_REGISTRY}sannelhouseweb
     build:
       context: .
       dockerfile: src\Sannel.House.Web\Dockerfile
     ports:
-      - "80"
-      - "443"
+      - "80:80"
+      - "443:443"

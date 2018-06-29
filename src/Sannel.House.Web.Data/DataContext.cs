@@ -54,23 +54,12 @@ namespace Sannel.House.Web.Data
 		{
 			base.OnModelCreating(builder);
 
-			builder.Entity<IdentityRole>()
-				.HasData(
-					new IdentityRole("DeviceList"),
-					new IdentityRole("DeviceManager"),
-					new IdentityRole("SensorEntryAdd"),
-					new IdentityRole("SensorEntryList"),
-					new IdentityRole("TemperatureSettingEdit"),
-					new IdentityRole("TemperatureSettingList"),
-					new IdentityRole("Admin")
-				);
-
 			builder.Entity<Device>()
 				.HasData(
 					new Device()
 					{
 						Id = 1,
-						Name = "Controller",
+						Name = "Central Controller",
 						Description = "Central Control System",
 						DisplayOrder = 0,
 						IsReadOnly = true,

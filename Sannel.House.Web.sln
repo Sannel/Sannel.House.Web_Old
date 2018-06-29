@@ -19,17 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Models", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Tests", "src\Sannel.House.Web.Tests\Sannel.House.Web.Tests.csproj", "{0091FA02-6A63-4D1C-9494-672EF0969935}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{43F6DD44-B3E4-4B23-A20D-024D01FDCB0E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data", "src\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj", "{13F47628-1A8F-4EE6-8CA0-617389A8F57A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sannel.House.Web.Data.SqlServer", "src\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj", "{D20C10DE-E6A4-49E0-8D53-34F8842C321A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data.SqlServer", "src\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj", "{D20C10DE-E6A4-49E0-8D53-34F8842C321A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sannel.House.Web.Data.Sqlite", "src\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj", "{369B7212-4367-4FD5-A858-C88B9800600A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sannel.House.Web.Data.Sqlite", "src\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj", "{369B7212-4367-4FD5-A858-C88B9800600A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sannel.House.Web.Data.MySql", "src\Sannel.House.Web.Data.MySql\Sannel.House.Web.Data.MySql.csproj", "{4650CDAF-E7F8-47D2-AACE-A495875C6420}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{81700AF2-9D69-4A23-900B-BE425A49DE1E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sannel.House.Web.Data.Migrations", "Sannel.House.Web.Data.Migrations", "{81700AF2-9D69-4A23-900B-BE425A49DE1E}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F7E06CAF-2251-43B2-B452-4B869510668F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +51,6 @@ Global
 		{0091FA02-6A63-4D1C-9494-672EF0969935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0091FA02-6A63-4D1C-9494-672EF0969935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0091FA02-6A63-4D1C-9494-672EF0969935}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43F6DD44-B3E4-4B23-A20D-024D01FDCB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43F6DD44-B3E4-4B23-A20D-024D01FDCB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43F6DD44-B3E4-4B23-A20D-024D01FDCB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43F6DD44-B3E4-4B23-A20D-024D01FDCB0E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13F47628-1A8F-4EE6-8CA0-617389A8F57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13F47628-1A8F-4EE6-8CA0-617389A8F57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13F47628-1A8F-4EE6-8CA0-617389A8F57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,10 +63,10 @@ Global
 		{369B7212-4367-4FD5-A858-C88B9800600A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{369B7212-4367-4FD5-A858-C88B9800600A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{369B7212-4367-4FD5-A858-C88B9800600A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4650CDAF-E7F8-47D2-AACE-A495875C6420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4650CDAF-E7F8-47D2-AACE-A495875C6420}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4650CDAF-E7F8-47D2-AACE-A495875C6420}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4650CDAF-E7F8-47D2-AACE-A495875C6420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E06CAF-2251-43B2-B452-4B869510668F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E06CAF-2251-43B2-B452-4B869510668F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E06CAF-2251-43B2-B452-4B869510668F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E06CAF-2251-43B2-B452-4B869510668F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,7 +79,6 @@ Global
 		{13F47628-1A8F-4EE6-8CA0-617389A8F57A} = {F84321D6-5C74-4960-AC46-AED4DB263C94}
 		{D20C10DE-E6A4-49E0-8D53-34F8842C321A} = {81700AF2-9D69-4A23-900B-BE425A49DE1E}
 		{369B7212-4367-4FD5-A858-C88B9800600A} = {81700AF2-9D69-4A23-900B-BE425A49DE1E}
-		{4650CDAF-E7F8-47D2-AACE-A495875C6420} = {81700AF2-9D69-4A23-900B-BE425A49DE1E}
 		{81700AF2-9D69-4A23-900B-BE425A49DE1E} = {F84321D6-5C74-4960-AC46-AED4DB263C94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

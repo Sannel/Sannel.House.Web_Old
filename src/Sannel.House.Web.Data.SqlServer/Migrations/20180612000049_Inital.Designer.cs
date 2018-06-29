@@ -10,7 +10,7 @@ using Sannel.House.Web.Data.SqlServer;
 namespace Sannel.House.Web.Data.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerDataContext))]
-    [Migration("20180605014842_Inital")]
+    [Migration("20180612000049_Inital")]
     partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,16 +43,6 @@ namespace Sannel.House.Web.Data.SqlServer.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = "278b20a3-5f77-46f1-8db3-09df65add03c", ConcurrencyStamp = "af314573-3b0e-4ea6-97bb-58d63c5f0c48", Name = "DeviceList" },
-                        new { Id = "568035e9-53d6-487d-bb77-6467f6e20c7a", ConcurrencyStamp = "293e6b47-ccdf-4da5-9f05-a3aac7c80b67", Name = "DeviceManager" },
-                        new { Id = "ea197699-b1a0-42a9-9025-6e89adaf7048", ConcurrencyStamp = "6270e93e-af1f-436b-998d-f6af0217217f", Name = "SensorEntryAdd" },
-                        new { Id = "9a819f47-fe6f-45df-90e1-ff1fa988818b", ConcurrencyStamp = "997a4f7d-8e49-4081-9c16-52ef8f7bbd4e", Name = "SensorEntryList" },
-                        new { Id = "240e3936-9c41-43c0-bb54-6f8c069beb82", ConcurrencyStamp = "a59e6260-b7ae-426f-b466-7defd29f09b8", Name = "TemperatureSettingEdit" },
-                        new { Id = "a6401538-1559-4c08-9fbc-9fb862ca3413", ConcurrencyStamp = "7b010314-696b-42d3-9e0f-642290c027ea", Name = "TemperatureSettingList" },
-                        new { Id = "bd341710-22aa-48b4-a9f2-052abb9c738a", ConcurrencyStamp = "b6bcb856-455f-4cfa-b327-fab48a62d7e5", Name = "Admin" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -258,7 +248,7 @@ namespace Sannel.House.Web.Data.SqlServer.Migrations
                     b.ToTable("Devices");
 
                     b.HasData(
-                        new { Id = 1, DateCreated = new DateTime(2018, 6, 5, 1, 48, 41, 936, DateTimeKind.Utc), Description = "Central Control System", DisplayOrder = 0, IsReadOnly = true, Name = "Controller" }
+                        new { Id = 1, DateCreated = new DateTime(2018, 6, 12, 0, 0, 49, 134, DateTimeKind.Utc), Description = "Central Control System", DisplayOrder = 0, IsReadOnly = true, Name = "Central Controller" }
                     );
                 });
 

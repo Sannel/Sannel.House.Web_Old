@@ -8,16 +8,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
-using Microsoft.AspNetCore.Mvc;
-using Sannel.House.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sannel.House.Web.Controllers
+namespace Sannel.House.Web.ViewModels
 {
-	public abstract class BaseController : Controller
+	public class LoginRequest
 	{
+		public string Username { get; set; }
+		public string Password { get; set; }
+		public string GrantType { get; set; }
 	}
 }

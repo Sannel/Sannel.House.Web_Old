@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Windows</DockerTargetOS>
-    <ProjectGuid>43f6dd44-b3e4-4b23-a20d-024d01fdcb0e</ProjectGuid>
+    <ProjectGuid>f7e06caf-2251-43b2-b452-4b869510668f</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://{ServiceIPAddress}{ServicePort}</DockerServiceUrl>
     <DockerServiceName>sannel.house.web</DockerServiceName>

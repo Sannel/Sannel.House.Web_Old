@@ -21,12 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sannel.House.Web.Data.MySql\Sannel.House.Web.Data.MySql.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Data.Sqlite\Sannel.House.Web.Data.Sqlite.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Data.SqlServer\Sannel.House.Web.Data.SqlServer.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Data\Sannel.House.Web.Data.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Interfaces\Sannel.House.Web.Interfaces.csproj" />
     <ProjectReference Include="..\Sannel.House.Web.Models\Sannel.House.Web.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="config\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

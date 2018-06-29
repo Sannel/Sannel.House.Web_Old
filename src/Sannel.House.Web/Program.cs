@@ -20,6 +20,10 @@ namespace Sannel.House.Web
 		public static IWebHost BuildWebHost(string[] args)
 		{
 			return WebHost.CreateDefaultBuilder(args)
+				.ConfigureAppConfiguration((b,c)=>
+				{
+					c.AddJsonFile("Config/appsettings.json", true);
+				})
 				.UseStartup<Startup>()
 				.Build();
 		}
