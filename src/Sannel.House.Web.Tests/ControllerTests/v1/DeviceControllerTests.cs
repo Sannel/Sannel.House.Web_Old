@@ -20,7 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Sannel.House.Web.Tests.ControllerTests
+namespace Sannel.House.Web.Tests.ControllerTests.v1
 {
 	public class DeviceControllerTests
 	{
