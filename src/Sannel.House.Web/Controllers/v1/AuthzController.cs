@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Sannel.House.Web.Models;
@@ -34,18 +35,21 @@ namespace Sannel.House.Web.Controllers.v1
 		private readonly SignInManager<ApplicationUser> signInManager;
 		private readonly RoleManager<IdentityRole> roleManager;
 		private readonly IConfiguration configuration;
+		private readonly IStringLocalizer localizer;
 		private readonly ILogger log;
 
 		public AuthzController(UserManager<ApplicationUser> userManager,
 			SignInManager<ApplicationUser> signInManager,
 			RoleManager<IdentityRole> roleManager,
 			IConfiguration configuration,
+			IStringLocalizer<AuthzController> localizer,
 			ILogger<AuthzController> logger)
 		{
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 			this.roleManager = roleManager;
 			this.configuration = configuration;
+			this.localizer = localizer;
 			log = logger;
 		}
 
@@ -113,7 +117,7 @@ namespace Sannel.House.Web.Controllers.v1
 					return await passwordGrantAsync(request);
 
 				default:
-					return BadRequest("Invalid Grant Type");
+					return BadRequest(localizer["InvalidGrantType"]);
 			}
 		}
 	}

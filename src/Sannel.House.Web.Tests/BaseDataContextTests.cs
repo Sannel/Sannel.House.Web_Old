@@ -10,6 +10,7 @@
    limitations under the License.*/
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,7 @@ namespace Sannel.House.Web.Tests
 	public abstract class BaseDataContextTests : IDisposable
 	{
 		protected ServiceProvider provider;
+		private SqliteConnection connection;
 
 		public BaseDataContextTests()
 		{
@@ -43,7 +45,10 @@ namespace Sannel.House.Web.Tests
 			services.AddSingleton<IConfiguration>(config);
 			services.AddLogging();
 
-			services.AddDbContextPool<SqliteDataContext>(o => o.UseSqlite("DataSource=:memory:"));
+			connection = new SqliteConnection("DataSource=:memory:");
+			connection.Open();
+
+			services.AddDbContextPool<SqliteDataContext>(o => o.UseSqlite(connection));
 			services.AddScoped<DataContext>(i => i.GetService<SqliteDataContext>());
 
 			services.AddIdentity<ApplicationUser, IdentityRole>(o =>
@@ -59,6 +64,18 @@ namespace Sannel.House.Web.Tests
 
 		}
 
+		protected virtual void PrepareDatabase()
+		{
+			var context = provider.GetService<DataContext>();
+			context.Database.Migrate();
+		}
+
+		protected virtual async Task PrepareDatabaseAsync()
+		{
+			var context = provider.GetService<DataContext>();
+			await context.Database.MigrateAsync();
+		}
+
 		protected virtual void AddServices(IServiceCollection services)
 		{
 
@@ -66,6 +83,7 @@ namespace Sannel.House.Web.Tests
 
 		public void Dispose()
 		{
+			connection?.Dispose();
 			provider.Dispose();
 		}
 	}

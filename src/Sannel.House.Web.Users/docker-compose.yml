@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  sannel.house.web.users:
+    image: ${DOCKER_REGISTRY}sannelhousewebusers:1
+    build:
+      context: .
+      dockerfile: Sannel.House.Web.Users/Dockerfile
