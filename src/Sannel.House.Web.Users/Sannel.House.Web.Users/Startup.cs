@@ -30,6 +30,8 @@ using IdentityServer4;
 using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Stores;
 using IdentityModel;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Sannel.House.Web.Users
 {

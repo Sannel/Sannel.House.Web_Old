@@ -258,3 +258,4 @@ paket-files/
 
 docker-compose.*.yml
 /src/Sannel.House.Web/logs
+/.vscode

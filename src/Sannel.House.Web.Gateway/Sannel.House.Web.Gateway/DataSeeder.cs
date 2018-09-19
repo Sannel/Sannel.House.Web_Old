@@ -13,7 +13,7 @@ using IdentityServer4.EntityFramework.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Sannel.House.Web.Users.Models;
+using Sannel.House.Web.Gateway.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

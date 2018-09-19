@@ -1,8 +1,12 @@
 version: '3.4'
 
 services:
-  sannel.house.web:
-    image: ${DOCKER_REGISTRY}sannelhouseweb
-    build:
-      context: .
-      dockerfile: src\Sannel.House.Web\Dockerfile
+  sannel.house.web.users:
+    image: sannel/sannelhousewebusers
+    labels:
+      org.shabadu.hostname: dev.sannel.local
+    networks: 
+      app_net:
+        ipv4_address: 172.16.238.11
+        ipv6_address: "2001:3984:3989::10"
+    
