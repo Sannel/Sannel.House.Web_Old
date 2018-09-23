@@ -2,10 +2,10 @@
 <Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
-    <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>221d67f9-8274-4ac7-b5da-5a4635a713e6</ProjectGuid>
+    <DockerTargetOS>Windows</DockerTargetOS>
+    <ProjectGuid>e68f0a90-7cf3-423b-a5f1-79917c3bcc64</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://{ServiceIPAddress}{ServicePort}</DockerServiceUrl>
     <DockerServiceName>sannel.house.web.users</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

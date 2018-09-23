@@ -1,8 +1,10 @@
 version: '3.4'
 
 services:
-  sannel.house.web.users:
-    image: ${DOCKER_REGISTRY}sannelhousewebusers:1
+  users:
+    image: ${DOCKER_REGISTRY}sannelhousewebusers
     build:
       context: .
-      dockerfile: Sannel.House.Web.Users/Dockerfile
+      dockerfile: Sannel.House.Web.Users\Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://+:443
