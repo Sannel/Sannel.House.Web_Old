@@ -32,6 +32,7 @@ using IdentityServer4.EntityFramework.Stores;
 using IdentityModel;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Sannel.House.Web.Users
 {
@@ -74,7 +75,10 @@ namespace Sannel.House.Web.Users
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 			services.AddIdentityServer()
-				.AddDeveloperSigningCredential()
+				.AddSigningCredential(
+					new X509Certificate2(
+						Configuration["IdentityServer:Certificate:Path"],
+						Configuration["IdentityServer:Certificate:Password"]))
 				.AddConfigurationStore(options =>
 				{
 					options.ConfigureDbContext = o =>

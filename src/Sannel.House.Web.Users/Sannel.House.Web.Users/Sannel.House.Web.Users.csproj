@@ -29,9 +29,4 @@
     <ProjectReference Include="..\Sannel.House.Web.Users.Data\Sannel.House.Web.Users.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="data\" />
-  </ItemGroup>
-
 </Project>

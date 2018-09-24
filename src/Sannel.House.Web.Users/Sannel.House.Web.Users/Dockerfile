@@ -3,8 +3,7 @@
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 58792
-EXPOSE 44346
+EXPOSE 443
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
@@ -23,4 +22,6 @@ RUN dotnet publish Sannel.House.Web.Users.csproj -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+RUN "mkdir c:\app\App_Config"
+RUN "mkdir c:\app\App_Data"
 ENTRYPOINT ["dotnet", "Sannel.House.Web.Users.dll"]
